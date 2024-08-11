@@ -96,6 +96,12 @@
         <script src="{{asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
         <script src="{{asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js')}}"></script>
 
+
+        <!--Internal  Select2 js -->
+        <script src="{{asset('assets/plugins/select2/js/select2.min.js')}}"></script>
+
+
+
 	<!--Internal  Datatable js -->
 	<script src="{{asset('assets/js/table-data.js')}}"></script>
 
@@ -107,4 +113,7 @@
                 <!-- right-sidebar js -->
                 <script src="{{asset('assets/plugins/sidebar/sidebar.js')}}"></script>
         @endif
+
+
+        
      

@@ -45,7 +45,7 @@ class UserDetailController extends Controller
         $existingDetail = User_Detail::where('user_id', Auth::id())->first();
 
             if ($existingDetail) {
-                return response()->json(['message' => 'User details already exist', 'status' => false], 400);
+                return $this->returnError('User details already exist');
             }
 
         $user_detail = new User_Detail();
@@ -59,22 +59,22 @@ class UserDetailController extends Controller
         $user_detail->user_id = Auth::id();
         $user_detail->save();
 
-        return $this -> returnData('user_detail',$user_detail);
+        return $this->returnSuccessMessage('User detail Create successfully');
+
+        // return $this -> returnData('user_detail',$user_detail);
     }
 
 
-    public function show($id)
-    {
-        $user_detail = User_Detail::where('user_id',auth()->user()->id)->get();
-        $city->save();
 
-        return $this -> returnData('user_detail',$user_detail);
     
-    }
 
-    public function update(Request $request,$id)
+    public function update(Request $request ,$id)
     {
-        
+        $user_detail = User_Detail::find($id);
+        if (!$user_detail) {
+            return $this->returnError('User details not found');
+        }
+
         $validator = Validator::make($request->all(), [
             'rang_salary' => 'sometimes|required|string|max:255',
             'status_employee' => 'sometimes|required|string|max:255',
@@ -86,7 +86,7 @@ class UserDetailController extends Controller
         ]);
     
         if ($validator->fails()) {
-            $errors = $validator->errors();
+            $errors = $validator->getMessageBag()->all();
             return response()->json($errors, 401);
         }
     
@@ -94,7 +94,7 @@ class UserDetailController extends Controller
         $user_detail = User_Detail::where('user_id', Auth::id())->first();
     
         if (!$user_detail) {
-            return response()->json(['message' => 'User details not found', 'status' => false], 404);
+            return $this->returnError('User  not found');
         }
     
         $user_detail->update($request->only([
@@ -106,17 +106,28 @@ class UserDetailController extends Controller
             'type_job', 
             'scope_work_id'
         ]));
+     
+        
+        
     
-        return $this->returnData('user_detail', $user_detail);
+          return $this->returnSuccessMessage('User details updated successfully');
     }
     
 
     
     public function destroy($id)
     {
-        $user_detail = User_Detail::findOrFail($id)->delete();
-        return response()->json(['message' => 'User details deleted successfully', 'status' => true], 200);
+        $user_detail = User_Detail::find($id);
+            
+            if(!$user_detail)
+                return $this->returnError('User details not found');
+            
+        $user_detail->delete();
+        return $this->returnSuccessMessage('User details deleted successfully');
     }
-    
-    
+     
+
 }
+    
+    
+

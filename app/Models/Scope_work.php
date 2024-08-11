@@ -16,4 +16,19 @@ class Scope_work extends Model
         return $query->select('id', 'name_' . app()->getLocale() . ' as name');
     }
 
+    public function Job_Title(){
+        return $this->hasMany(Job_Title::class, 'scope_work_id');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($scopeworks) {
+            $scopeworks->Job_Title()->delete();
+        });
+    }
+
+    
+
 }

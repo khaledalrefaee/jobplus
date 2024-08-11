@@ -8,7 +8,7 @@
         <div class="breadcrumb-header justify-content-between">
             <div class="my-auto">
                 <div class="d-flex">
-                    <h4 class="content-title mb-0 my-auto">{{__('route.Tables')}}</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/ {{__('route.City')}}</span>
+                    <h4 class="content-title mb-0 my-auto">{{__('route.Tables')}}</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/ {{__('route.scope_work')}}</span>
                 </div>
             </div>
             <div class="d-flex my-xl-auto right-content">
@@ -44,15 +44,21 @@
                             <table class="table text-md-nowrap" id="example1">
                                 <thead>
                                     <tr>
+                                        <th class="wd-15p border-bottom-0"> {{__('route.image')}}</th>
+
                                         <th class="wd-15p border-bottom-0"> {{__('route.name_arabic')}}</th>
                                         <th class="wd-15p border-bottom-0"> {{__('route.name_english')}}</th>
                                         <th class="wd-15p border-bottom-0"> {{__('route.Action')}}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($cities as $item)
+                                    @foreach ($scopeWorks as $item)
                                         <tr>
-                                        
+                                                <td>
+                                                    <div class=" avatar-xxl d-none d-sm-block">
+                                                        <img  alt="" class="rounded-circle" src="{{asset($item->icon)}}">
+                                                    </div>
+                                                </td>
                                                 <td>{{$item->name_ar}}</td>
                                                 <td>{{$item->name_en}}</td>
                                                 <td>
@@ -61,14 +67,14 @@
                                                         title="{{ trans('route.Edit') }}"><i class="fa fa-edit"></i>
                                                     </button>
                                                 
-                                                    <a href="{{route('city.destroy',$item->id)}}" class="btn btn-danger btn-sm" 
+                                                    <a href="{{route('scope_work.destroy',$item->id)}}" class="btn btn-danger btn-sm" 
                                                         title="{{ trans('route.Delete') }}">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
 
                                                 </td>
                                         </tr>
-                                        @include('back.cities.edit')
+                                        @include('back.scope_work.edit')
                                     @endforeach
                          
                                 </tbody>
@@ -83,6 +89,28 @@
     </div>
     <!-- Container closed -->
 
-    @include('back.cities.create')
+    @include('back.scope_work.create')
    
+
+
+    <script>
+        function previewImage(event) {
+            const imagePreview = document.getElementById('image-preview');
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function() {
+                imagePreview.src = reader.result;
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                imagePreview.src = "";
+            }
+        }
+    </script>
+
+
+
 @endsection

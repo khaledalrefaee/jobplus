@@ -4,7 +4,7 @@ namespace App\Http\Requests\back;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CityRequest extends FormRequest
+class Scope_workRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,8 +14,12 @@ class CityRequest extends FormRequest
         return true;
     }
 
-   
-    public function rules()
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
     {
         return [
             'name_en'=>'required|max:100',
@@ -23,7 +27,7 @@ class CityRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'name_en' =>trans('validation.required'),

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +15,8 @@ use Mcamara\LaravelLocalization\LaravelLocalization;
 class AuthController extends Controller
 {
 
+    use GeneralTrait;
+    
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -61,8 +64,10 @@ class AuthController extends Controller
         }
     
         $user = User::create($data);
-    
-        return response()->json(['message' => trans('User created successfully'), 'data' => $user, 'status' => true], 201);
+        return $this->returnSuccessMessage('User created successfully');
+        
+
+        // return response()->json(['message' => trans(''), 'data' => $user, 'status' => true], 201);
     
     }
     
@@ -83,18 +88,19 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
-            return response()->json(['error'=>'There is an error in the email or password'] , 400);
+            return $this->returnError('There is an error in the email or password');
+            // return response()->json(['error'=>''] , 400);
         }
 
         $token = $user->createToken('myapptoken')->plainTextToken;
 
      
-        $response = [
-            'user' => $user,
-            'token' => $token
-        ];
+        // $response = [
+        //     'user' => $user,
+        //     'token' => $token
+        // ];
 
-        return response($response, 200);
+        return $this->returnData('token',$token);
         
     }
 
@@ -102,7 +108,8 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-        return response()->json(['message' => 'User successfully signed out']);
+        return $this->returnSuccessMessage('User successfully signed out');
+    
     }
 
 
@@ -115,7 +122,7 @@ class AuthController extends Controller
         $city = $locale == 'en' ? $user->city->name_en : $user->city->name_ar;
         $activeStatus = $locale == 'en' ? 'active' : 'مفعل';
     
-        return response()->json([
+        $date =[
             'first_name' => $user->first_name,
             'last_name' => $user->last_name,
             'phone' => $user->phone,
@@ -127,7 +134,10 @@ class AuthController extends Controller
             'image' => asset($user->image),
             'city' => $city,
             'active' => $activeStatus,
-        ]);
+        ];
+
+        return $this->returnData('profile', $date);
+    
     }
     
 
@@ -146,7 +156,7 @@ class AuthController extends Controller
             'nationality' => 'required|string|max:255',
             'birthday' => 'required|date_format:d/m/Y',
             'city_id' => 'required|exists:cities,id',
-            'address' => 'nullable|string|max:255',
+            'address' => 'string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -189,7 +199,8 @@ class AuthController extends Controller
 
         $user->update($data);
 
-        return response()->json(['message' => trans('User updated successfully'), 'data' => $user, 'status' => true], 200);
+        return $this->returnSuccessMessage('User updated successfully');
+        // return response()->json(['message' => trans(''), 'data' => $user, 'status' => true], 200);
     }
 
 
@@ -207,10 +218,12 @@ class AuthController extends Controller
     
             $user->delete();
     
-            return response()->json(['message' => 'User deleted successfully and logged out', 'status' => true], 200);
+            return $this->returnSuccessMessage('User deleted successfully and logged out');
+            // return response()->json(['message' => '', 'status' => true], 200);
         }
     
-        return response()->json(['message' => 'User not found', 'status' => false], 404);
+        return $this->returnError('User not found');
+        // return response()->json(['message' => '', 'status' => false], 404);
     }
     
     

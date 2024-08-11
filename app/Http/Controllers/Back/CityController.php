@@ -16,12 +16,15 @@ class CityController extends Controller
     
     }
 
-    public function store(CityRequest $request)
+    public function store(Request $request)
     {
-        if(City::where('name_ar',$request->name_ar)->orwhere('name_en',$request->name_en)->exists()){
-            return redirect()->back()->withErrors(trans('route.exists'));
-        }
+  
+        $request->validate([
+            'name_ar' => 'required|max:255|unique:cities,name_ar',
+            'name_en' => 'required|max:255|unique:cities,name_en',
+        ]);
         try {
+
             $city = new city();
             $city->name_ar = $request->name_ar;
             $city->name_en = $request->name_en;
@@ -36,23 +39,29 @@ class CityController extends Controller
     }
 
 
-    public function update(CityRequest $request)
+    public function update(Request $request, $id)
     {
         try {
-            $validated = $request->validated();
-            $city =city::findOrFail($request->id);
-            $city->update([
-                $city->name_ar = $request->name_ar,
-                $city->name_en = $request->name_en,
+            $city = city::findOrFail($id);
+            
+            $request->validate([
+                'name_ar' => 'required|max:255|unique:cities,name_ar,' . $city->id,
+                'name_en' => 'required|max:255|unique:cities,name_en,' . $city->id,
             ]);
-           
+    
+            $city->update([
+                'name_ar' => $request->name_ar,
+                'name_en' => $request->name_en,
+            ]);
+            
             toastr()->warning(trans('route.Update_messages'));
             return redirect()->back();
         }
         catch (\Exception $e){
-            return redirect()->back()->withErrors(['error'=>$e->getMessage()]);
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
         }
     }
+    
 
 
     public function destroy($id)

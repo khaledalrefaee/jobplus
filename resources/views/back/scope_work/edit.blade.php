@@ -6,16 +6,16 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="main-content-label mg-b-5">
-                            {{__('route.edit_city')}}
-                                @if (app()->getLocale() == 'ar')
-                                        {{$item->name_ar}}
-                                @else
-                                        {{$item->name_en}}
-                                @endif
+                            {{__('route.edit_scope_work')}}
+                            @if (app()->getLocale() == 'ar')
+                                    {{$item->name_ar}}
+                            @else
+                                    {{$item->name_en}}
+                            @endif
                           
                         </div>
                        
-                        <form action="{{route('city.update',$item->id)}}" data-parsley-validate="" method="POST">
+                        <form action="{{route('scope_work.update',$item->id)}}" data-parsley-validate=""  enctype="multipart/form-data" method="POST">
                             @csrf
                             <div class="row row-sm">
                                 <div class="col-6">
@@ -32,6 +32,21 @@
 
                                     </div>
                                 </div>
+
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label class="form-label">{{__('route.image')}}: <span class="tx-danger">*</span></label>
+                                        <input class="form-control" name="image" type="file" accept="image/*" id="" >
+                                    </div>
+                                </div>
+                                
+                                <div class="col-6">
+                                    <div class="avatar-xxl d-none d-sm-block">
+                                        <img id="" alt="" class="rounded-circle" src="{{asset($item->icon)}}" style="width: 150px; height: 150px;">
+
+                                    </div>
+                                </div>
+
                                 <div class="modal-footer">
                                     <button class="btn ripple btn-primary " type="submit">{{__('route.save')}}</button>
                                     <button class="btn ripple btn-secondary" data-dismiss="modal" type="button">{{__('route.close')}}</button>
@@ -44,4 +59,9 @@
         </div>
     </div>
 </div>
+
+
+
+
+
 <!-- End Modal effects-->

@@ -8,6 +8,8 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\BusinessGallery;
+use App\Models\skill;
 
 class User extends Authenticatable
 {
@@ -26,15 +28,58 @@ class User extends Authenticatable
      * @var array<int, string>
      */
 
-     public function userdetails()
-    {
-        return $this->hasOne(User_Detail::class);
-    }
-
     public function city()
     {
         return $this->belongsTo(City::class);
     }
+
+     
+    public function userdetails()
+    {
+        return $this->hasOne(User_Detail::class);
+    }
+
+    public function businessgallery()
+    {
+        return $this->hasMany(BusinessGallery::class ,'user_id');
+    }
+
+    public function skill()
+    {
+        return $this->hasMany(skill::class ,'user_id');
+    }
+
+    public function language()
+    {
+        return $this->hasMany(Language::class ,'user_id');
+    }
+
+    
+
+    
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($userdetails) {
+            $userdetails->userdetails()->delete();
+        });
+
+        static::deleting(function ($businessgallery) {
+            $businessgallery->businessgallery()->delete();
+        });
+
+        static::deleting(function ($skill) {
+            $skill->skill()->delete();
+        });
+
+        static::deleting(function ($language) {
+            $language->language()->delete();
+        });
+    }
+
+ 
 
 
     protected $hidden = [

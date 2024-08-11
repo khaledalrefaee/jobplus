@@ -13,7 +13,12 @@ return[
     'Data Tables'=>'Data Tables',
     'Tables'=>'Tables',
     'City'=>'City',
+    'image'=>'image',
+    'add_scope_work' =>'Add scope Of work',
+    'edit_scope_work' =>'Edit scope Of work',
+    'name_Scope_of_work' =>'name Scope Of work',
     'Delete_messages'=>'Deletion process completed successfully',
+    'job_title'=>'job title',
     'Add_messages'=>'Data has been saved successfully!',
     'Action'=>'Action',
     'edit_city'=>'edit city',
@@ -21,4 +26,5 @@ return[
     'save'=>'save',
     'close'=>'close',
     'home'=>'home',
+    'scope_work'=>'scope of work',
 ];
