@@ -32,6 +32,7 @@ class CityController extends Controller
             toastr()->success(trans('route.Add_messages'));
            
             return redirect()->back();
+            
         }
         catch (\Exception $a){
             return redirect()->back()->withErrors(['error'=>$a->getMessage()]);

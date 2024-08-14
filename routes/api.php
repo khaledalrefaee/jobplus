@@ -3,12 +3,16 @@
 use App\Models\City;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\CvController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\SkillController;
+use App\Http\Controllers\Api\JobTitleController;
 use App\Http\Controllers\Api\LanguageController;
 use App\Http\Controllers\Api\ScopeWorkController;
 use App\Http\Controllers\Api\UserDetailController;
+use App\Http\Controllers\Api\ExperiencesController;
+use App\Http\Controllers\Api\CertificatesController;
 use App\Http\Controllers\Api\BusinessGalleryController;
 
 
@@ -27,6 +31,9 @@ Route::group(['middleware' => ['setapplanguage']], function () {
 
     Route::post('city', [CityController::class,'index']);
     Route::post('scope/work', [ScopeWorkController::class,'index']);
+    Route::post('job/title', [JobTitleController::class,'index']);
+
+
 
     ///////////////////////////// user Details delete //////////////////////////////////////
     Route::post('user/detail/destroy/{id}',[UserDetailController::class,'destroy']);
@@ -81,6 +88,34 @@ Route::group(['middleware' => ['auth:sanctum','setapplanguage']], function () {
          Route::post('user/language/store',[LanguageController::class,'store']);
          Route::post('user/language/update/{id}',[LanguageController::class,'update']);
          Route::post('user/language/destroy/{id}',[LanguageController::class,'destroy']);
+
+
+         
+         ///////////////////////////// Experiences //////////////////////////////////////
+
+         Route::post('user/Experiences/get',[ExperiencesController::class,'index']);
+         Route::post('user/Experiences/store',[ExperiencesController::class,'store']);
+         Route::post('user/Experiences/update/{id}',[ExperiencesController::class,'update']);
+         Route::post('user/Experiences/destroy/{id}',[ExperiencesController::class,'destroy']);
+
+
+         ///////////////////////////// Certificates //////////////////////////////////////
+
+         Route::post('user/Certificates/get',[CertificatesController::class,'index']);
+         Route::post('user/Certificates/store',[CertificatesController::class,'store']);
+         Route::post('user/Certificates/update/{id}',[CertificatesController::class,'update']);
+         Route::post('user/Certificates/destroy/{id}',[CertificatesController::class,'destroy']);
+
+
+
+        ///////////////////////////// Cv //////////////////////////////////////
+
+        Route::get('user/Cv/get',[CvController::class,'index']);
+        
+        Route::get('user/Cv/download/{id}',[CvController::class,'download']);
+        Route::post('user/Cv/store',[CvController::class,'store']);
+        Route::post('user/Cv/update/{id}',[CvController::class,'update']);
+        Route::post('user/Cv/destroy/{id}',[CvController::class,'destroy']);
 });
 
 

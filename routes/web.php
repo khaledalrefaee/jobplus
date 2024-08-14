@@ -32,7 +32,7 @@ Route::group(
         Route::post('city/store',[CityController::class,'store'])->name('city.store');
         Route::post('city/update/{id}',[CityController::class,'update'])->name('city.update');
         Route::get('city/destroy/{id}',[CityController::class,'destroy'])->name('city.destroy');
-    
+        
 
         ////////////////////////////////// scope_work \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
         Route::get('scope/work',[ScopeWorkController::class,'index'])->name('scope_work');

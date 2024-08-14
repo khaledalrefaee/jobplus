@@ -13,7 +13,7 @@ class City extends Model
     // use HasTranslations;
 
     protected $fillable = ['name_en','name_ar'];
-  
+    
 
     protected $table = 'cities';
 

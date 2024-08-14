@@ -17,6 +17,11 @@ class Job_Title extends Model
         return $this->belongsTo(Scope_work::class);
     }   
     
+    public function experience()
+    {
+        return $this->hasMany(Experience::class ,'job_title_id');
+    }
+
     public function scopeSelection($query)
     {
         return $query->select('id', 'name_' . app()->getLocale() . ' as name');

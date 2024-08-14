@@ -39,6 +39,11 @@ class User extends Authenticatable
         return $this->hasOne(User_Detail::class);
     }
 
+    public function cv()
+    {
+        return $this->hasOne(Cv::class);
+    }
+
     public function businessgallery()
     {
         return $this->hasMany(BusinessGallery::class ,'user_id');
@@ -48,12 +53,23 @@ class User extends Authenticatable
     {
         return $this->hasMany(skill::class ,'user_id');
     }
+   
+ 
 
     public function language()
     {
         return $this->hasMany(Language::class ,'user_id');
     }
 
+    public function experience()
+    {
+        return $this->hasMany(Experience::class ,'user_id');
+    }
+
+    public function certificate()
+    {
+        return $this->hasMany(Certificate::class ,'user_id');
+    }
     
 
     
@@ -76,6 +92,18 @@ class User extends Authenticatable
 
         static::deleting(function ($language) {
             $language->language()->delete();
+        });
+
+        static::deleting(function ($experience) {
+            $experience->experience()->delete();
+        });
+
+        static::deleting(function ($certificate) {
+            $certificate->certificate()->delete();
+        });
+
+        static::deleting(function ($cv) {
+            $cv->cv()->delete();
         });
     }
 
