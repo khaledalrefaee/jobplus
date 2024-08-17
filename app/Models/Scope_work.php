@@ -20,12 +20,21 @@ class Scope_work extends Model
         return $this->hasMany(Job_Title::class, 'scope_work_id');
     }
 
+    public function userdetail(){
+        return $this->hasMany(User_Detail::class);
+    }
+
+
     protected static function boot()
     {
         parent::boot();
 
         static::deleting(function ($scopeworks) {
             $scopeworks->Job_Title()->delete();
+        });
+
+        static::deleting(function ($userdetail) {
+            $userdetail->userdetail()->delete();
         });
     }
 

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Back\CityController;
+use App\Http\Controllers\Back\UsersController;
 use App\Http\Controllers\Back\JobtitleController;
 use App\Http\Controllers\Back\ScopeWorkController;
 
@@ -41,11 +42,22 @@ Route::group(
         Route::get('scope/work/destroy/{id}',[ScopeWorkController::class,'destroy'])->name('scope_work.destroy');
 
 
-                ////////////////////////////////// Job Title \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-                Route::get('job/title',[JobtitleController::class,'index'])->name('job_title');
-                Route::post('job/title/store',[JobtitleController::class,'store'])->name('job_title.store');
-                Route::post('job/title/update/{id}',[JobtitleController::class,'update'])->name('job_title.update');
-                Route::get('job/title/destroy/{id}',[JobtitleController::class,'destroy'])->name('job_title.destroy');
+        ////////////////////////////////// Job Title \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+        Route::get('job/title',[JobtitleController::class,'index'])->name('job_title');
+        Route::post('job/title/store',[JobtitleController::class,'store'])->name('job_title.store');
+        Route::post('job/title/update/{id}',[JobtitleController::class,'update'])->name('job_title.update');
+        Route::get('job/title/destroy/{id}',[JobtitleController::class,'destroy'])->name('job_title.destroy');
+
+
+        ////////////////////////////////// Users \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+        Route::get('users',[UsersController::class,'index'])->name('users');
+        Route::get('user/show/{id}',[UsersController::class,'show'])->name('user.show');
+        Route::post('/users/update/{id}', [UsersController::class, 'update'])->name('users.update');
+        Route::post('/users/update-active/{id}', [UsersController::class, 'updateActiveStatus'])->name('users.updateActive');
+
+
+        Route::post('job/title/update/{id}',[UsersController::class,'update'])->name('job_title.update');
+        Route::get('job/title/destroy/{id}',[UsersController::class,'destroy'])->name('job_title.destroy');
     });
 
 

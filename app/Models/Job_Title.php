@@ -22,6 +22,24 @@ class Job_Title extends Model
         return $this->hasMany(Experience::class ,'job_title_id');
     }
 
+    public function userdetail(){
+        return $this->hasMany(User_Detail::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($userdetail) {
+            $userdetail->userdetail()->delete();
+        });
+
+        static::deleting(function ($experience) {
+            $experience->experience()->delete();
+        });
+    }
+
+
     public function scopeSelection($query)
     {
         return $query->select('id', 'name_' . app()->getLocale() . ' as name');

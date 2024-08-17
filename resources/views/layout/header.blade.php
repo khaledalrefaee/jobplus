@@ -28,7 +28,7 @@
                     <li class="">
 
 
-                        <div class="dropdown  nav-itemd-none d-md-flex">
+                        {{-- <div class="dropdown  nav-itemd-none d-md-flex">
                             <a href="#" class="d-flex  nav-item nav-link pr-0 country-flag1" data-toggle="dropdown" aria-expanded="false">
                                 <span class="avatar country-Flag mr-0 align-self-center bg-transparent">
                                     <img src="{{asset('assets/img/flags/us_flag.jpg')}}" alt="img">
@@ -50,7 +50,18 @@
                                     </div>
                                 </a>
                             </div>
-                        </div>
+                        </div> --}}
+
+
+                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                        <li>
+                            <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                {{ $properties['native'] }}
+                            </a>
+                        </li>
+                        @endforeach
+                    
+                    
                     </li>
                 </ul>
                 <div class="nav nav-item  navbar-nav-right ml-auto">

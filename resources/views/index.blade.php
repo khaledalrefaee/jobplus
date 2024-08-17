@@ -15,7 +15,7 @@
 		<!-- /Loader -->
 
 		<!-- Page -->
-		<div class="page">
+		<div class="page" >
             <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 
             @include('layout.sidbar')

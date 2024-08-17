@@ -97,10 +97,15 @@
         <script src="{{asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js')}}"></script>
 
 
+        <script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.all.min.js "></script>
         <!--Internal  Select2 js -->
         <script src="{{asset('assets/plugins/select2/js/select2.min.js')}}"></script>
 
+        <!--Internal  jquery-simple-datetimepicker js -->
+        <script src="{{asset('assets/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js')}}"></script>
 
+        <!-- Ionicons js -->
+        <script src="{{asset('assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.js')}}"></script>
 
 	<!--Internal  Datatable js -->
 	<script src="{{asset('assets/js/table-data.js')}}"></script>

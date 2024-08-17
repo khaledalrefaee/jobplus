@@ -86,10 +86,12 @@ class AuthController extends Controller
         }
 
         $user = User::where('email', $request->email)->first();
+        if($user ->active == 0){
+            return $this->returnError('This account is not active');
+        }
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             return $this->returnError('There is an error in the email or password');
-            // return response()->json(['error'=>''] , 400);
         }
 
         $token = $user->createToken('myapptoken')->plainTextToken;
@@ -200,7 +202,6 @@ class AuthController extends Controller
         $user->update($data);
 
         return $this->returnSuccessMessage('User updated successfully');
-        // return response()->json(['message' => trans(''), 'data' => $user, 'status' => true], 200);
     }
 
 
@@ -219,11 +220,9 @@ class AuthController extends Controller
             $user->delete();
     
             return $this->returnSuccessMessage('User deleted successfully and logged out');
-            // return response()->json(['message' => '', 'status' => true], 200);
         }
     
         return $this->returnError('User not found');
-        // return response()->json(['message' => '', 'status' => false], 404);
     }
     
     

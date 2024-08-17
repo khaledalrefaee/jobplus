@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\SkillController;
 use App\Http\Controllers\Api\JobTitleController;
 use App\Http\Controllers\Api\LanguageController;
 use App\Http\Controllers\Api\ScopeWorkController;
+use App\Http\Controllers\Api\CompletionController;
 use App\Http\Controllers\Api\UserDetailController;
 use App\Http\Controllers\Api\ExperiencesController;
 use App\Http\Controllers\Api\CertificatesController;
@@ -31,6 +32,8 @@ Route::group(['middleware' => ['setapplanguage']], function () {
 
     Route::post('city', [CityController::class,'index']);
     Route::post('scope/work', [ScopeWorkController::class,'index']);
+    Route::post('get/jobtitle/by/{id}', [ScopeWorkController::class,'getjobtitlebyid']);
+    
     Route::post('job/title', [JobTitleController::class,'index']);
 
 
@@ -116,6 +119,10 @@ Route::group(['middleware' => ['auth:sanctum','setapplanguage']], function () {
         Route::post('user/Cv/store',[CvController::class,'store']);
         Route::post('user/Cv/update/{id}',[CvController::class,'update']);
         Route::post('user/Cv/destroy/{id}',[CvController::class,'destroy']);
+
+
+        ///////////////////////////// Completion //////////////////////////////////////
+        Route::get('user/completion', [CompletionController::class, 'getCompletionPercentage']);
 });
 
 

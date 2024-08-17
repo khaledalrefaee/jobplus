@@ -19,12 +19,12 @@
 		<link href="{{asset('assets/plugins/owl-carousel/owl.carousel.css')}}" rel="stylesheet" />
 
 		<!--  Custom Scroll bar-->
-		<link href="../../assets/plugins/mscrollbar/jquery.mCustomScrollbar.css')}}" rel="stylesheet"/>
+		{{-- <link href="../../assets/plugins/mscrollbar/jquery.mCustomScrollbar.css')}}" rel="stylesheet"/> --}}
 
 		<!--  Right-sidemenu css -->
 		<link href="{{asset('assets/plugins/sidebar/sidebar.css')}}" rel="stylesheet">
 
-		
+		<link href=" https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css " rel="stylesheet">
 		<!-- Maps css -->
 		<link href="{{asset('assets/plugins/jqvmap/jqvmap.min.css')}}" rel="stylesheet">
 
@@ -43,6 +43,12 @@
 		<!--- Animations css-->
 		<link href="{{asset('assets/css/animate.css')}}" rel="stylesheet">
 		<!-- ********************************************************************-->
+
+		<!--Internal  Datetimepicker-slider css -->
+		<link href="{{asset('assets/plugins/amazeui-datetimepicker/css/amazeui.datetimepicker.css')}}" rel="stylesheet">
+		<link href="{{asset('assets/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.css')}}" rel="stylesheet">
+		<link href="{{asset('assets/plugins/pickerjs/picker.min.css')}}" rel="stylesheet">
+
 
 		@if (App::getLocale() == 'ar')
 		

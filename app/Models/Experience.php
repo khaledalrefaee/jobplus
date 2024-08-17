@@ -17,6 +17,6 @@ class Experience extends Model
     } 
     
     public function jobtitle(){
-        return $this->belongsTo(Job_Title::class);
+        return $this->belongsTo(Job_Title::class,'job_title_id');
     } 
 }

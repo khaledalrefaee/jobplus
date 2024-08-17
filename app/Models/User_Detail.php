@@ -16,4 +16,18 @@ class User_Detail extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopework()
+    {
+        return $this->belongsTo(Scope_work::class,'scope_work_id');
+    }
+
+    public function jobtitle()
+    {
+        return $this->belongsTo(Job_Title::class,'job_title_id');
+    }
+
+ 
+
+
 }

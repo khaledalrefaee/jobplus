@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('career_level');
             $table->string('type_job');
             $table->integer('scope_work_id');
+            $table->integer('job_title_id');
             $table->integer('user_id');
 
            
