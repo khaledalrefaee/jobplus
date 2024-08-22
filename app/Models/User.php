@@ -72,7 +72,15 @@ class User extends Authenticatable
     }
     
 
-    
+    public function scopework()
+    {
+        return $this->belongsTo(Scope_work::class,'scope_work_id');
+    }
+
+    public function jobtitle()
+    {
+        return $this->belongsTo(Job_Title::class,'job_title_id');
+    }
 
     protected static function boot()
     {

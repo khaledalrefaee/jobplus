@@ -18,9 +18,10 @@ return new class extends Migration
             $table->string('phone')->unique();
             $table->string('email')->unique();
             $table->string('gender');
-
-            $table->string('nationality');
-            $table->date('birthday');
+            $table->string('nationality')->nullable();
+            $table->date('birthday')->nullable();
+            $table->integer('scope_work_id');
+            $table->integer('job_title_id');
             $table->integer('city_id');
             $table->text('address')->nullable();
             $table->string('image')->nullable();

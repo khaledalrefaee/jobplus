@@ -1,131 +1,6 @@
 @extends('index')
 @section('content')
-<style>
 
-    /* From Uiverse.io by Shoh2008 */ 
-.checkbox-wrapper-8 .tgl {
-  display: none;
-}
-
-.checkbox-wrapper-8 .tgl,
-  .checkbox-wrapper-8 .tgl:after,
-  .checkbox-wrapper-8 .tgl:before,
-  .checkbox-wrapper-8 .tgl *,
-  .checkbox-wrapper-8 .tgl *:after,
-  .checkbox-wrapper-8 .tgl *:before,
-  .checkbox-wrapper-8 .tgl + .tgl-btn {
-  box-sizing: border-box;
-}
-
-.checkbox-wrapper-8 .tgl::-moz-selection,
-  .checkbox-wrapper-8 .tgl:after::-moz-selection,
-  .checkbox-wrapper-8 .tgl:before::-moz-selection,
-  .checkbox-wrapper-8 .tgl *::-moz-selection,
-  .checkbox-wrapper-8 .tgl *:after::-moz-selection,
-  .checkbox-wrapper-8 .tgl *:before::-moz-selection,
-  .checkbox-wrapper-8 .tgl + .tgl-btn::-moz-selection,
-  .checkbox-wrapper-8 .tgl::selection,
-  .checkbox-wrapper-8 .tgl:after::selection,
-  .checkbox-wrapper-8 .tgl:before::selection,
-  .checkbox-wrapper-8 .tgl *::selection,
-  .checkbox-wrapper-8 .tgl *:after::selection,
-  .checkbox-wrapper-8 .tgl *:before::selection,
-  .checkbox-wrapper-8 .tgl + .tgl-btn::selection {
-  background: none;
-}
-
-.checkbox-wrapper-8 .tgl + .tgl-btn {
-  outline: 0;
-  display: block;
-  width: 4em;
-  height: 2em;
-  position: relative;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.checkbox-wrapper-8 .tgl + .tgl-btn:after,
-  .checkbox-wrapper-8 .tgl + .tgl-btn:before {
-  position: relative;
-  display: block;
-  content: "";
-  width: 50%;
-  height: 100%;
-}
-
-.checkbox-wrapper-8 .tgl + .tgl-btn:after {
-  left: 0;
-}
-
-.checkbox-wrapper-8 .tgl + .tgl-btn:before {
-  display: none;
-}
-
-.checkbox-wrapper-8 .tgl:checked + .tgl-btn:after {
-  left: 50%;
-}
-
-.checkbox-wrapper-8 .tgl-skewed + .tgl-btn {
-  overflow: hidden;
-  transform: skew(-10deg);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  transition: all 0.2s ease;
-  font-family: sans-serif;
-  background: #888;
-}
-
-.checkbox-wrapper-8 .tgl-skewed + .tgl-btn:after,
-  .checkbox-wrapper-8 .tgl-skewed + .tgl-btn:before {
-  transform: skew(10deg);
-  display: inline-block;
-  transition: all 0.2s ease;
-  width: 100%;
-  text-align: center;
-  position: absolute;
-  line-height: 2em;
-  font-weight: bold;
-  color: #fff;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
-}
-
-.checkbox-wrapper-8 .tgl-skewed + .tgl-btn:after {
-  left: 100%;
-  content: attr(data-tg-on);
-}
-
-.checkbox-wrapper-8 .tgl-skewed + .tgl-btn:before {
-  left: 0;
-  content: attr(data-tg-off);
-}
-
-.checkbox-wrapper-8 .tgl-skewed + .tgl-btn:active {
-  background: #888;
-}
-
-.checkbox-wrapper-8 .tgl-skewed + .tgl-btn:active:before {
-  left: -10%;
-}
-
-.checkbox-wrapper-8 .tgl-skewed:checked + .tgl-btn {
-  background: #86d993;
-}
-
-.checkbox-wrapper-8 .tgl-skewed:checked + .tgl-btn:before {
-  left: -100%;
-}
-
-.checkbox-wrapper-8 .tgl-skewed:checked + .tgl-btn:after {
-  left: 0;
-}
-
-.checkbox-wrapper-8 .tgl-skewed:checked + .tgl-btn:active:after {
-  left: 10%;
-}
-</style>
 	<!-- container -->
     <div class="container-fluid">
 
@@ -133,7 +8,8 @@
         <div class="breadcrumb-header justify-content-between">
             <div class="my-auto">
                 <div class="d-flex">
-                    <h4 class="content-title mb-0 my-auto">{{__('route.Tables')}}</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/ {{__('route.City')}}</span>
+                    <h4 class="content-title mb-0 my-auto">{{__('route.Tables')}}</h4>
+                    <span class="text-muted mt-1 tx-13 ml-2 mb-0">/ {{__('route.users')}}</span>
                 </div>
             </div>
           
@@ -160,24 +36,52 @@
                             <table class="table text-md-nowrap" id="example1">
                                 <thead>
                                     <tr>
-                                        <th class="wd-15p border-bottom-0"> {{__('route.first_name')}}</th>
-                                        <th class="wd-15p border-bottom-0"> {{__('route.last_name')}}</th>
-                                        <th class="wd-15p border-bottom-0"> {{__('route.phone')}}</th>
-                                        <th class="wd-15p border-bottom-0"> {{__('route.email')}}</th>
-                                        <th class="wd-15p border-bottom-0"> {{__('route.scope_work')}}</th>
-                                        <th class="wd-15p border-bottom-0"> {{__('route.active')}}</th>
-                                        <th class="wd-15p border-bottom-0"> {{__('route.Action')}}</th>
+                                        <th class="wd-5p border-bottom-0"> #</th>
+                                        <th class="wd-13p border-bottom-0"> {{__('route.full_name')}}</th>
+                                        <th class="wd-13p border-bottom-0"> {{__('route.phone')}}</th>
+                                        <th class="wd-13p border-bottom-0"> {{__('route.email')}}</th>
+                                        
+                                        <th class="wd-13p border-bottom-0"> {{__('route.scope_work')}}</th>
+                                        <th class="wd-13p border-bottom-0"> {{__('route.job_title')}}</th>
+                                        <th class="wd-13p border-bottom-0"> {{__('route.completion Percentages')}}</th>
+
+                                        <th class="wd-13p border-bottom-0"> {{__('route.active')}}</th>
+                                        <th class="wd-13p border-bottom-0"> {{__('route.Action')}}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+
+                                  <?php $i = 0; ?>
+                                 
                                     @foreach ($users as $item)
-                                        <tr>
-                                        
-                                                <td>{{$item->first_name}}</td>
-                                                <td>{{$item->last_name}}</td>
+                                    @php
+                                    $completionPercentage = $completionPercentages[$item->id];
+                            
+                                    if ($completionPercentage < 30) {
+                                        $bgClass = 'bg-danger';
+                                    } elseif ($completionPercentage >= 30 && $completionPercentage < 60) {
+                                        $bgClass = 'bg-warning';
+                                    } elseif ($completionPercentage >= 60 && $completionPercentage < 80) {
+                                        $bgClass = 'bg-info';
+                                    } else {
+                                        $bgClass = 'bg-success';
+                                    }
+                                  @endphp
+
+
+                                        <tr >
+                                          <?php $i++; ?>
+                                                
+                                                <td>{{$i}}</td>
+                                                <td>{{$item->first_name}} {{$item->last_name}}</td>
+                                               
                                                 <td>{{$item->phone}}</td>
                                                 <td>{{$item->email}}</td>
-                                                <td>{{$item->userdetails->scopework->{'name_' . app()->getLocale()} }}</td>
+
+                                                <td>{{ isset($item->scopework->{'name_' . app()->getLocale()}) ? $item->scopework->{'name_' . app()->getLocale()} : '' }}</td>
+                                                <td>{{ isset($item->jobtitle->{'name_' . app()->getLocale()}) ? $item->jobtitle->{'name_' . app()->getLocale()} : '' }}</td>
+                                                
+                                                <td class="{{ $bgClass }}">{{$completionPercentages[$item->id] }}</td>
                                                 <td>
                                                     <div class="checkbox-wrapper-8">
                                                         <input type="checkbox" id="cb3-8" class="tgl tgl-skewed" data-id="{{$item->id}}" {{ $item->active ? 'checked' : '' }}>
@@ -192,7 +96,13 @@
                                                         title="{{ trans('route.show') }}">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
-
+                                                    @if(isset($item->cv))
+                                                      <a class="btn btn-sm btn-indigo " href="{{ route('cv.download', $item->cv->id) }}" title="Download CV">
+                                                        <i class="typcn typcn-folder"></i>
+                                                      </a>
+                                                  
+                                                    @endif
+                                                
                                                 </td>
                                         </tr>
                                         

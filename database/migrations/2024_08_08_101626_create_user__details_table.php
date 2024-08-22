@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('educational_level');
             $table->string('career_level');
             $table->string('type_job');
-            $table->integer('scope_work_id');
-            $table->integer('job_title_id');
+            $table->text('description')->nullable();
+        
             $table->integer('user_id');
 
            

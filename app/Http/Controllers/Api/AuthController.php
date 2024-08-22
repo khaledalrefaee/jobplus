@@ -27,10 +27,12 @@ class AuthController extends Controller
             'password' => 'required|string|min:6|confirmed',
             'password_confirmation' => 'required',
             'gender' => 'required|string|max:255',
-            'nationality' => 'required|string|max:255',
-            'birthday' => 'required|date_format:d/m/Y',
-            'city_id' => 'required|exists:cities,id',
-            'address' => 'string|max:255',
+            'nationality' => 'nullable|string|max:255',
+            'birthday' => 'nullable|date_format:d/m/Y',
+            'city_id' => 'exists:cities,id',
+            'address' => 'nullable|string|max:255',
+            'scope_work_id' => 'required|exists:scope_works,id',
+            'job_title_id' => 'required|exists:job__titles,id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
     
@@ -49,26 +51,29 @@ class AuthController extends Controller
             'nationality',
             'birthday',
             'city_id',
-            'address'
+            'address',
+            'scope_work_id',
+            'job_title_id',
         ]);
-    
-        $data['birthday'] = Carbon::createFromFormat('d/m/Y', $request->birthday)->format('Y-m-d');
+        if ($request->filled('birthday')) {
+            $data['birthday'] = Carbon::createFromFormat('d/m/Y', $request->birthday)->format('Y-m-d');
+        }
         $data['password'] = Hash::make($request->password);
     
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $fileName = time() . '-' . $file->getClientOriginalName();
+            
+            $fileName = time() . '-' . preg_replace('/\s+/', '-', $file->getClientOriginalName());
             $destinationPath = public_path('images');
             $file->move($destinationPath, $fileName);
+            
             $data['image'] = 'images/' . $fileName;
         }
     
         $user = User::create($data);
-        return $this->returnSuccessMessage('User created successfully');
-        
-
-        // return response()->json(['message' => trans(''), 'data' => $user, 'status' => true], 201);
     
+        return $this->returnSuccessMessage('User created successfully');
+            
     }
     
     
@@ -86,14 +91,14 @@ class AuthController extends Controller
         }
 
         $user = User::where('email', $request->email)->first();
-        if($user ->active == 0){
-            return $this->returnError('This account is not active');
-        }
+       
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             return $this->returnError('There is an error in the email or password');
         }
-
+        if($user ->active == 0){
+            return $this->returnError('This account is not active');
+        }
         $token = $user->createToken('myapptoken')->plainTextToken;
 
      
@@ -109,7 +114,8 @@ class AuthController extends Controller
     
     public function logout(Request $request)
     {
-        Auth::logout();
+        
+        auth()->user()->tokens()->delete();
         return $this->returnSuccessMessage('User successfully signed out');
     
     }
@@ -117,12 +123,18 @@ class AuthController extends Controller
 
     public function profile(Request $request)
     {
-        $user = Auth::user()->load(['city']);
+        
+        $user = Auth::user()->load(['city','scopework','jobtitle']);
     
         $locale = app()->getLocale();
     
         $city = $locale == 'en' ? $user->city->name_en : $user->city->name_ar;
-        $activeStatus = $locale == 'en' ? 'active' : 'مفعل';
+
+        $scopework = $locale == 'en' ? $user->scopework->name_en : $user->scopework->name_ar;
+
+        $jobtitle = $locale == 'en' ? $user->jobtitle->name_en : $user->jobtitle->name_ar;
+
+        $activeStatus = $locale == 'en' &&  $user->active == 0 ? 'active' : 'مفعل';
     
         $date =[
             'first_name' => $user->first_name,
@@ -135,6 +147,8 @@ class AuthController extends Controller
             'address' => $user->address,
             'image' => asset($user->image),
             'city' => $city,
+            'scopework'=>$scopework,
+            'jobtitle'=>$jobtitle,
             'active' => $activeStatus,
         ];
 
@@ -149,15 +163,18 @@ class AuthController extends Controller
         $user = Auth::user();
 
         $validator = Validator::make($request->all(), [
+            'scope_work_id' => 'required|exists:scope_works,id',
+            'job_title_id' => 'required|exists:job__titles,id',
+
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
             'phone' => 'required|string|max:255|unique:users,phone,' . $user->id,
             'password' => 'nullable|string|min:6|confirmed',
             'gender' => 'required|string|max:255',
-            'nationality' => 'required|string|max:255',
-            'birthday' => 'required|date_format:d/m/Y',
-            'city_id' => 'required|exists:cities,id',
+            'nationality' => 'nullable|string|max:255',
+            'birthday' => 'nullable|date_format:d/m/Y',
+            'city_id' => 'nullable|required|exists:cities,id',
             'address' => 'string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -176,7 +193,9 @@ class AuthController extends Controller
             'nationality',
             'birthday',
             'city_id',
-            'address'
+            'address',
+            'scope_work_id',
+            'job_title_id',
         ]);
 
         if ($request->filled('birthday')) {
@@ -187,13 +206,21 @@ class AuthController extends Controller
             $data['password'] = Hash::make($request->password);
         }
 
+        if ($request->filled('scope_work_id')) {
+            $data['scope_work_id'] = $request->scope_work_id;
+        }
+
+        if ($request->filled('job_title_id')) {
+            $data['job_title_id'] = $request->job_title_id;
+        }
+
         if ($request->hasFile('image')) {
             if ($user->image && file_exists(public_path($user->image))) {
                 unlink(public_path($user->image));
             }
 
             $file = $request->file('image');
-            $fileName = time() . '-' . $file->getClientOriginalName();
+            $fileName = time() . '-' . preg_replace('/\s+/', '-', $file->getClientOriginalName()); 
             $destinationPath = public_path('images');
             $file->move($destinationPath, $fileName);
             $data['image'] = 'images/' . $fileName;

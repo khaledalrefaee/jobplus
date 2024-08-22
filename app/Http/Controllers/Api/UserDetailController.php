@@ -36,8 +36,8 @@ class UserDetailController extends Controller
             'educational_level' => 'required|string|max:255',
             'career_level' => 'required|string|max:255',
             'type_job' => 'required|string|max:255',
-            'scope_work_id' => 'required|exists:scope_works,id',
-            'job_title_id' => 'required|exists:job__titles,id',
+           
+            'description' => 'string|max:500',
         ]);
     
         if ($validator->fails()) {
@@ -61,6 +61,7 @@ class UserDetailController extends Controller
         $user_detail->type_job = $request->type_job;
         $user_detail->scope_work_id = $request->scope_work_id;
         $user_detail->job_title_id = $request->job_title_id;
+        $user_detail->description = $request->description;
         $user_detail->user_id = Auth::id();
         $user_detail->save();
 
@@ -87,6 +88,7 @@ class UserDetailController extends Controller
             'educational_level' => 'sometimes|required|string|max:255',
             'career_level' => 'sometimes|required|string|max:255',
             'type_job' => 'sometimes|required|string|max:255',
+            'description' => 'string|max:500',
             'scope_work_id' => 'sometimes|required|exists:scope_works,id',
             'job_title_id' => 'sometimes|required|exists:job__titles,id',
 
@@ -113,6 +115,7 @@ class UserDetailController extends Controller
             'type_job', 
             'scope_work_id',
             'job_title_id',
+            'description',
         ]));
      
         

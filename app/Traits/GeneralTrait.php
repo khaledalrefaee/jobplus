@@ -23,7 +23,6 @@ trait GeneralTrait
     {
         return [
             'status' => true,
-          
             'msg' => $msg
         ];
     }

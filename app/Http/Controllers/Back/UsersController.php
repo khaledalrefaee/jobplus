@@ -2,16 +2,39 @@
 
 namespace App\Http\Controllers\Back;
 
+use App\Models\Cv;
 use App\Models\City;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class UsersController extends Controller
 {
-    public function index(){
-        $users = User::all();
-        return view('back.users.index',compact('users'));
+    public function index()
+    {
+        $users = User::with(['userdetails', 'businessgallery', 'skill', 'language', 'experience', 'certificate'])->get();
+
+        $completionPercentages = [];
+
+        foreach ($users as $user) {
+            $totalSections = 6;
+            $completedSections = 0;
+
+            if ($user->userdetails) $completedSections++;
+            if ($user->businessgallery && $user->businessgallery->count() > 0) $completedSections++;
+            if ($user->skill && $user->skill->count() > 0) $completedSections++;
+            if ($user->language && $user->language->count() > 0) $completedSections++;
+            if ($user->experience && $user->experience->count() > 0) $completedSections++;
+            if ($user->certificate && $user->certificate->count() > 0) $completedSections++;
+
+            $completionPercentage = round(($completedSections / $totalSections) * 100);
+            
+            $completionPercentages[$user->id] = $completionPercentage;
+        }
+
+        return view('back.users.index', compact('users', 'completionPercentages'));
     }
 
     public function show($id){
@@ -72,6 +95,20 @@ class UsersController extends Controller
 
         $user->tokens()->delete();
         return response()->json(['success' => 'User status updated successfully']);
+    }
+
+
+    public function downloadCV($cvId)
+    {
+        $cv = Cv::find($cvId);
+        if(!$cv)
+         return redirect()->back()->with('error', 'CV not found.');
+
+        $filePath = public_path($cv->cv);
+        
+        if (File::exists($filePath)) 
+           return response()->download($filePath);
+
     }
 
 }

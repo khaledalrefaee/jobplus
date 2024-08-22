@@ -47,39 +47,33 @@
                     <div class="pl-0">
                         <div class="main-profile-overview">
                             <div class="main-img-user profile-user">
-                                <img alt="" src="{{asset($user->image)}}">
-                                {{-- <a class="fas fa-camera profile-edit" href="JavaScript:void(0);"></a> --}}
+                                @if ($user->image == null)
+                                    <img alt="" src="{{asset('assets/img/faces/6.jpg')}}">
+                                @else
+                                    <img alt="" src="{{asset($user->image)}}">
+                                @endif
                             </div>
                             <div class="d-flex justify-content-between mg-b-20">
                                 <div>
                                     <h5 class="main-profile-name">{{$user->first_name}} {{$user->last_name}}</h5>
-                                    <h4 class="main-profile-name">{{$user->userdetails->jobtitle->{'name_' . app()->getLocale()} }}
+                                    <h4 class="main-profile-name">
+                                    {{ isset($user->scopework->{'name_' . app()->getLocale()}) ? $user->scopework->{'name_' . app()->getLocale()} : '' }}
                                         
                                     </h4>
                                 </div>
                             </div>
                             <h3 class="text-start">
-                                {{$user->userdetails->scopework->{'name_' . app()->getLocale()} }}
+                                    {{ isset($user->jobtitle->{'name_' . app()->getLocale()}) ? $user->jobtitle->{'name_' . app()->getLocale()} : '' }}
                             </h3 >
-                            {{-- <div class="main-profile-bio">
-                                pleasure rationally encounter but because pursue consequences that are extremely painful.occur in which toil and pain can procure him some great pleasure.. <a href="">More</a>
-                            </div> --}}
-                            <!-- main-profile-bio -->
-                            {{-- <div class="row">
-                                <div class="col-md-4 col mb20">
-                                    <h5>947</h5>
-                                    <h6 class="text-small text-muted mb-0">Followers</h6>
-                                </div>
-                                <div class="col-md-4 col mb20">
-                                    <h5>583</h5>
-                                    <h6 class="text-small text-muted mb-0">Tweets</h6>
-                                </div>
-                                <div class="col-md-4 col mb20">
-                                    <h5>48</h5>
-                                    <h6 class="text-small text-muted mb-0">Posts</h6>
-                                </div>
-                            </div> --}}
-
+                            <h6>{{__('route.description')}}</h6>
+                            <div class="main-profile-bio">
+                                @if($user && $user->userdetails)
+                                    {{$user->userdetails->description}}
+                                @else
+                                
+                                @endif
+                             
+                            </div>
 
                             <hr class="mg-y-30">
                             <label class="main-content-label tx-13 mg-b-20">{{__('route.Social')}}</label>
@@ -156,6 +150,7 @@
                                 @endforeach
                               
                             </div>
+
                             <hr class="mg-y-30">
                             <h6>{{__('route.languages')}}</h6>
 
@@ -328,7 +323,7 @@
                                         <h5 class="text-primary m-b-5 tx-14">
                                             {{ $experience->jobtitle->{'name_' . app()->getLocale()} }}
                                         </h5>
-                                        <p class="">{{$experience->company_name}}</p>
+                                        <p class="">{{$experience->name_company}}</p>
                                         <p><b>{{$experience->from_date}}-{{$experience->to_date}}</b></p>
                                         <p class="m-b-5">{{$experience->text}}</p>
                                     </div>
@@ -481,32 +476,35 @@
                                     <div class="cardtitle">
                                         <div class="d-flex justify-content-between">
                                             <h6>{{__('route.rang_salary')}}</h6>
-                                            <span class="text-end">{{$user->userdetails->rang_salary}}</span>
+                                            <span class="text-end">{{isset($user->userdetails->rang_salary ) ?$user->userdetails->rang_salary : ''}}</span>
                                         </div>
                                 
                                         <div class="d-flex justify-content-between">
                                             <h6>{{__('route.status_employee')}}</h6>
-                                            <span class="text-end">{{$user->userdetails->status_employee}}</span>
+                                            <span class="text-end">{{isset($user->userdetails->status_employee ) ?$user->userdetails->status_employee : ''}}</span>
                                         </div>
                                 
                                         <div class="d-flex justify-content-between">
                                             <h6>{{__('route.years_experience')}}</h6>
-                                            <span class="text-end">{{$user->userdetails->years_experience}}</span>
+
+
+
+                                            <span class="text-end">{{isset($user->userdetails->years_experience) ? $user->userdetails->years_experience : ''}}</span>
                                         </div>
                                 
                                         <div class="d-flex justify-content-between">
                                             <h6>{{__('route.educational_level')}}</h6>
-                                            <span class="text-end">{{$user->userdetails->educational_level}}</span>
+                                            <span class="text-end">{{isset($user->userdetails->educational_level)? $user->userdetails->educational_level : '' }}</span>
                                         </div>
                                 
                                         <div class="d-flex justify-content-between">
                                             <h6>{{__('route.career_level')}}</h6>
-                                            <span class="text-end">{{$user->userdetails->career_level}}</span>
+                                            <span class="text-end">{{isset($user->userdetails->career_level)? $user->userdetails->career_level : '' }}</span>
                                         </div>
 
                                         <div class="d-flex justify-content-between">
                                             <h6>{{__('route.type_job')}}</h6>
-                                            <span class="text-end">{{$user->userdetails->type_job}}</span>
+                                            <span class="text-end">{{isset($user->userdetails->type_job)? $user->userdetails->type_job : '' }}</span>
                                         </div>
                                     </div>
                                 </div>

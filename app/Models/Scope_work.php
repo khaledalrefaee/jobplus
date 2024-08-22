@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Company;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Scope_work extends Model
 {
@@ -23,6 +24,12 @@ class Scope_work extends Model
     public function userdetail(){
         return $this->hasMany(User_Detail::class);
     }
+
+    public function companies()
+    {
+        return $this->belongsToMany(Company::class, 'scope_work_company');
+    }
+
 
 
     protected static function boot()
