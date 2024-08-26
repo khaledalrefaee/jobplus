@@ -17,8 +17,7 @@ class UserDetailController extends Controller
     public function index()
     {
         
-       $user_detail =User_Detail::where('user_id',auth()->user()->id)
-       ->with('scopework','jobtitle')->get();
+       $user_detail =User_Detail::where('user_id',auth()->user()->id)->get();
 
        return $this -> returnData('user_detail',$user_detail);
     }
@@ -59,8 +58,7 @@ class UserDetailController extends Controller
         $user_detail->educational_level = $request->educational_level;
         $user_detail->career_level = $request->career_level;
         $user_detail->type_job = $request->type_job;
-        $user_detail->scope_work_id = $request->scope_work_id;
-        $user_detail->job_title_id = $request->job_title_id;
+       
         $user_detail->description = $request->description;
         $user_detail->user_id = Auth::id();
         $user_detail->save();
@@ -89,8 +87,7 @@ class UserDetailController extends Controller
             'career_level' => 'sometimes|required|string|max:255',
             'type_job' => 'sometimes|required|string|max:255',
             'description' => 'string|max:500',
-            'scope_work_id' => 'sometimes|required|exists:scope_works,id',
-            'job_title_id' => 'sometimes|required|exists:job__titles,id',
+        
 
         ]);
     
@@ -113,8 +110,6 @@ class UserDetailController extends Controller
             'educational_level', 
             'career_level', 
             'type_job', 
-            'scope_work_id',
-            'job_title_id',
             'description',
         ]));
      

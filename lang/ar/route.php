@@ -116,4 +116,9 @@ return [
     'By'=>'من قبل ',
     'to'=>'الى حساب الأستاذ مجد الكناني',
     'subscriptio'=>'الأشتراكات',
+    'status'=>'حالة',
+    'Profile'=>'ملف تعريف',
+    'Unacceptable'=>'غير مقبولة',
+    'Acceptable'=>'مقبولة',
+    'My_subscriptions'=>'اشتراكاتي',
 ];

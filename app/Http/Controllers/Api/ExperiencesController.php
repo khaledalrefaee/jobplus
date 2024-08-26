@@ -15,8 +15,23 @@ class ExperiencesController extends Controller
     
     public function index()
     {
-        $Experience = Experience::where('user_id',auth()->user()->id)->get();
-        return $this -> returnData('Experience',$Experience);
+        $experiences = Experience::where('user_id',auth()->user()->id)->with('jobtitle')
+        ->get();
+        $experiences->transform(function($experience) {
+            if(app()->getLocale() == 'ar')
+            { 
+                $experience->job_title_id = $experience->jobtitle->name_ar;
+                unset($experience->jobtitle);
+            }
+
+            else
+            {
+                $experience->job_title_id = $experience->jobtitle->name_en;
+                unset($experience->jobtitle);
+            }
+            return $experience;
+        });
+        return $this -> returnData('Experience',$experiences);
     }
 
 

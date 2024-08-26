@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\SkillController;
 use App\Http\Controllers\Api\JobTitleController;
 use App\Http\Controllers\Api\LanguageController;
+use App\Http\Controllers\Api\CVJobWorkController;
 use App\Http\Controllers\Api\ScopeWorkController;
 use App\Http\Controllers\Api\CompletionController;
 use App\Http\Controllers\Api\UserDetailController;
@@ -38,16 +39,16 @@ Route::group(['middleware' => ['setapplanguage']], function () {
 
 
 
-    ///////////////////////////// user Details delete //////////////////////////////////////
-    Route::post('user/detail/destroy/{id}',[UserDetailController::class,'destroy']);
+        ///////////////////////////// user Details delete //////////////////////////////////////
+        Route::post('user/detail/destroy/{id}',[UserDetailController::class,'destroy']);
     
 
 
-     ///////////////////////////// user create and login //////////////////////////////////////
-    Route::post('register',[AuthController::class,'register']);
-    Route::post('login',[AuthController::class,'login']);
+        ///////////////////////////// user create and login //////////////////////////////////////
+        Route::post('register',[AuthController::class,'register']);
+        Route::post('login',[AuthController::class,'login']);
  
-
+       
 });
 
 
@@ -120,7 +121,12 @@ Route::group(['middleware' => ['auth:sanctum','setapplanguage']], function () {
         Route::post('user/Cv/update/{id}',[CvController::class,'update']);
         Route::post('user/Cv/destroy/{id}',[CvController::class,'destroy']);
 
+ 
+        ///////////////////////////// Donloed Cv JobWord //////////////////////////////////////
 
+        Route::get('/cv/download', [CVJobWorkController::class, 'download']);
+
+        
         ///////////////////////////// Completion //////////////////////////////////////
         Route::get('user/completion', [CompletionController::class, 'getCompletionPercentage']);
 });

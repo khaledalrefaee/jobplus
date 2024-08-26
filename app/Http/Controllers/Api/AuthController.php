@@ -56,8 +56,13 @@ class AuthController extends Controller
             'job_title_id',
         ]);
         if ($request->filled('birthday')) {
-            $data['birthday'] = Carbon::createFromFormat('d/m/Y', $request->birthday)->format('Y-m-d');
+            
+            $birthday  = Carbon::createFromFormat('d/m/Y', $request->birthday)->format('Y-m-d');
+            $data['birthday'] = $birthday;
+    
+            $data['age'] = Carbon::parse($birthday)->age;
         }
+
         $data['password'] = Hash::make($request->password);
     
         if ($request->hasFile('image')) {
@@ -199,7 +204,10 @@ class AuthController extends Controller
         ]);
 
         if ($request->filled('birthday')) {
-            $data['birthday'] = Carbon::createFromFormat('d/m/Y', $request->birthday)->format('Y-m-d');
+            $birthday = Carbon::createFromFormat('d/m/Y', $request->birthday)->format('Y-m-d');
+            $data['birthday'] = $birthday;
+    
+            $data['age'] = Carbon::parse($birthday)->age;
         }
 
         if ($request->filled('password')) {

@@ -34,16 +34,18 @@ class User extends Authenticatable
     }
 
      
-    public function userdetails()
-    {
-        return $this->hasOne(User_Detail::class);
-    }
+  
 
     public function cv()
     {
         return $this->hasOne(Cv::class);
     }
 
+    public function userdetails()
+    {
+        return $this->hasOne(User_Detail::class);
+    }
+    
     public function businessgallery()
     {
         return $this->hasMany(BusinessGallery::class ,'user_id');

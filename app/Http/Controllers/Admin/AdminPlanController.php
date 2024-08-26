@@ -12,4 +12,6 @@ class AdminPlanController extends Controller
     {   $plans = Plan::all();
          return view('admin.plan.index',compact('plans'));
     }
+
+
 }

@@ -21,7 +21,7 @@
 
 
 	</head>
-	<body class="main-body">
+	<body class="main-body dark-theme">
 
 		<!-- Loader -->
 		
@@ -36,12 +36,12 @@
 					<div class="col-md-5 col-lg-5 col-xl-5 d-none d-md-flex bg-primary-transparent">
 						<div class="row wd-100p mx-auto text-center">
 							<div class="col-md-12 col-lg-12 col-xl-12 my-auto mx-auto wd-100p">
-								<img src="{{asset('assets/images/istockphoto.jpg')}}" class="my-auto ht-xl-80p wd-md-100p wd-xl-80p mx-auto" alt="logo">
+								<img src="{{asset('assets/images/logo_2.png')}}" class="my-auto ht-xl-80p wd-md-100p wd-xl-80p mx-auto" alt="logo">
 							</div>
 						</div>
 					</div>
 					<!-- The content half -->
-					<div class="col-md-7 col-lg-7 col-xl-7 bg-white">
+					<div class="col-md-7 col-lg-7 col-xl-7">
 						<div class="login d-flex align-items-center py-2">
 							<!-- Demo content-->
 							<div class="container p-0">
@@ -50,11 +50,12 @@
 										<div class="card-sigin">
 											<div class="mb-5 d-flex"> 
                                                 <a href="javascript:void(0);">
-                                                <img src="{{asset('assets/img/brand/favicon.png')}}" class="sign-favicon ht-40" alt="logo">
+                                                	<img src="{{asset('assets/images/logo_2.png')}}" class="sign-favicon ht-70" alt="logo">
                                                 </a>
-                                                <h1 class="main-logo1 ml-1 mr-0 my-auto tx-28">Find<span>Jo</span>b</h1>
+												<h1 class="main-logo1 ml-1 mr-0 my-auto tx-28">Job<span>Wor</span>k</h1>
+
                                             </div>
-											<div class="main-signup-header">
+											<div class="main-signup-header" style="margin-top: -9%;">
 												<h2 class="text-primary">{{__('route.Get Started')}}</h2>
 												<h5 class="font-weight-normal mb-4">{{__('route.only takes a minute')}}.</h5>
                                                     @if ($errors->any())
@@ -66,14 +67,14 @@
                                                             </ul>
                                                         </div>
                                                     @endif
-													<div class="app-sidebar__user clearfix active">
+													<div class="app-sidebar__user clearfix active" style="margin-top: -9%;">
 														<div class="dropdown user-pro-body">
 															<div class="">
-																<img id="image-preview" alt="user-img" class="avatar avatar-xl brround mCS_img_loaded" src="">
+																<img id="image-preview" alt="" class="avatar avatar-xl brround mCS_img_loaded" src="">
 															</div>
 														</div>
 													</div>
-                                                <form action="{{route('Register.form')}}" method="POST" accept="multipart/form-data" dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}">
+                                                <form style="margin-top: -9%;" action="{{route('Register.form')}}" method="POST" enctype="multipart/form-data" dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}">
 													@csrf
 
                                                     <div class="row">

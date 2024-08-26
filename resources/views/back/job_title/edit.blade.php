@@ -18,19 +18,8 @@
                         <form action="{{ route('job_title.update', $item->id) }}" method="POST" data-parsley-validate="">
                             @csrf
                         
-                            <div class="row row-sm">
-                                <!-- Scope Work Dropdown -->
-                                <div class="parsley-select col-12" id="slWrapper">
-                                    <label class="form-label">{{ __('route.scope_work') }}: <span class="tx-danger">*</span></label>
-                                    <select name="scope_work_id" class="form-control select2" data-parsley-class-handler="#slWrapper" data-parsley-errors-container="#slErrorContainer" data-placeholder="Choose one" required>
-                                        @foreach ($scopeworks as $scopework)
-                                            <option value="{{ $scopework->id }}" {{ old('scope_work_id', $item->scope_work_id) == $scopework->id ? 'selected' : '' }}>
-                                                {{ $scopework->name_en }} / {{ $scopework->name_ar }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    <div id="slErrorContainer"></div>
-                                </div>
+                            <div class="row ">
+                               
                         
                                 <!-- Name Arabic -->
                                 <div class="col-6">
@@ -48,6 +37,23 @@
                                     </div>
                                 </div>
                         
+                                 <!-- Scope Work Dropdown -->
+                                 <div class="parsley-select col-lg-12 col-md-12" id="slWrapper"style="width: 100%;">
+                                    <div class="form-group">
+                                  
+                                        <label class="form-label">{{ __('route.scope_work') }}: <span class="tx-danger">*</span></label>
+                                        <select name="scope_work_id" class="form-control select2" data-parsley-class-handler="#slWrapper"
+                                            data-parsley-errors-container="#slErrorContainer" data-placeholder="Choose one" required>
+                                            
+                                            @foreach ($scopeworks as $scopework)
+                                                <option value="{{ $scopework->id }}" {{ old('scope_work_id', $item->scope_work_id) == $scopework->id ? 'selected' : '' }}>
+                                                    {{ $scopework->name_en }} / {{ $scopework->name_ar }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                       
+                                    </div>
+                                </div>
                                 <!-- Buttons -->
                                 <div class="modal-footer">
                                     <button class="btn ripple btn-primary" type="submit">{{ __('route.save') }}</button>

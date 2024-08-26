@@ -49,9 +49,9 @@ class AuthController extends Controller
               'password',
               'job_title',
               'city_id',
-              'image',
               'address',
             ]);
+         
             $data['password'] = Hash::make($request->password);
             $data['type'] ='admin';
 
@@ -60,7 +60,7 @@ class AuthController extends Controller
                 $fileName = time() . '-' . $file->getClientOriginalName();
                 $destinationPath = public_path('images');
                 $file->move($destinationPath, $fileName);
-                $data['icon'] = 'images/' . $fileName;
+                $data['image'] = 'images/' . $fileName;
             }
 
             $Company = Company::create($data);

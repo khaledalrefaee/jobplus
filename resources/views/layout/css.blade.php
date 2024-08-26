@@ -7,7 +7,7 @@
 		<meta name="Keywords" content="Admin Dashboard,Jop Plus"/>
 
 		<!-- Title -->
-		<title>  dashboard Jop Plus </title>
+		<title>  dashboard Find Job </title>
 
 		<!-- Favicon -->
 		<link rel="icon" href="{{asset('assets/img/brand/favicon.png')}}" type="image/x-icon"/>
@@ -56,14 +56,13 @@
 			<link rel="stylesheet" href="{{asset('assets/css-rtl/sidemenu.css')}}">
 			<!--- Style css --->
 			<link href="{{asset('assets/css-rtl/style.css')}}" rel="stylesheet">
-
-			
+			<!--- Dark-mode css --->
+		  <link href="{{asset('assets/css-rtl/style-dark.css')}}" rel="stylesheet">
 			
 		
 
 		@else
 
-			<link href="{{asset('assets/css/style-dark.css')}}" rel="stylesheet">
 
 			<!-- Sidemenu css -->
 			<link rel="stylesheet" href="{{asset('assets/css/sidemenu.css')}}">
@@ -75,7 +74,7 @@
 
 		@endif
 		
-		
+
 
 		<style>
 			    /* From Uiverse.io by Shoh2008 */ 
@@ -201,6 +200,38 @@
 .checkbox-wrapper-8 .tgl-skewed:checked + .tgl-btn:active:after {
   left: 10%;
 }
+
+.toast {
+    background-color: #333 !important; 
+    color: #fff !important; 
+}
+
+
+.toast-close-button {
+    color: #fff !important; 
+}
+
+
+.toast-success {
+    background-color: #28a745 !important; 
+    color: #fff !important;
+}
+
+.toast-error {
+    background-color: #dc3545 !important;
+    color: #fff !important;
+}
+
+.toast-warning {
+    background-color: #ffc107 !important; 
+    color: #fff !important; 
+}
+
+.toast-info {
+    background-color: #17a2b8 !important; 
+    color: #fff !important;
+}
+
+
 		</style>
-		<!--- Dark-mode css --->
-		{{-- <link href="../../assets/css-rtl/style-dark.css" rel="stylesheet"> --}}
+	

@@ -20,13 +20,14 @@ return new class extends Migration
             $table->string('gender');
             $table->string('nationality')->nullable();
             $table->date('birthday')->nullable();
+            $table->string('age')->nullable();
             $table->integer('scope_work_id');
             $table->integer('job_title_id');
             $table->integer('city_id');
             $table->text('address')->nullable();
             $table->string('image')->nullable();
             $table->integer('active')->default(1);
-
+           
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

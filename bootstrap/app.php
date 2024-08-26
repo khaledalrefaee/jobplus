@@ -1,5 +1,6 @@
 <?php
 
+use Barryvdh\DomPDF\Facade;
 use Illuminate\Foundation\Application;
 use App\Http\Middleware\SetAppLanguage;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -16,7 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'localeCookieRedirect'    => \Mcamara\LaravelLocalization\Middleware\LocaleCookieRedirect::class,
             'localeViewPath'          => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class,
             'setapplanguage' =>\App\Http\Middleware\SetAppLanguage::class,
-
+            'PDF' => Facade::class,
         ]);
     })
     ->withRouting(

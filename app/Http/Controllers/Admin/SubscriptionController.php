@@ -9,13 +9,62 @@ use Illuminate\Support\Facades\Auth;
 
 class SubscriptionController extends Controller
 {
+
+    public function index()  {
+        
+        $subscriptions = Subscription::where('company_id',Auth::guard('company')->id())->get();
+        return view('admin.subscriptions.index',compact('subscriptions'));
+
+
+        // $subscriptions = Subscription::with('plan')
+        // ->withCount(['jobOpportunities']) 
+        // ->get();
+
+        // foreach ($subscriptions as $subscription) {
+        //     $subscription->remaining_opportunities = $subscription->plan->Number_of_opportunities - $subscription->job_opportunities_count;
+        // }
+
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        try {
+            $subscription = Subscription::findOrFail($id);
+            
+            $request->validate([
+                
+                'payment_type' => 'required',
+                'name' => 'required',
+                'By' => 'required_if:payment_type,تحويل',
+                'id_payment' => 'required_if:payment_type,تحويل',
+            ]);
+    
+            $subscription->update([
+                'payment_type'=>$request->payment_type,
+                'name'=>$request->name,
+                'By'=>$request->By,
+                'id_payment'=>$request->id_payment,
+            ]);
+            
+            toastr()->warning(trans('route.Update_messages'));
+            return redirect()->back();
+        }
+        catch (\Exception $e){
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+
+
     public function store(Request $request)  {
         $request->validate([
             'plan_id' => 'required',
             'payment_type' => 'required',
-            'name'=>'required',
+            'name' => 'required',
+            'By' => 'required_if:payment_type,تحويل',
+            'id_payment' => 'required_if:payment_type,تحويل',
         ]);
-
+        
         try {
 
             $Subscription = new Subscription();

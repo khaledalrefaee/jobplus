@@ -15,7 +15,10 @@
               
                 <div class="col-sm-6 col-md-4 col-xl-3 mg-t-20">
                     <a type="button" class="btn btn-info btn-icon mr-2" class="modal-effect  btn-block" data-effect="effect-sign" 
-                    data-toggle="modal" title="{{__('route.Add')}}" href="#modaldemo8"><i class="mdi mdi-filter-variant"></i></a>
+                        data-toggle="modal" title="{{__('route.Add')}}" href="#modaldemo8">
+                        <i class="mdi mdi-plus"></i>
+                       
+                    </a>
                   
                 </div>
 
@@ -81,6 +84,7 @@
         </div>
         <!-- /row -->
     </div>
+    
     <!-- Container closed -->
 
     @include('back.cities.create')

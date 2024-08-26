@@ -99,5 +99,10 @@ return[
     'By'=>'By',
     'to'=>'To the account of Mr. majd Alkinani',
     'subscriptio'=>'subscriptio',
+    'status'=>'status',
+    'Profile'=>'Profile',
+    'Unacceptable'=>'Unacceptable',
+    'Acceptable'=>'Acceptable',
+    'My_subscriptions'=>'My subscriptions',
     
 ];

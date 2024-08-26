@@ -6,9 +6,11 @@ $city =City::count();
 
 <aside class="app-sidebar sidebar-scroll" >
     <div class="main-sidebar-header active">
-        <a class="desktop-logo logo-light active" href="javascripty:void(0)"><img src="{{asset('assets/images/photo.jpg')}}" width="200" height="200" class="main-logo" alt="logo"></a>
-        <a class="logo-icon mobile-logo icon-light active" href="javascripty:void(0)"><img src="{{asset('assets/images/photo.jpg')}}" width="200" height="200" class="logo-icon" alt="logo"></a>
+        <a class="desktop-logo logo-light active" href="{{url('dashboard')}}"><img src="{{asset('assets/images/logo_2.png')}}" class="main-logo" alt="logo"></a>
+        <a class="desktop-logo logo-dark active" href="{{url('dashboard')}}"><img src="{{asset('assets/images/logo_2.png')}}" class="main-logo dark-theme"  style="width: 300%;height: 300%;margin-top: -33%;" alt="logo"></a>
+        <a class="logo-icon mobile-logo icon-light active" href="{{url('dashboard')}}"><img src="{{asset('assets/images/logo_2.png')}}" class="logo-icon" alt="logo"></a>
     </div>
+    
     <div class="main-sidemenu mCustomScrollbar _mCS_1 mCS-autoHide" style="position: relative; overflow: visible;">
         <div id="mCSB_1" class="mCustomScrollBox mCS-minimal mCSB_vertical mCSB_outside" style="max-height: none;" tabindex="0">
             <div id="mCSB_1_container" class="mCSB_container" style="position: relative; top: 0px; left: 0px;" >

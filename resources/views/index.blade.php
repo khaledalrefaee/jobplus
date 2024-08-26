@@ -6,7 +6,7 @@
 
 	</head>
 
-	<body class="main-body app sidebar-mini">
+	<body class="main-body app sidebar-mini dark-theme">
 
 		<!-- Loader -->
 		<div id="global-loader">

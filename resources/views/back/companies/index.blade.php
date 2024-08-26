@@ -11,16 +11,7 @@
                     <h4 class="content-title mb-0 my-auto">{{__('route.Tables')}}</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/ {{__('route.companies')}}</span>
                 </div>
             </div>
-            <div class="d-flex my-xl-auto right-content">
-              
-                <div class="col-sm-6 col-md-4 col-xl-3 mg-t-20">
-                    <a type="button" class="btn btn-info btn-icon mr-2" class="modal-effect  btn-block" data-effect="effect-sign" 
-                    data-toggle="modal" title="{{__('route.Add')}}" href="#modaldemo8"><i class="mdi mdi-filter-variant"></i></a>
-                  
-                </div>
-
-               
-            </div>
+         
         </div>
         <!-- breadcrumb -->
 

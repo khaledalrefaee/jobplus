@@ -8,34 +8,11 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">Pages</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/ Profile</span>
+                <h4 class="content-title mb-0 my-auto">{{__('route.Pages')}}</h4>
+                <span class="text-muted mt-1 tx-13 ml-2 mb-0">/ {{__('route.Profile')}}</span>
             </div>
         </div>
-        <div class="d-flex my-xl-auto right-content">
-            <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-info btn-icon mr-2"><i class="mdi mdi-filter-variant"></i></button>
-            </div>
-            <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-danger btn-icon mr-2"><i class="mdi mdi-star"></i></button>
-            </div>
-            <div class="pr-1 mb-3 mb-xl-0">
-                <button type="button" class="btn btn-warning  btn-icon mr-2"><i class="mdi mdi-refresh"></i></button>
-            </div>
-            <div class="mb-3 mb-xl-0">
-                <div class="btn-group dropdown">
-                    <button type="button" class="btn btn-primary">14 Aug 2019</button>
-                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" id="dropdownMenuDate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate" data-x-placement="bottom-end">
-                        <a class="dropdown-item" href="#">2015</a>
-                        <a class="dropdown-item" href="#">2016</a>
-                        <a class="dropdown-item" href="#">2017</a>
-                        <a class="dropdown-item" href="#">2018</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
     </div>
     <!-- breadcrumb -->
 
@@ -235,56 +212,7 @@
 
         </div>
         <div class="col-lg-8">
-            <div class="row row-sm">
-                <div class="col-sm-12 col-xl-4 col-lg-12 col-md-12">
-                    <div class="card ">
-                        <div class="card-body">
-                            <div class="counter-status d-flex md-mb-0">
-                                <div class="counter-icon bg-primary-transparent">
-                                    <i class="icon-layers text-primary"></i>
-                                </div>
-                                <div class="ml-auto">
-                                    <h5 class="tx-13">Orders</h5>
-                                    <h2 class="mb-0 tx-22 mb-1 mt-1">1,587</h2>
-                                    <p class="text-muted mb-0 tx-11"><i class="si si-arrow-up-circle text-success mr-1"></i>increase</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-xl-4 col-lg-12 col-md-12">
-                    <div class="card ">
-                        <div class="card-body">
-                            <div class="counter-status d-flex md-mb-0">
-                                <div class="counter-icon bg-danger-transparent">
-                                    <i class="icon-paypal text-danger"></i>
-                                </div>
-                                <div class="ml-auto">
-                                    <h5 class="tx-13">Revenue</h5>
-                                    <h2 class="mb-0 tx-22 mb-1 mt-1">46,782</h2>
-                                    <p class="text-muted mb-0 tx-11"><i class="si si-arrow-up-circle text-success mr-1"></i>increase</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-xl-4 col-lg-12 col-md-12">
-                    <div class="card ">
-                        <div class="card-body">
-                            <div class="counter-status d-flex md-mb-0">
-                                <div class="counter-icon bg-success-transparent">
-                                    <i class="icon-rocket text-success"></i>
-                                </div>
-                                <div class="ml-auto">
-                                    <h5 class="tx-13">Product sold</h5>
-                                    <h2 class="mb-0 tx-22 mb-1 mt-1">1,890</h2>
-                                    <p class="text-muted mb-0 tx-11"><i class="si si-arrow-up-circle text-success mr-1"></i>increase</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
             <div class="card">
                 <div class="card-body">
                     <div class="tabs-menu ">

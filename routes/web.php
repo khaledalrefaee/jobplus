@@ -101,6 +101,14 @@ Route::group(
 
         Route::get('subscriptio',[SubscripController::class,'index'])->name('subscriptio');
 
+        Route::post('subscriptio/store',[SubscripController::class,'store'])->name('subscriptio.store');
+
+
+        Route::get('subscriptio/Unacceptable/{id}',[SubscripController::class,'Unacceptable'])->name('Unacceptable');
+        Route::get('subscriptio/Acceptable/{id}',[SubscripController::class,'Acceptable'])->name('Acceptable');
+
+
+        Route::get('subscriptio/destroy/{id}',[SubscripController::class,'destroy'])->name('subscriptio.destroy');
 
 
         //////////////////////////////////  Admin \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -112,6 +120,8 @@ Route::group(
         
 
         Route::post('subscriptio/store',[SubscriptionController::class,'store'])->name('subscriptio.store.admin');
+        Route::get('my/subscriptio',[SubscriptionController::class,'index'])->name('subscriptio.get.admin');
+        Route::post('subscriptio/update/{id}',[SubscriptionController::class,'update'])->name('subscriptio.update.admin');
 
         });
     });
