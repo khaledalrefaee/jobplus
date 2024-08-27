@@ -121,4 +121,31 @@ return [
     'Unacceptable'=>'غير مقبولة',
     'Acceptable'=>'مقبولة',
     'My_subscriptions'=>'اشتراكاتي',
+
+    'Job_Opportunity'=>'فرصة عمل',
+    'Form'=>'النموذج',
+    'First'=>'أولا',
+    'from_age'=>'من العمر',
+    'to_age'=>'إلى العمر',
+
+    'educational_level'=>'المستوى التعليمي',
+    'diploma'=>'دبلوم',
+    'graduate'=>'الدراسات العليا ',
+    'Master'=>'ماستر',
+    'Doctorate'=>'دكتوراه',
+
+    'student'=>'طالب',
+    'Junior'=>'خبير',
+    'senior'=>'متمرس',
+    'Manager'=>'مدير',
+    'years_experience'=>'سنوات الخبرة',
+    'number_vacancies'=>'عدد الوظائف الشاغرة',
+   'Does not matter'=>'لا يهم',
+   'between'=>'بين',
+   'and'=>'و',
+
+   'job_description'=>'الوصف الوظيفي',
+   'requirements'=>'المتطلبات',
+   'requirements_for_trainees'=>'متطلبات للمتدربين',
+
 ];

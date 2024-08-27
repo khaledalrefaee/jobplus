@@ -18,6 +18,12 @@ class Subscription extends Model
     }
 
 
+    public function jobOpportunities()
+    {
+        return $this->hasMany(JobOpportunity::class);
+    }
+    
+
     public function plan()
     {
         return $this->belongsTo(Plan::class);

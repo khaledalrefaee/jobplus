@@ -36,7 +36,7 @@ class UserDetailController extends Controller
             'career_level' => 'required|string|max:255',
             'type_job' => 'required|string|max:255',
            
-            'description' => 'string|max:500',
+            'description' => 'required|string|max:500',
         ]);
     
         if ($validator->fails()) {

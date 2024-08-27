@@ -2,6 +2,7 @@
 <html lang="en">
 	<head>
 
+		
 		@include('layout.css')
 
 	</head>
@@ -51,7 +52,7 @@
 
 		<!-- Back-to-top -->
 		<a href="#top" id="back-to-top"><i class="las la-angle-double-up"></i></a>
-
+		
         @include('layout.js')
 
 	</body>

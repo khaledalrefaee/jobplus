@@ -153,10 +153,11 @@
 															<p class="mg-b-10">{{__('route.scope_work')}}</p>
 
 															<select name="scopeWorks_id[]" class="form-control select2" multiple="multiple">
+																
 																@foreach ($scopeWorks as $scopeWork)
 																	
 																
-																	<option selected value="{{$scopeWork->id}}">
+																	<option  value="{{$scopeWork->id}}">
 																		{{$scopeWork ->name_en}} / {{$scopeWork ->name_ar}}
 																	</option>
 																@endforeach

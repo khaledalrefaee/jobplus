@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('By')->nullable();
             $table->integer('id_payment')->nullable();
             $table->string('status');
+            $table->integer('remaining_opportunities')->default(0);
             $table->timestamps();
         });
     }

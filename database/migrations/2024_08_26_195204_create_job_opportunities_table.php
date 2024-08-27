@@ -31,9 +31,11 @@ return new class extends Migration
             $table->longtext('job_description');
             $table->longtext('requirements');
             $table->longtext('requirements_for_trainees')->nullable();
-            $table->integer('filter');
+            $table->string('status');
+            $table->integer('subscription_id')->nullable();
+            // $table->integer('filter');
             $table->integer('company_id');
-            $table->string('question')->nullable();
+            // $table->string('question')->nullable();
             $table->timestamps();
         });
     }

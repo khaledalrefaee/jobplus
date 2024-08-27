@@ -1,4 +1,12 @@
-	<!-- JQuery min js -->
+
+</script>
+        <script>
+      tinymce.init({
+  selector: 'textarea#default-editor'
+});
+      </script>
+
+        <!-- JQuery min js -->
         <script src="{{asset('assets/plugins/jquery/jquery.min.js')}}"></script>
 
         <!-- Bootstrap Bundle js -->
@@ -37,6 +45,10 @@
         <script src="{{asset('assets/plugins/rating/jquery.rating-stars.js')}}"></script>
         <script src="{{asset('assets/plugins/rating/jquery.barrating.js')}}"></script>
 
+        <!-- Internal Jquery.steps js -->
+	<script src="{{asset('assets/plugins/jquery-steps/jquery.steps.min.js')}}"></script>
+	<script src="{{asset('assets/plugins/parsleyjs/parsley.min.js')}}"></script>
+
         <!--Internal  Perfect-scrollbar js -->
         <script src="{{asset('assets/plugins/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
         <script src="{{asset('assets/plugins/perfect-scrollbar/p-scroll.js')}}"></script>
@@ -48,7 +60,8 @@
         <script src="{{asset('assets/plugins/sidebar/sidebar-custom.js')}}"></script>
 
 
-        
+        <!--Internal  Form-wizard js -->
+        <script src="{{asset('assets/js/form-wizard.js')}}"></script>
 
 
         <!-- Sticky js -->

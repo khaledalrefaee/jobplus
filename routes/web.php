@@ -14,6 +14,7 @@ use App\Http\Controllers\Back\companiesController;
 use App\Http\Controllers\Back\ScopeWorkController;
 use App\Http\Controllers\Admin\AdminPlanController;
 use App\Http\Controllers\Admin\SubscriptionController;
+use App\Http\Controllers\Back\JobOpportunityController;
 
 
 
@@ -27,6 +28,7 @@ Route::get('/', function () {
 
 
 
+Route::post('get/jobtitle/by/{id}', [JobOpportunityController::class,'getjobtitlebyid']);
 
    
 Route::group(
@@ -100,15 +102,17 @@ Route::group(
 
 
         Route::get('subscriptio',[SubscripController::class,'index'])->name('subscriptio');
-
         Route::post('subscriptio/store',[SubscripController::class,'store'])->name('subscriptio.store');
-
-
         Route::get('subscriptio/Unacceptable/{id}',[SubscripController::class,'Unacceptable'])->name('Unacceptable');
         Route::get('subscriptio/Acceptable/{id}',[SubscripController::class,'Acceptable'])->name('Acceptable');
-
-
         Route::get('subscriptio/destroy/{id}',[SubscripController::class,'destroy'])->name('subscriptio.destroy');
+
+
+        //////////////////////////////////  Job Opportunity \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+        Route::get('Job/Opportunity',[JobOpportunityController::class,'index'])->name('Job.Opportunity');
+        Route::get('Job/Opportunity/create',[JobOpportunityController::class,'create'])->name('Job.Opportunity.create');
+        Route::post('Job/Opportunity/store',[JobOpportunityController::class,'store'])->name('job_opportunity.store');
+
 
 
         //////////////////////////////////  Admin \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\

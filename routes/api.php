@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\CompletionController;
 use App\Http\Controllers\Api\UserDetailController;
 use App\Http\Controllers\Api\ExperiencesController;
 use App\Http\Controllers\Api\CertificatesController;
+use App\Http\Controllers\Api\JobOpportunityController;
 use App\Http\Controllers\Api\BusinessGalleryController;
 
 
@@ -122,9 +123,11 @@ Route::group(['middleware' => ['auth:sanctum','setapplanguage']], function () {
         Route::post('user/Cv/destroy/{id}',[CvController::class,'destroy']);
 
  
-        ///////////////////////////// Donloed Cv JobWord //////////////////////////////////////
+        ///////////////////////////// Job Opportunity //////////////////////////////////////
 
-        Route::get('/cv/download', [CVJobWorkController::class, 'download']);
+        Route::post('/get/all/job/Opportunity', [JobOpportunityController::class, 'index']);
+        Route::post('/get/filtter/job/Opportunity', [JobOpportunityController::class, 'filtter']);
+
 
         
         ///////////////////////////// Completion //////////////////////////////////////
