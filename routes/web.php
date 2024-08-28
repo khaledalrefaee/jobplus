@@ -15,6 +15,7 @@ use App\Http\Controllers\Back\ScopeWorkController;
 use App\Http\Controllers\Admin\AdminPlanController;
 use App\Http\Controllers\Admin\SubscriptionController;
 use App\Http\Controllers\Back\JobOpportunityController;
+use App\Http\Controllers\Admin\JobOpportunityAdminController;
 
 
 
@@ -117,15 +118,22 @@ Route::group(
 
         //////////////////////////////////  Admin \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-        ////////////////////////////////// plans Admin \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
         Route::group(['prefix' => 'admin'], function () {
 
+        ////////////////////////////////// plans Admin \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
         Route::get('plans',[AdminPlanController::class,'index'])->name('plans.admin');
         
-
+        ////////////////////////////////// Subscription Admin \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
         Route::post('subscriptio/store',[SubscriptionController::class,'store'])->name('subscriptio.store.admin');
         Route::get('my/subscriptio',[SubscriptionController::class,'index'])->name('subscriptio.get.admin');
         Route::post('subscriptio/update/{id}',[SubscriptionController::class,'update'])->name('subscriptio.update.admin');
+
+
+        ////////////////////////////////// Job Opportunity Admin \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+        Route::get('my/Job/Opportunity',[JobOpportunityAdminController::class,'index'])->name('Job.Opportunity.admin');
+        Route::get('create/Job/Opportunity',[JobOpportunityAdminController::class,'create'])->name('create.Job.Opportunity.admin');
+        Route::post('store/Job/Opportunity',[JobOpportunityAdminController::class,'store'])->name('job_opportunity.store.admin');
+
 
         });
     });

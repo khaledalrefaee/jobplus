@@ -21,12 +21,7 @@ class Company extends Authenticatable
         return $this->belongsToMany(Scope_work::class, 'scope_work_company');
     }
 
-    public function latestActiveSubscription()
-    {
-        return $this->hasMany(Subscription::class)
-                    ->where('status', 'active')
-                    ->orderBy('created_at', 'desc')->get();
-    }
+
 
     public function subscriptions()
     {

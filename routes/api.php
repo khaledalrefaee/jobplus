@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CvController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CityController;
+use App\Http\Controllers\Api\GetImageCompany;
 use App\Http\Controllers\Api\SkillController;
 use App\Http\Controllers\Api\JobTitleController;
 use App\Http\Controllers\Api\LanguageController;
@@ -126,10 +127,13 @@ Route::group(['middleware' => ['auth:sanctum','setapplanguage']], function () {
         ///////////////////////////// Job Opportunity //////////////////////////////////////
 
         Route::post('/get/all/job/Opportunity', [JobOpportunityController::class, 'index']);
+        Route::post('/get/show/job/Opportunity/{id}', [JobOpportunityController::class, 'show']);
         Route::post('/get/filtter/job/Opportunity', [JobOpportunityController::class, 'filtter']);
 
+        ///////////////////////////// get Image Company //////////////////////////////////////
 
-        
+        Route::get('get/image/company', [GetImageCompany::class, 'getTopCompanyImages']);
+
         ///////////////////////////// Completion //////////////////////////////////////
         Route::get('user/completion', [CompletionController::class, 'getCompletionPercentage']);
 });

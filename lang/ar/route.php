@@ -147,5 +147,9 @@ return [
    'job_description'=>'الوصف الوظيفي',
    'requirements'=>'المتطلبات',
    'requirements_for_trainees'=>'متطلبات للمتدربين',
+    'My_opportunities'=>'فرصي',
+    'remaining_opportunities'=>'الفرص المتبقية',
 
+    'You have used all your available opportunities'=>'لقد استفدت من جميع الفرص المتاحة لديك',
+    'No plan associated with this subscription'=>'لا توجد خطة مرتبطة بهذا الاشتراك',
 ];

@@ -3,13 +3,19 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Cv;
 use App\Models\City;
+use App\Models\skill;
+use App\Models\Language;
+use App\Models\Experience;
+use App\Models\Certificate;
+use App\Models\BusinessGallery;
+use App\Models\User_Detail;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Models\BusinessGallery;
-use App\Models\skill;
 
 class User extends Authenticatable
 {
@@ -30,7 +36,7 @@ class User extends Authenticatable
 
     public function city()
     {
-        return $this->belongsTo(City::class);
+        return $this->belongsTo(City::class,'city_id');
     }
 
      
@@ -43,7 +49,7 @@ class User extends Authenticatable
 
     public function userdetails()
     {
-        return $this->hasOne(User_Detail::class);
+        return $this->hasOne(User_Detail::class,'user_id');
     }
     
     public function businessgallery()
@@ -88,35 +94,17 @@ class User extends Authenticatable
     {
         parent::boot();
 
-        static::deleting(function ($userdetails) {
-            $userdetails->userdetails()->delete();
-        });
-
-        static::deleting(function ($businessgallery) {
-            $businessgallery->businessgallery()->delete();
-        });
-
-        static::deleting(function ($skill) {
-            $skill->skill()->delete();
-        });
-
-        static::deleting(function ($language) {
-            $language->language()->delete();
-        });
-
-        static::deleting(function ($experience) {
-            $experience->experience()->delete();
-        });
-
-        static::deleting(function ($certificate) {
-            $certificate->certificate()->delete();
-        });
-
-        static::deleting(function ($cv) {
-            $cv->cv()->delete();
+        static::deleting(function ($user) {
+            // Delete all related records
+            $user->userdetails()->delete();
+            $user->businessgallery()->delete();
+            $user->skill()->delete();
+            $user->language()->delete();
+            $user->experience()->delete();
+            $user->certificate()->delete();
+            $user->cv()->delete();
         });
     }
-
  
 
 

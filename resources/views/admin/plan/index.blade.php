@@ -74,6 +74,7 @@
                                     <div class="row row-sm">
                                         <div class="col-12">
                                             <input class="form-control" name="plan_id" placeholder="" value="{{$item->id}}"  type="hidden">
+                                            <input class="form-control" name="remaining_opportunities" placeholder="" value="{{$item->Number_of_opportunities}}"  type="hidden">
 
                                             <div class="form-group mg-b-0">
                                                 <label class="form-label">{{__('route.name')}}: <span class="tx-danger">*</span></label>

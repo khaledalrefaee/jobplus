@@ -23,7 +23,7 @@ class JobOpportunityController extends Controller
 
     public function show($id)
     {
-        $JobOpportunity = JobOpportunity::with(['company','jobtitle','scopework','city'])->find($id);
+        $JobOpportunity = JobOpportunity::with(['company','jobtitle','scopework','city'])->where('status' ,'Acceptable')->find($id);
         if(is_null($JobOpportunity)){
             return $this -> returnError('404','This JobOpportunity Not Found');
         }

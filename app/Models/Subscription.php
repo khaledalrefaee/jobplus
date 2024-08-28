@@ -18,11 +18,21 @@ class Subscription extends Model
     }
 
 
+    
     public function jobOpportunities()
     {
         return $this->hasMany(JobOpportunity::class);
     }
-    
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($subscripy) {
+
+            $subscripy->jobOpportunities()->delete();
+        });
+    }
 
     public function plan()
     {

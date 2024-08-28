@@ -63,6 +63,7 @@ class SubscriptionController extends Controller
             'name' => 'required',
             'By' => 'required_if:payment_type,تحويل',
             'id_payment' => 'required_if:payment_type,تحويل',
+            'remaining_opportunities' =>'required',
         ]);
         
         try {
@@ -72,7 +73,7 @@ class SubscriptionController extends Controller
             $Subscription->plan_id = $request->plan_id;
             $Subscription->payment_type = $request->payment_type;
             $Subscription->company_id = Auth::guard('company')->id();
-
+            $Subscription->remaining_opportunities = $request->remaining_opportunities;
             $Subscription->By = $request-> By;
             $Subscription-> id_payment  = $request-> id_payment ;
             

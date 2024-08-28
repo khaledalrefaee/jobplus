@@ -15,7 +15,7 @@
               
                 <div class="col-sm-6 col-md-4 col-xl-3 mg-t-20">
                     <a type="button" class="btn btn-info btn-icon mr-2" class="modal-effect  btn-block" 
-                         title="{{__('route.Add')}}" href="{{route('Job.Opportunity.create')}}">
+                         title="{{__('route.Add')}}" href="{{route('create.Job.Opportunity.admin')}}">
                         <i class="mdi mdi-plus"></i>
                        
                     </a>

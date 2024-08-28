@@ -39,6 +39,7 @@
                                     <tr>
                                         <th class="wd-15p border-bottom-0"> {{__('route.name')}}</th>
                                         <th class="wd-10p border-bottom-0"> {{__('route.Number_of_opportunities')}}</th>
+                                        <th class="wd-15p border-bottom-0"> {{__('route.remaining_opportunities')}}</th>
 
                                         <th class="wd-15p border-bottom-0"> {{__('route.payment_type')}}</th>
                                         <th class="wd-10p border-bottom-0"> {{__('route.By')}}</th>
@@ -55,6 +56,7 @@
                                              --}}
                                                 <td>{{$item->name}}</td>
                                                 <td>{{$item->plan->Number_of_opportunities}}</td>
+                                                <td>{{$item->remaining_opportunities}}</td>
                                                 <td>{{$item->payment_type}}</td>
                                                 <td>{{$item->By}}</td>
                                                 <td>{{$item->id_payment}}</td>

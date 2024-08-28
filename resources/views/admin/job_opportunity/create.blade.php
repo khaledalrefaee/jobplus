@@ -32,7 +32,7 @@
                             </ul>
                         </div>
                     @endif
-                            <form action="{{ route('job_opportunity.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('job_opportunity.store.admin') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="row">
@@ -216,7 +216,7 @@
                                     <div class="control-group form-group mb-0 col-6">
                                         <label class="form-label">{{__('route.address')}} <span class="text-success">( {{__('route.optional')}} )</span></label> 
                                         <div class="form-group">
-                                            <input type="text" name="address" value="{{old('address')}}" class="form-control required " placeholder="Address">
+                                            <input type="text" name="address" class="form-control required " placeholder="Address">
                                         </div>
                                     </div>
     
@@ -224,21 +224,21 @@
                                     <div class="control-group form-group mb-0 col-12">
                                         <label class="form-label">{{__('route.job_description')}} </label> 
                                         <div class="form-group">
-                                            <textarea type="text" name="job_description" class="form-control required " rows="5" >{{(old('job_description'))}}</textarea>
+                                            <textarea type="text" name="job_description" class="form-control required " rows="5" >{{__('route.job_description')}}</textarea>
                                         </div>
                                     </div>
     
                                     <div class="control-group form-group mb-0 col-12">
                                         <label class="form-label">{{__('route.requirements')}} </label> 
                                         <div class="form-group">
-                                            <textarea type="text" name="requirements" class="form-control required " rows="5" >{{(old('requirements'))}}</textarea>
+                                            <textarea type="text" name="requirements" class="form-control required " rows="5" >{{__('route.requirements')}}</textarea>
                                         </div>
                                     </div>
     
                                     <div class="control-group form-group mb-0 col-12">
                                         <label class="form-label">{{__('route.requirements_for_trainees')}} <span class="text-success">{{__('route.optional')}}</span></label> 
                                         <div class="form-group">
-                                            <textarea type="text" name="requirements_for_trainees" class="form-control required " rows="5" >{{(old('requirements_for_trainees'))}}</textarea>
+                                            <textarea type="text" name="requirements_for_trainees" class="form-control required " rows="5" >{{__('route.requirements_for_trainees')}}</textarea>
                                         </div>
                                     </div>
                                 </div>

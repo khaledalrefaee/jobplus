@@ -127,5 +127,9 @@ return[
     'job_description'=>'job description',
     'requirements'=>'requirements',
     'requirements_for_trainees'=>'requirements for trainees',
-
+    'My_opportunities'=>'My own opportunities',
+    'remaining_opportunities' =>'remaining opportunities',
+    
+    'You have used all your available opportunities'=>'You have used all your available opportunities',
+    'No plan associated with this subscription'=>'No plan associated with this subscription',
 ];

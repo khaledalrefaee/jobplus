@@ -12,8 +12,18 @@ class Plan extends Model
     protected $guarded = []; 
 
     public function subscriptions()
-{
-    return $this->hasMany(Subscription::class);
-}
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($jobTitle) {
+
+            $jobTitle->subscriptions()->delete();
+        });
+    }
 
 }
