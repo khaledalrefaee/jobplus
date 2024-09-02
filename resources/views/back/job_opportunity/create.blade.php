@@ -42,7 +42,7 @@
                                         <select name="scope_work_id" class="form-control select2" id="scope_work_id">
                                             <option value=""> </option>
                                             @foreach ($scopeWorks as $scopeWork)
-                                                <option value="{{$scopeWork->id}}">
+                                                <option value="{{$scopeWork->id}}" {{ old('scope_work_id') == $scopeWork->id ? 'selected' : '' }}>
                                                     {{$scopeWork->name_en}} / {{$scopeWork->name_ar}}
                                                 </option>
                                             @endforeach
@@ -53,192 +53,188 @@
                                         <label class="form-label">{{__('route.job_title')}}</label>
                                         <select name="job_title_id" class="form-control select2" id="job_title_id">
                                             <option value="">اختر العنوان الوظيفي</option>
+                                            
+                                                <option value="">
+                                               
+                                                </option>
+                                          
                                         </select>
                                     </div>
-                                
+                                    
                                     <div class="control-group form-group col-6">
                                         <label class="form-label">{{__('route.gender')}}</label>
-                                        
                                         <div style="display: flex; gap: 20px; align-items: center;">
                                             <label class="rdiobox" style="margin-right: 10px;">
-                                                <input name="gender" type="radio" value="male"> 
+                                                <input name="gender" type="radio" value="male" {{ old('gender') == 'male' ? 'checked' : '' }}>
                                                 <span>{{__('route.male')}}</span>
                                             </label>
-                                            
                                             <label class="rdiobox">
-                                                <input name="gender" type="radio" value="female">
+                                                <input name="gender" type="radio" value="female" {{ old('gender') == 'female' ? 'checked' : '' }}>
                                                 <span>{{__('route.female')}}</span>
                                             </label>
-
-
                                             <label class="rdiobox">
-                                                <input name="gender" type="radio" value="Does not matter">
+                                                <input name="gender" type="radio" value="Does not matter" {{ old('gender') == 'Does not matter' ? 'checked' : '' }}>
                                                 <span>{{__('route.Does not matter')}}</span>
                                             </label>
                                         </div>
                                     </div>
-                                    
                                     
                                     <div class="col-lg-6 mg-b-20 mg-lg-b-0">
                                         <label class="form-label">{{__('route.City')}}</label>
                                         <select name="city_id" class="form-control select2" id="city_id">
                                             <option value=""> </option>
                                             @foreach ($city as $item)
-                                                <option value="{{$item->id}}">
+                                                <option value="{{$item->id}}" {{ old('city_id') == $item->id ? 'selected' : '' }}>
                                                     {{$item->name_en}} / {{$item->name_ar}}
                                                 </option>
                                             @endforeach
                                         </select>
                                     </div>
-                              
-    
+                                    
                                     <div class="control-group form-group col-3">
-                                        
                                         <label class="form-label">{{__('route.from_age')}} <span class="text-success">( {{__('route.optional')}} )</span> </label>
                                         <input type="number" class="form-control " name="from_age" value="{{old('from_age')}}" placeholder="20" min="10" max="100">
                                     </div>
-    
+                                    
                                     <div class="control-group form-group col-3">
-                                        
                                         <label class="form-label">{{__('route.to_age')}} <span class="text-success">( {{__('route.optional')}} )</span></label>
                                         <input type="number" class="form-control " name="to_age" value="{{old('to_age')}}" placeholder="50" min="10" max="100">
                                     </div>
-    
+                                    
                                     <div class="control-group form-group col-6">
                                         <label class="form-label">{{__('route.educational_level')}}</label>
-                                        <select name="educational_level" class="form-control select2" >
+                                        <select name="educational_level" class="form-control select2">
                                             <option value=""> </option>
-                                                <option value="{{__('route.diploma')}}">
-                                                    {{__('route.diploma')}}
-                                                </option>
-                                                <option value="{{__('route.Doctorate')}}">
-                                                    {{__('route.Doctorate')}}
-                                                </option>
-                                                <option value="{{__('route.graduate')}}">
-                                                    {{__('route.graduate')}}
-                                                </option>
-                                                <option value="{{__('route.Master')}}">
-                                                    {{__('route.Master')}}
-                                                </option>
-                                           
+                                            <option value="diploma" {{ old('educational_level') == 'diploma' ? 'selected' : '' }}>
+                                                {{__('route.diploma')}}
+                                            </option>
+                                            <option value="Doctorate" {{ old('educational_level') == 'Doctorate' ? 'selected' : '' }}>
+                                                {{__('route.Doctorate')}}
+                                            </option>
+                                            <option value="graduate" {{ old('educational_level') == 'graduate' ? 'selected' : '' }}>
+                                                {{__('route.graduate')}}
+                                            </option>
+                                            <option value="Master" {{ old('educational_level') == 'Master' ? 'selected' : '' }}>
+                                                {{__('route.Master')}}
+                                            </option>
                                         </select>
+                                        
                                     </div>
-    
+                                    
                                     <div class="control-group form-group col-6">
                                         <label class="form-label">{{__('route.career_level')}}</label>
-                                        <select name="career_level" class="form-control select2" >
+                                        <select name="career_level" class="form-control select2">
                                             <option value=""> </option>
-                                                <option value="{{__('route.student')}}">
-                                                    {{__('route.student')}}
-                                                </option>
-                                                <option value="{{__('route.Junior')}}">
-                                                    {{__('route.Junior')}}
-                                                </option>
-                                                <option value="{{__('route.senior')}}">
-                                                    {{__('route.senior')}}
-                                                </option>
-                                                <option value="{{__('route.Manager')}}">
-                                                    {{__('route.Manager')}}
-                                                </option>
-                                              
-                                           
+                                            <option value="student" {{ old('career_level') == 'student' ? 'selected' : '' }}>
+                                                {{ __('route.student') }}
+                                            </option>
+                                            <option value="Junior" {{ old('career_level') == 'Junior' ? 'selected' : '' }}>
+                                                {{ __('route.Junior') }}
+                                            </option>
+                                            <option value="senior" {{ old('career_level') == 'senior' ? 'selected' : '' }}>
+                                                {{ __('route.senior') }}
+                                            </option>
+                                            <option value="Manager" {{ old('career_level') == 'Manager' ? 'selected' : '' }}>
+                                                {{ __('route.Manager') }}
+                                            </option>
                                         </select>
+                                        
                                     </div>
-    
+
+                                    <div class="control-group form-group col-6">
+                                        <label class="form-label">{{__('route.type_job')}}</label>
+                                        <select name="type_job" class="form-control select2">
+                                            <option value=""> </option>
+                                            <option value="remotely" {{ old('type_job') == 'remotely' ? 'selected' : '' }}>
+                                                {{ __('route.remotely') }}
+                                            </option>
+                                            <option value="full_time" {{ old('type_job') == 'full_time' ? 'selected' : '' }}>
+                                                {{ __('route.full_time') }}
+                                            </option>
+                                            <option value="hours" {{ old('type_job') == 'hours' ? 'selected' : '' }}>
+                                                {{ __('route.hours') }}
+                                            </option>
+                                        </select>
+                                        
+                                    </div>
+                                    
                                     <div class="control-group form-group col-6">
                                         <label class="form-label">{{__('route.years_experience')}}</label>
-                                        <select name="years_experience" class="form-control select2" >
+                                        <select name="years_experience" class="form-control select2">
                                             <option value=""> </option>
-                                            <option value="{{__('route.Does not matter')}}">
+                                            <option value="Does not matter" {{ old('years_experience') == __('route.Does not matter') ? 'selected' : '' }}>
                                                 {{__('route.Does not matter')}}
-                                             </option>
-    
-                                                <option value="1 year">
-                                                   1 year
+                                            </option>
+                                            @for ($i = 1; $i <= 10; $i++)
+                                                <option value="{{ $i }} year" {{ old('years_experience') == "$i year" ? 'selected' : '' }}>
+                                                    {{ $i }} year
                                                 </option>
-                                                <option value="2 year">
-                                                    2 year
-                                                 </option>
-                                                 <option value="3 year">
-                                                    3 year
-                                                 </option>
-                                                 <option value="4 year">
-                                                    4 year
-                                                 </option>
-                                                 <option value="5 year">
-                                                    5 year
-                                                 </option>
-                                                 <option value="6 year">
-                                                    6 year
-                                                 </option>
-                                           
+                                            @endfor
                                         </select>
                                     </div>
-    
+                                    
                                     <div class="control-group form-group mb-0 col-6">
                                         <label class="form-label">{{__('route.number_vacancies')}}</label>
-                                        <input type="number" name="number_vacancies" class="form-control required" min="1" max="10" placeholder="Number of Vacancies">
+                                        <input type="number" name="number_vacancies" class="form-control required" min="1" max="10" value="{{old('number_vacancies')}}" placeholder="Number of Vacancies">
                                     </div>
-    
+                                    
                                     <div class="control-group form-group col-6">
                                         <label class="form-label">{{__('route.rang_salary')}}</label>
-                                        <select name="rang_salary" class="form-control " >
+                                        <select name="rang_salary" class="form-control">
                                             <option value=""> </option>
-                                                <option value="{{__('route.between')}} 1000 {{__('route.and')}} 2000">
-                                                    {{__('route.between')}} 1000 {{__('route.and')}} 2000
+                                            @foreach(range(1000, 9000, 1000) as $salary)
+                                                <option value="{{ __('route.between') . " $salary " . __('route.and') . " " . ($salary + 1000) }}" {{ old('rang_salary') == __('route.between') . " $salary " . __('route.and') . " " . ($salary + 1000) ? 'selected' : '' }}>
+                                                    {{ __('route.between') . " $salary " . __('route.and') . " " . ($salary + 1000) }}
                                                 </option>
-                                                <option value="{{__('route.between')}} 2000 {{__('route.and')}} 3000">
-                                                    {{__('route.between')}} 2000 {{__('route.and')}} 3000
-                                                </option>
-                                                <option value="{{__('route.between')}} 3000 {{__('route.and')}} 4000">
-                                                    {{__('route.between')}} 3000 {{__('route.and')}} 4000
-                                                </option>
-                                                <option value="{{__('route.between')}} 4000 {{__('route.and')}} 5000">
-                                                    {{__('route.between')}} 4000 {{__('route.and')}} 5000
-                                                </option>
-                                                <option value="{{__('route.between')}} 5000 {{__('route.and')}} 6000">
-                                                    {{__('route.between')}} 5000 {{__('route.and')}} 6000
-                                                </option>
-                                                <option value="{{__('route.between')}} 6000 {{__('route.and')}} 7000">
-                                                    {{__('route.between')}} 6000 {{__('route.and')}} 7000
-                                                </option>
-                                                <option value="{{__('route.between')}} 7000 {{__('route.and')}} 8000">
-                                                    {{__('route.between')}} 7000 {{__('route.and')}} 8000
-                                                </option>
-                                                <option value="{{__('route.between')}} 8000 {{__('route.and')}} 9000">
-                                                    {{__('route.between')}} 8000 {{__('route.and')}} 9000
-                                                </option>
-                                           
+                                            @endforeach
                                         </select>
                                     </div>
-    
-    
+                                    
                                     <div class="control-group form-group mb-0 col-6">
-                                        <label class="form-label">{{__('route.address')}} <span class="text-success">( {{__('route.optional')}} )</span></label> 
+                                        <label class="form-label">{{__('route.address')}} <span class="text-success">( {{__('route.optional')}} )</span></label>
                                         <div class="form-group">
                                             <input type="text" name="address" value="{{old('address')}}" class="form-control required " placeholder="Address">
                                         </div>
                                     </div>
+                                    
+    
+                                    <div class="control-group form-group mb-0 col-6">
+                                        <label class="form-label">{{__('route.filter')}} <span class="text-success">( {{__('route.optional')}} )</span></label>
+                                        <div class="form-group">
+                                            <input type="checkbox" name="filter" value="1" class="form-control " placeholder="Address" id="filter-checkbox">
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group form-group mb-0 col-6">
+                                        <label class="form-label">{{__('route.question')}} <span class="text-success">( {{__('route.optional')}} )</span></label>
+                                        <div class="form-group">
+                                            <input type="text" name="question" value="{{old('question')}}" class="form-control required " placeholder="question">
+                                        </div>
+                                    </div>
+                                  
     
                                    
                                     <div class="control-group form-group mb-0 col-12">
-                                        <label class="form-label">{{__('route.job_description')}} </label> 
+                                        <h4 class="form-label">{{__('route.job_description')}} </h4> 
                                         <div class="form-group">
-                                            <textarea type="text" name="job_description" class="form-control required " rows="5" >{{(old('job_description'))}}</textarea>
+                                            <textarea name="job_description" id="editor" cols="30"rows="10">{{(old('job_description'))}}</textarea>
+
                                         </div>
                                     </div>
     
                                     <div class="control-group form-group mb-0 col-12">
-                                        <label class="form-label">{{__('route.requirements')}} </label> 
+                                        <h4 class="form-label">{{__('route.requirements')}} </h4> 
                                         <div class="form-group">
-                                            <textarea type="text" name="requirements" class="form-control required " rows="5" >{{(old('requirements'))}}</textarea>
+                                            <textarea name="requirements" id="editor" cols="30"rows="10">{{(old('requirements'))}}</textarea>
+
                                         </div>
                                     </div>
     
                                     <div class="control-group form-group mb-0 col-12">
-                                        <label class="form-label">{{__('route.requirements_for_trainees')}} <span class="text-success">{{__('route.optional')}}</span></label> 
+                                        <h4 class="form-label">{{__('route.requirements_for_trainees')}} <span class="text-success">{{__('route.optional')}}</span></h4> 
                                         <div class="form-group">
-                                            <textarea type="text" name="requirements_for_trainees" class="form-control required " rows="5" >{{(old('requirements_for_trainees'))}}</textarea>
+                                            <textarea name="requirements_for_trainees" id="editor" cols="30"rows="10">{{(old('requirements_for_trainees'))}}</textarea>
+
                                         </div>
                                     </div>
                                 </div>
@@ -257,7 +253,8 @@
         <!-- row closed -->
     </div>
     <!-- Container closed -->
-    <script src="https://cdn.tiny.cloud/1/8vpv48z8mqzocaa4oagm9ox2ry48qhgpu4jjunvnbjl9z4xi/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
@@ -273,13 +270,13 @@
                         },
                         dataType: "json",
                         success: function(data) {
-                            console.log(data); // للتحقق من البيانات المستلمة
+                            console.log(data); 
                             if (data.jobtitlebyid) {
                                 var jobTitleSelect = $('select[name="job_title_id"]');
                                 jobTitleSelect.empty();
                                 jobTitleSelect.append('<option value="">اختر العنوان الوظيفي</option>');
                                 $.each(data.jobtitlebyid, function(key, value){
-                                    console.log(value); // للتحقق من كل عنصر من عناصر العنوان الوظيفي
+                                    console.log(value); 
                                     jobTitleSelect.append('<option value="'+ value.id +'">'+ value.name_en +' / '+ value.name_ar +'</option>');
                                 });
                             } else {
@@ -297,13 +294,15 @@
         });
     </script>
     
-    
+    <script>
+        const checkbox = document.getElementById('filter-checkbox');
+        checkbox.addEventListener('change', function() {
+            this.value = this.checked ? 1 : 0;
+        });
+    </script>
+
 
     
-<!-- Place the first <script> tag in your HTML's <head> -->
+    
 
-    <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
-    
-    
-</body>
 @endsection

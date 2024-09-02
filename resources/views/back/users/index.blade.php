@@ -58,13 +58,13 @@
                                     $completionPercentage = $completionPercentages[$item->id];
                             
                                     if ($completionPercentage < 30) {
-                                        $bgClass = 'bg-danger';
+                                        $bgClass = 'badge badge-pill badge-danger';
                                     } elseif ($completionPercentage >= 30 && $completionPercentage < 60) {
-                                        $bgClass = 'bg-warning';
+                                        $bgClass = 'badge badge-pill badge-warning';
                                     } elseif ($completionPercentage >= 60 && $completionPercentage < 80) {
-                                        $bgClass = 'bg-info';
+                                        $bgClass = 'badge badge-pill badge-info';
                                     } else {
-                                        $bgClass = 'bg-success';
+                                        $bgClass = 'badge badge-pill badge-success';
                                     }
                                   @endphp
 

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Back\AuthController;
 use App\Http\Controllers\Back\CityController;
 use App\Http\Controllers\Back\PlanController;
@@ -59,7 +60,14 @@ Route::group(
             return view('content');
         });
 
-     
+       //////////////////////////////////  Profile \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+        Route::get('profile',[ProfileController::class,'show'])->name('profile');
+        Route::post('profile/update',[ProfileController::class,'update'])->name('update.company_auth');
+
+
+
 
         ////////////////////////////////// City \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
         Route::get('city',[CityController::class,'index'])->name('city');
@@ -111,8 +119,23 @@ Route::group(
 
         //////////////////////////////////  Job Opportunity \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
         Route::get('Job/Opportunity',[JobOpportunityController::class,'index'])->name('Job.Opportunity');
+        Route::get('Job/Opportunity/filterJobs',[JobOpportunityController::class,'filterJobs'])->name('Job.Opportunity.filter');
+
         Route::get('Job/Opportunity/create',[JobOpportunityController::class,'create'])->name('Job.Opportunity.create');
         Route::post('Job/Opportunity/store',[JobOpportunityController::class,'store'])->name('job_opportunity.store');
+        Route::get('job/opportunity/show/{id}/job/work',[JobOpportunityController::class,'show'])->name('job_opportunity.show');
+
+        Route::get('job/opportunity/edit/{id}/job/work',[JobOpportunityController::class,'edit'])->name('job_opportunity.edit');
+        Route::post('job/opportunity/update/{id}',[JobOpportunityController::class,'update'])->name('job_opportunity.update');
+
+        Route::get('Job/Opportunity/destroy/{id}',[JobOpportunityController::class,'destroy'])->name('job_opportunity.destroy');
+
+        Route::get('Job/Opportunity/Unacceptable/{id}',[JobOpportunityController::class,'Unacceptable'])->name('job_opportunity.Unacceptable');
+
+        Route::get('Job/Opportunity/Acceptable/{id}',[JobOpportunityController::class,'Acceptable'])->name('job_opportunity.Acceptable');
+
+
+      
 
 
 

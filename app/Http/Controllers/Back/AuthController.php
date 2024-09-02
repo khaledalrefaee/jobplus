@@ -104,7 +104,7 @@ class AuthController extends Controller
             if ($Company->active == 1) 
             {
                 if (Auth::guard('company')->attempt($credentials)) {
-                    toastr()->success(trans('route.Welcome back Mr') . $Company->first_name);
+                    toastr()->success(trans('route.Welcome back Mr') . " "  .$Company->first_name);
 
                     return redirect()->intended('dashboard');
                 } else {

@@ -149,7 +149,28 @@ return [
    'requirements_for_trainees'=>'متطلبات للمتدربين',
     'My_opportunities'=>'فرصي',
     'remaining_opportunities'=>'الفرص المتبقية',
-
+    'Profile'=>'الملف الشخصي',
+    'Edit_Profile'=>'تعديل الملف الشخصي',
     'You have used all your available opportunities'=>'لقد استفدت من جميع الفرص المتاحة لديك',
     'No plan associated with this subscription'=>'لا توجد خطة مرتبطة بهذا الاشتراك',
+    'city'=>'المدينة',
+    'age'=>'العمر',
+    'In Processing'=>'قيد المعالجة',
+    'Acceptable' =>'مقبول',
+    'Unacceptable' =>'غير مقبول',
+
+    'remotely'=>'عمل عن بعد',
+    'full_time'=>'دوام كامل',
+    'hours'=>'ساعات',
+
+    'filter'=>'تصفيه',
+    'question'=>'سؤال',
+
+    'Main'=>'رئيسية',
+    'General'=>'عام',
+    'in'=>'في',
+    'Age Range'=>'الفئة العمرية',
+    'years'=>'عاما',
+    'Posted on'=>'نشر في',
+    'Back'=>'العودة',
 ];

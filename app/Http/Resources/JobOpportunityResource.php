@@ -28,6 +28,7 @@ class JobOpportunityResource extends JsonResource
             'years_experience' => $this->years_experience,
             'number_vacancies' => $this->number_vacancies,
             'address' => $this->address,
+            'type_job' => $this->type_job,
             'rang_salary' => $this->rang_salary,
             'job_description' => $this->job_description,
             'requirements' => $this->requirements,
@@ -35,7 +36,7 @@ class JobOpportunityResource extends JsonResource
          
          
             
-            'created_at' => $this->created_at->toDateString(),
+            'created_at' => $this->created_at->diffForHumans(),
             'updated_at' => $this->updated_at->toDateString(),
             'company' => new CompanyResource($this->whenLoaded('company')),
             'jobtitle' => new JobTitleResource($this->whenLoaded('jobtitle')),

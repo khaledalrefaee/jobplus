@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('educational_level');
             $table->string('career_level');
             $table->string('years_experience');
+            $table->string('type_job');
             $table->integer('number_vacancies');
             $table->string('address')->nullable();
             $table->string('rang_salary');
@@ -33,10 +34,11 @@ return new class extends Migration
             $table->longtext('requirements_for_trainees')->nullable();
             $table->string('status');
             $table->integer('subscription_id')->nullable();
-            // $table->integer('filter');
+            $table->integer('filter')->default(0);
             $table->integer('company_id');
-            // $table->string('question')->nullable();
+            $table->text('question')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

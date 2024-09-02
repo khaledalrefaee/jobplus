@@ -22,37 +22,6 @@
                   
                 </div>
 
-                
-                <form action="{{ route('Job.Opportunity.filter') }}" method="GET">
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="city_id">City</label>
-                            <select name="city_id" id="city_id" class="form-control">
-                                @foreach ($city as $item)
-                                    <option value="{{$item->id}}">{{$item->name_en}}/{{$item->name_ar}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                
-                        <div class="form-group col-md-4">
-                            <label for="type_job">Job Type</label>
-                            <select name="type_job" id="type_job" class="form-control">
-                                <option value="full_time">Full Time</option>
-                                <option value="part_time">Part Time</option>
-                                <option value="contract">Contract</option>
-                                <option value="internship">Internship</option>
-                            </select>
-                        </div>
-                
-                        <div class="form-group col-md-4">
-                            <label for="years_experience">Years of Experience</label>
-                            <input type="number" name="years_experience" id="years_experience" class="form-control">
-                        </div>
-                    </div>
-                
-                    <button type="submit" class="btn btn-primary">Filter</button>
-                </form>
-                
                
             </div>
         </div>
@@ -85,7 +54,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($job_opportunitys as $item)
+                                    @foreach ($jobs as $item)
                                         <tr>
                                                 <td>{{$item->company->name_company}}</td>
                                                 <td>{{$item->scopework->name_en}}</td>

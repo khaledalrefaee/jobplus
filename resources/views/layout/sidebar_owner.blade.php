@@ -1,12 +1,16 @@
 <ul class="side-menu">
-    <li class="side-item side-item-category">Main</li>
+    <li class="side-item side-item-category">{{__('route.Main')}}</li>
     
     <li class="slide">
         <a class="side-menu__item " href="{{route('city')}}">
-            <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24" ><path d="M0 0h24v24H0V0z" fill="none"/>
-                <path d="M5 5h4v6H5zm10 8h4v6h-4zM5 17h4v2H5zM15 5h4v2h-4z" opacity=".3"/>
-                <path d="M3 13h8V3H3v10zm2-8h4v6H5V5zm8 16h8V11h-8v10zm2-8h4v6h-4v-6zM13 3v6h8V3h-8zm6 4h-4V5h4v2zM3 21h8v-6H3v6zm2-4h4v2H5v-2z"/>
+            <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24">
+                <path d="M0 0h24v24H0V0z" fill="none"/>
+                <path d="M3 21h18v-2H3v2zm16-10h-4v-4h-2v4h-4v-4H7v6H5v6h14v-6h-2v-6zm-6 4h-2v-4h2v4z" opacity=".3"/>
+                <path d="M5 19h14v2H5v-2zm12-12h-4V3h-2v4H7V3H5v6H3v12h18V9h-2V7zm-6 6v-4h2v4h-2z"/>
             </svg>
+            
+            
+            
             <span class="side-menu__label">{{__('route.City')}}</span>
             <span class="badge badge-success side-badge">
                 {{$city}}
@@ -14,7 +18,7 @@
         </a>
     </li>
 
-    <li class="side-item side-item-category">General</li>
+    <li class="side-item side-item-category">{{__('route.General')}}</li>
     <li class="slide">
         <a class="side-menu__item" href="{{route('scope_work')}}">
             <span class="icon-[material-symbols--work]" style="width: 1rem; height: 1rem; color: black;"></span>        <span class="side-menu__label">{{__('route.scope_work')}}</span>

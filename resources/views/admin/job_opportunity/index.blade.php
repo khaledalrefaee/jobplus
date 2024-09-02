@@ -64,7 +64,7 @@
                                                         title="{{ trans('route.Edit') }}"><i class="fa fa-edit"></i>
                                                     </button>
                                                 
-                                                    <a href="{{route('city.destroy',$item->id)}}" class="btn btn-danger btn-sm" 
+                                                    <a href="{{route('job_opportunity.destroy',$item->id)}}" class="btn btn-danger btn-sm" 
                                                         title="{{ trans('route.Delete') }}">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
