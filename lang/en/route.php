@@ -152,4 +152,7 @@ return[
     'years'=>'years',
     'Posted on'=>'Posted on',
     'Back'=>'Back',
+    'specialties'=>'specialties',
+    'plan'=>'plan',
+    'increase'=>'increase',
 ];

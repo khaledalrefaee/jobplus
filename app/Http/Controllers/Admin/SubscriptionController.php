@@ -77,7 +77,7 @@ class SubscriptionController extends Controller
             $Subscription->By = $request-> By;
             $Subscription-> id_payment  = $request-> id_payment ;
             
-            $Subscription->status = 'In Processing ';
+            $Subscription->status = 'In Processing';
             $Subscription->save();
             toastr()->success(trans('route.Add_messages'));
            

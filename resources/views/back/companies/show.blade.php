@@ -3,6 +3,8 @@
 
 <?php 
 $lang = app()->getLocale();
+$countsubscriptio =  DB::table('subscriptions')->where('company_id', $company->id)->where('status','Acceptable')->count();
+$countopportunities = DB::table('job_opportunities')->where('company_id', $company->id)->where('status','Acceptable')->count();
 ?>
 
 <div class="container-fluid">
@@ -25,8 +27,8 @@ $lang = app()->getLocale();
                     <div class="pl-0">
                         <div class="main-profile-overview">
                             <div class="main-img-user profile-user">
-                                @if ($company_auth->image)
-                                    <img alt="" id="image-preview" src="{{asset($company_auth->image)}}">
+                                @if ($company->image)
+                                    <img alt="" id="image-preview" src="{{asset($company->image)}}">
                                 @else
                                     <img alt="" id="image-preview" src="{{asset('assets/img/faces/6.jpg')}}">
 
@@ -34,14 +36,14 @@ $lang = app()->getLocale();
                             </div>
                             <div class="d-flex justify-content-between mg-b-20">
                                 <div>
-                                    <h5 class="main-profile-name">{{$company_auth->first_name}} {{$company_auth->last_name}}</h5>
-                                    <p class="main-profile-name-text">{{$company_auth->name_company}} 
+                                    <h5 class="main-profile-name">{{$company->first_name}} {{$company->last_name}}</h5>
+                                    <p class="main-profile-name-text">{{$company->name_company}} 
                                     </p>
                                 </div>
                             </div>
-                            <h6>{{$company_auth->job_title}}</h6>
+                            <h6>{{$company->job_title}}</h6>
                             <p class="main-profile-name-text">
-                                @foreach($company_auth->scopeWorks as $scopeWork)
+                                @foreach($company->scopeWorks as $scopeWork)
                                 {{ $scopeWork->{'name_' . $lang} }} /
                             @endforeach
                             </p>
@@ -61,7 +63,10 @@ $lang = app()->getLocale();
 											<div class="media-body">
 												<span>{{__('route.phone')}}</span>
 												<div>
-													{{$company_auth->phone}}
+                                                    <a href="whatsapp://send?abid={{$company->phone}}&text=مرحبا%2C%!">
+                                                        {{$company->phone}}
+                                                    </a>
+													
 												</div>
 											</div>
 										</div>
@@ -72,7 +77,9 @@ $lang = app()->getLocale();
 											<div class="media-body">
 												<span>{{__('route.email')}}</span>
 												<div>
-													{{$company_auth->email}}
+                                                    <a href="mailto:{{$company->email}}">
+													{{$company->email}}
+                                                    </a>
 												</div>
 											</div>
 										</div>
@@ -85,9 +92,9 @@ $lang = app()->getLocale();
 												<span>{{__('route.city')}}</span>
 												<div>
                                                     @if (app()->getLocale() == 'en')
-                                                        {{$company_auth->city->name_en}}
+                                                        {{$company->city->name_en}}
                                                     @else
-                                                        {{$company_auth->city->name_ar}}
+                                                        {{$company->city->name_ar}}
                                                         
                                                     @endif
 											
@@ -102,7 +109,7 @@ $lang = app()->getLocale();
 											<div class="media-body">
 												<span>{{__('route.address')}}</span>
 												<div>
-													{{$company_auth->address}}
+													{{$company->address}}
 												</div>
 											</div>
 										</div>
@@ -127,9 +134,9 @@ $lang = app()->getLocale();
                                     <i class="icon-layers text-primary"></i>
                                 </div>
                                 <div class="ml-auto">
-                                    <h5 class="tx-13">Orders</h5>
-                                    <h2 class="mb-0 tx-22 mb-1 mt-1">1,587</h2>
-                                    <p class="text-muted mb-0 tx-11"><i class="si si-arrow-up-circle text-success mr-1"></i>increase</p>
+                                    <h5 class="tx-13">{{__('route.opportunities')}}</h5>
+                                    <h2 class="mb-0 tx-22 mb-1 mt-1">{{$countopportunities}}</h2>
+                                    <p class="text-muted mb-0 tx-11"><i class="si si-arrow-up-circle text-success mr-1"></i>{{__('route.increase')}}</p>
                                 </div>
                             </div>
                         </div>
@@ -143,9 +150,9 @@ $lang = app()->getLocale();
                                     <i class="icon-paypal text-danger"></i>
                                 </div>
                                 <div class="ml-auto">
-                                    <h5 class="tx-13">Revenue</h5>
-                                    <h2 class="mb-0 tx-22 mb-1 mt-1">46,782</h2>
-                                    <p class="text-muted mb-0 tx-11"><i class="si si-arrow-up-circle text-success mr-1"></i>increase</p>
+                                    <h5 class="tx-13">{{__('route.subscriptio')}}</h5>
+                                    <h2 class="mb-0 tx-22 mb-1 mt-1">{{$countsubscriptio}}</h2>
+                                    <p class="text-muted mb-0 tx-11"><i class="si si-arrow-up-circle text-success mr-1"></i>{{__('route.increase')}}</p>
                                 </div>
                             </div>
                         </div>
@@ -177,11 +184,11 @@ $lang = app()->getLocale();
                                 <a href="#home" data-toggle="tab" aria-expanded="true"> 
                                     <span class="visible-xs">
                                     <i class="las la-user-circle tx-16 mr-1"></i></span> 
-                                    <span class="hidden-xs">{{__('route.My_opportunities')}}</span> 
+                                    <span class="hidden-xs">{{__('route.opportunities')}}</span> 
                                 </a>
                             </li>
                             <li class="">
-                                <a href="#profile" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="las la-images tx-15 mr-1"></i></span> <span class="hidden-xs">{{__('route.My_subscriptions')}}</span> </a>
+                                <a href="#profile" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="las la-images tx-15 mr-1"></i></span> <span class="hidden-xs">{{__('route.subscriptio')}}</span> </a>
                             </li>
                             <li class="">
                                 <a href="#settings" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="las la-cog tx-16 mr-1"></i></span> <span class="hidden-xs">{{__('route.settings')}}</span> </a>
@@ -201,7 +208,7 @@ $lang = app()->getLocale();
 
                     <div class="tab-content border-left border-bottom border-right border-top-0 p-4">
                         <div class="tab-pane active" id="home">
-                            @foreach ($company_auth->JobOpportunity()->orderBy('created_at', 'desc')->get() as $JobOpportunity)
+                            @foreach ($company->JobOpportunity()->orderBy('created_at', 'desc')->get() as $JobOpportunity)
                                 <div class="m-t-30">
                                     <h4 class="tx-15 text-uppercase mt-3">{{ $JobOpportunity->scopework->{'name_' . $lang} }}</h4>
                                     <div class=" p-t-10">
@@ -274,14 +281,38 @@ $lang = app()->getLocale();
                         </div>
                         <div class="tab-pane" id="profile">
                             <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="border p-1 card thumb">
-                                        <a href="#" class="image-popup" title="Screenshot-2"> <img src="../../assets/img/photos/7.jpg" class="thumb-img" alt="work-thumbnail"> </a>
-                                        <h4 class="text-center tx-14 mt-3 mb-0">Gallary Image</h4>
-                                        <div class="ga-border"></div>
-                                        <p class="text-muted text-center"><small>Photography</small></p>
+                                @foreach ($company->subscriptions as $subscriptions)
+                                    <div class="col-sm-4">
+                                        <div class="border p-1 card thumb">
+                                            <a href="#" class="image-popup" title="Screenshot-2">
+                                            </a>
+                                            <h4 class="text-center tx-14 mt-3 mb-0">{{__('route.plan')}} : {{$subscriptions->plan->Number_of_opportunities}} {{__('route.opportunities')}}</h4>
+                                            <h4 class="text-center tx-14 mt-3 mb-0">{{__('route.remaining_opportunities')}} : {{$subscriptions->remaining_opportunities}}</h4>
+
+                                            <div class="ga-border"></div>
+                                            <p class="text-muted text-center">
+                                                <small>{{__('route.name')}} : {{$subscriptions->name}}</small>
+                                            </p>
+                                            <p class="text-muted text-center">
+                                                <small>{{__('route.payment_type')}} : {{$subscriptions->payment_type}}</small>
+                                            </p>
+
+                                            <p class="text-muted text-center">
+                                            @if ($subscriptions->status == 'In Processing')
+                                                <small class="text-warning">{{__('route.status')}} : {{__('route.'.$subscriptions->status) }}</small>
+
+                                            @elseif($subscriptions->status == 'Unacceptable')
+                                                <small class="text-danger">{{__('route.status')}} : {{__('route.'.$subscriptions->status) }}</small>
+
+                                            @else
+                                                <small class="text-success">{{__('route.status')}} : {{__('route.'.$subscriptions->status) }}</small>
+
+                                            @endif
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
+                                @endforeach
+                              
                                
                             </div>
                         </div>
@@ -292,19 +323,19 @@ $lang = app()->getLocale();
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="FullName">{{__('route.first_name')}}</label>
-                                            <input type="text" value="{{$company_auth->first_name}}" name="first_name" id="first_name" class="form-control">
+                                            <input type="text" value="{{$company->first_name}}" name="first_name" id="first_name" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="FullName">{{__('route.last_name')}}</label>
-                                            <input type="text" value="{{$company_auth->last_name}}" name="last_name" id="last_name" class="form-control">
+                                            <input type="text" value="{{$company->last_name}}" name="last_name" id="last_name" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="name_company">{{__('route.name_company')}}</label>
-                                            <input type="text" name="name_company" value="{{$company_auth->name_company}}" id="Username" class="form-control">
+                                            <input type="text" name="name_company" value="{{$company->name_company}}" id="Username" class="form-control">
                                         </div>
                                     </div>
 
@@ -318,13 +349,13 @@ $lang = app()->getLocale();
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="Email">{{__('route.email')}}</label>
-                                            <input type="email" name="email" value="{{$company_auth->email}}" id="Email" class="form-control">
+                                            <input type="email" name="email" value="{{$company->email}}" id="Email" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="phone">{{__('route.phone')}}</label>
-                                            <input type="number" name="phone" value="{{$company_auth->phone}}" id="Username" class="form-control">
+                                            <input type="number" name="phone" value="{{$company->phone}}" id="Username" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-6">
@@ -344,14 +375,14 @@ $lang = app()->getLocale();
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="job_title">{{__('route.job_title')}}</label>
-                                            <input type="text" name="job_title" value="{{$company_auth->job_title}}" id="Username" class="form-control">
+                                            <input type="text" name="job_title" value="{{$company->job_title}}" id="Username" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="address">{{__('route.address')}}</label>
-                                            <input type="text" name="address" value="{{$company_auth->address}}" id="Username" class="form-control">
+                                            <input type="text" name="address" value="{{$company->address}}" id="Username" class="form-control">
                                         </div>
                                     </div>
 

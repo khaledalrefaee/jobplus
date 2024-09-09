@@ -60,10 +60,10 @@
                                                 <td>{{$item->Number_of_opportunities}}</td>
                                                 <td>{{$item->price}} SYP</td>
                                                 <td>
-                                                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
+                                                    {{-- <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
                                                         data-target="#modaldemo8_edit{{ $item->id }}"
                                                         title="{{ trans('route.Edit') }}"><i class="fa fa-edit"></i>
-                                                    </button>
+                                                    </button> --}}
                                                 
                                                     <a href="{{route('plan.destroy',$item->id)}}" class="btn btn-danger btn-sm" 
                                                         title="{{ trans('route.Delete') }}">

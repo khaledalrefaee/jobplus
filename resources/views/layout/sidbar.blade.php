@@ -11,9 +11,8 @@ $city =City::count();
         <a class="logo-icon mobile-logo icon-light active" href="{{url('dashboard')}}"><img src="{{asset('assets/images/logo_2.png')}}" class="logo-icon" alt="logo"></a>
     </div>
     
-    <div class="main-sidemenu mCustomScrollbar _mCS_1 mCS-autoHide" style="position: relative; overflow: visible;">
-        <div id="mCSB_1" class="mCustomScrollBox mCS-minimal mCSB_vertical mCSB_outside" style="max-height: none;" tabindex="0">
-            <div id="mCSB_1_container" class="mCSB_container" style="position: relative; top: 0px; left: 0px;" >
+    <div class="main-sidemenu">
+        <div class="app-sidebar__user clearfix">
 
                 
         <div class="app-sidebar__user clearfix active">
@@ -45,12 +44,7 @@ $city =City::count();
         @endif
     </div>
 </div>
-<div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-minimal mCSB_scrollTools_vertical" style="display: block;">
-    <div class="mCSB_draggerContainer">
-        <div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; display: block; height: 84px; max-height: 275.6px; top: 0px;">
-            <div class="mCSB_dragger_bar" style="line-height: 50px;"></div></div><div class="mCSB_draggerRail">
-                </div>
-            </div>
-        </div>
-    </div>
+   
+</aside>
+
 </aside>

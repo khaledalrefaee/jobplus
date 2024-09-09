@@ -22,6 +22,10 @@ class Company extends Authenticatable
     }
 
 
+    public function jobopportunityuser()
+    {
+        return $this->hasMany(JobOpportunityUser::class);
+    }
 
     public function subscriptions()
     {

@@ -181,6 +181,7 @@
         @if (App::getLocale() == 'ar')
                 <!-- left-sidebar js -->
                 <script src="{{asset('assets/plugins/sidebar/sidebar-rtl.js')}}"></script>
+                <script src="../../assets/plugins/sidebar/sidebar-custom.js"></script>
         @else
                 <!-- right-sidebar js -->
                 <script src="{{asset('assets/plugins/sidebar/sidebar.js')}}"></script>

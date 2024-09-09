@@ -121,7 +121,7 @@ return [
     'Unacceptable'=>'غير مقبولة',
     'Acceptable'=>'مقبولة',
     'My_subscriptions'=>'اشتراكاتي',
-
+    'increase'=>'أكثر',
     'Job_Opportunity'=>'فرصة عمل',
     'Form'=>'النموذج',
     'First'=>'أولا',
@@ -162,6 +162,7 @@ return [
     'remotely'=>'عمل عن بعد',
     'full_time'=>'دوام كامل',
     'hours'=>'ساعات',
+    'plan'=>'الخطة',
 
     'filter'=>'تصفيه',
     'question'=>'سؤال',
@@ -173,4 +174,5 @@ return [
     'years'=>'عاما',
     'Posted on'=>'نشر في',
     'Back'=>'العودة',
+    'specialties'=>'الاختصاصات',
 ];

@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\ExperiencesController;
 use App\Http\Controllers\Api\CertificatesController;
 use App\Http\Controllers\Api\JobOpportunityController;
 use App\Http\Controllers\Api\BusinessGalleryController;
+use App\Http\Controllers\Api\JobOpportunityUserController;
 
 
 
@@ -129,6 +130,18 @@ Route::group(['middleware' => ['auth:sanctum','setapplanguage']], function () {
         Route::post('/get/all/job/Opportunity', [JobOpportunityController::class, 'index']);
         Route::post('/get/show/job/Opportunity/{id}', [JobOpportunityController::class, 'show']);
         Route::post('/get/filtter/job/Opportunity', [JobOpportunityController::class, 'filtter']);
+        Route::post('/get/filterJobs', [JobOpportunityController::class, 'filterJobs']);
+
+
+        
+        ///////////////////////////// add Apply for a chance //////////////////////////////////////
+
+        Route::post('/add/Apply/for/a/chance', [JobOpportunityUserController::class, 'store']);
+        Route::post('/delete/Apply/for/a/chance/{id}', [JobOpportunityUserController::class, 'destroy']);
+        Route::post('get/User/Opportunities',[JobOpportunityUserController::class,'getUserOpportunities']);
+
+
+        
 
         ///////////////////////////// get Image Company //////////////////////////////////////
 

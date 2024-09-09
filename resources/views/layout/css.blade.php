@@ -23,7 +23,7 @@
 		<link href="{{asset('assets/plugins/owl-carousel/owl.carousel.css')}}" rel="stylesheet" />
 
 		<!--  Custom Scroll bar-->
-		{{-- <link href="../../assets/plugins/mscrollbar/jquery.mCustomScrollbar.css')}}" rel="stylesheet"/> --}}
+		<link href="{{asset('assets/plugins/mscrollbar/jquery.mCustomScrollbar.css')}}" rel="stylesheet"/>
 
 		<!--  Right-sidemenu css -->
 		<link href="{{asset('assets/plugins/sidebar/sidebar.css')}}" rel="stylesheet">

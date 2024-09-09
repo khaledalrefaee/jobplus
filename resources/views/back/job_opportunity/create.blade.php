@@ -179,16 +179,18 @@
                                     </div>
                                     
                                     <div class="control-group form-group col-6">
-                                        <label class="form-label">{{__('route.rang_salary')}}</label>
+                                        <label class="form-label">{{ __('route.rang_salary') }}</label>
                                         <select name="rang_salary" class="form-control">
                                             <option value=""> </option>
                                             @foreach(range(1000, 9000, 1000) as $salary)
-                                                <option value="{{ __('route.between') . " $salary " . __('route.and') . " " . ($salary + 1000) }}" {{ old('rang_salary') == __('route.between') . " $salary " . __('route.and') . " " . ($salary + 1000) ? 'selected' : '' }}>
+                                                <option value="between {{ $salary }} and {{ $salary + 1000 }}" 
+                                                    {{ old('rang_salary') == 'between ' . $salary . ' and ' . ($salary + 1000) ? 'selected' : '' }}>
                                                     {{ __('route.between') . " $salary " . __('route.and') . " " . ($salary + 1000) }}
                                                 </option>
                                             @endforeach
                                         </select>
                                     </div>
+                                    
                                     
                                     <div class="control-group form-group mb-0 col-6">
                                         <label class="form-label">{{__('route.address')}} <span class="text-success">( {{__('route.optional')}} )</span></label>

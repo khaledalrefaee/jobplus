@@ -29,15 +29,15 @@ class JobOpportunityResource extends JsonResource
             'number_vacancies' => $this->number_vacancies,
             'address' => $this->address,
             'type_job' => $this->type_job,
+            'question' =>$this->question,
             'rang_salary' => $this->rang_salary,
             'job_description' => $this->job_description,
             'requirements' => $this->requirements,
             'requirements_for_trainees' => $this->requirements_for_trainees,
          
-         
             
             'created_at' => $this->created_at->diffForHumans(),
-            'updated_at' => $this->updated_at->toDateString(),
+            'updated_at' => $this->updated_at->diffForHumans(),
             'company' => new CompanyResource($this->whenLoaded('company')),
             'jobtitle' => new JobTitleResource($this->whenLoaded('jobtitle')),
             'scopework' => new ScopeWorkResource($this->whenLoaded('scopework')),

@@ -37,4 +37,9 @@ class JobOpportunity extends Model
         return $this->belongsTo(Scope_work::class , 'scope_work_id');
     }
 
+    public function user()
+    {
+        return $this->belongsToMany(User::class, 'job_opportunity_users');
+    }
+
 }

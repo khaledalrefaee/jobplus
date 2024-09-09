@@ -56,6 +56,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(BusinessGallery::class ,'user_id');
     }
+ 
+    public function jobopportunityuser()
+    {
+        return $this->belongsToMany(JobOpportunity::class, 'job_opportunity_users');
+    }
 
     public function skill()
     {
@@ -103,6 +108,7 @@ class User extends Authenticatable
             $user->experience()->delete();
             $user->certificate()->delete();
             $user->cv()->delete();
+            $user->jobopportunityuser()->delete();
         });
     }
  

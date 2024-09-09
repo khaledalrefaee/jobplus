@@ -5,56 +5,161 @@
     <div class="container-fluid">
 
         <!-- breadcrumb -->
-        <div class="breadcrumb-header justify-content-between">
-            <div class="my-auto">
-                <div class="d-flex">
-                    <h4 class="content-title mb-0 my-auto">{{__('route.Tables')}}</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/ {{__('route.Job_Opportunity')}}</span>
-                </div>
-            </div>
-            <div class="d-flex my-xl-auto right-content">
+        <div class=" ">
+           
+            <div class=" ">
               
-                <div class="col-sm-6 col-md-4 col-xl-3 mg-t-20">
-                    <a type="button" class="btn btn-info btn-icon mr-2" class="modal-effect  btn-block" 
-                         title="{{__('route.Add')}}" href="{{route('Job.Opportunity.create')}}">
-                        <i class="mdi mdi-plus"></i>
-                       
-                    </a>
-                  
-                </div>
+                
 
                 
                 <form action="{{ route('Job.Opportunity.filter') }}" method="GET">
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label for="city_id">City</label>
-                            <select name="city_id" id="city_id" class="form-control">
+                    <div class="row">
+                        <div class="col-lg-3 mg-b-20 mg-lg-b-0">
+                            <label class="form-label">{{__('route.City')}}</label>
+                            <select name="city_id" class="form-control select2" id="city_id">
+                                <option value=""> </option>
                                 @foreach ($city as $item)
-                                    <option value="{{$item->id}}">{{$item->name_en}}/{{$item->name_ar}}</option>
+                                    <option value="{{$item->id}}" {{ old('city_id') == $item->id ? 'selected' : '' }}>
+                                        {{$item->name_en}} / {{$item->name_ar}}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
-                
-                        <div class="form-group col-md-4">
-                            <label for="type_job">Job Type</label>
-                            <select name="type_job" id="type_job" class="form-control">
-                                <option value="full_time">Full Time</option>
-                                <option value="part_time">Part Time</option>
-                                <option value="contract">Contract</option>
-                                <option value="internship">Internship</option>
+
+                        <div class="col-lg-3 mg-b-20 mg-lg-b-0">
+                            <label class="form-label">{{__('route.scope_work')}}</label>
+                            <select name="scope_work_id" class="form-control select2" id="scope_work_id">
+                                <option value=""> </option>
+                                @foreach ($scope_work as $scopeWork)
+                                    <option value="{{$scopeWork->id}}" {{ old('scope_work_id') == $scopeWork->id ? 'selected' : '' }}>
+                                        {{$scopeWork->name_en}} / {{$scopeWork->name_ar}}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
-                
-                        <div class="form-group col-md-4">
-                            <label for="years_experience">Years of Experience</label>
-                            <input type="number" name="years_experience" id="years_experience" class="form-control">
+
+                        <div class="col-lg-3 mg-b-20 mg-lg-b-0">
+                            <label class="form-label">{{__('route.job_title')}}</label>
+                            <select name="job_title_id" class="form-control select2" id="job_title_id">
+                                <option value="">اختر العنوان الوظيفي</option>
+                                
+                                    <option value="">
+                                   
+                                    </option>
+                              
+                            </select>
                         </div>
+
+                        <div class="control-group form-group col-3">
+                            <label class="form-label">{{ __('route.rang_salary') }}</label>
+                            <select name="rang_salary" class="form-control">
+                                <option value=""> </option>
+                                @foreach(range(1000, 9000, 1000) as $salary)
+                                    <option value="between {{ $salary }} and {{ $salary + 1000 }}">
+                                        {{ __('route.between') . " $salary " . __('route.and') . " " . ($salary + 1000) }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="control-group form-group col-3">
+                            <label class="form-label">{{__('route.career_level')}}</label>
+                            <select name="career_level" class="form-control select2">
+                                <option value=""> </option>
+                                <option value="student">
+                                    {{ __('route.student') }}
+                                </option>
+                                <option value="Junior">
+                                    {{ __('route.Junior') }}
+                                </option>
+                                <option value="senior">
+                                    {{ __('route.senior') }}
+                                </option>
+                                <option value="Manager">
+                                    {{ __('route.Manager') }}
+                                </option>
+                            </select>
+                            
+                        </div>
+                        
+                
+                        <div class="control-group form-group col-2">
+                            <label class="form-label">{{__('route.type_job')}}</label>
+                            <select name="type_job" class="form-control select2">
+                                <option value=""> </option>
+                                <option value="remotely">
+                                    {{ __('route.remotely') }}
+                                </option>
+                                <option value="full_time">
+                                    {{ __('route.full_time') }}
+                                </option>
+                                <option value="hours">
+                                    {{ __('route.hours') }}
+                                </option>
+                            </select>
+                            
+                        </div>
+                
+                        <div class="control-group form-group col-2">
+                            <label class="form-label">{{__('route.years_experience')}}</label>
+                            <select name="years_experience" class="form-control select2">
+                                <option value=""> </option>
+                                <option value="Does not matter" >
+                                    {{__('route.Does not matter')}}
+                                </option>
+                                @for ($i = 1; $i <= 10; $i++)
+                                    <option value="{{ $i }} year" >
+                                        {{ $i }} year
+                                    </option>
+                                @endfor
+                            </select>
+                        </div>
+
+                        <div class="control-group form-group col-2">
+                            <label class="form-label">{{__('route.educational_level')}}</label>
+                            <select name="educational_level" class="form-control select2">
+                                <option value=""> </option>
+                                <option value="diploma"  >
+                                    {{__('route.diploma')}}
+                                </option>
+                                <option value="Doctorate" >
+                                    {{__('route.Doctorate')}}
+                                </option>
+                                <option value="graduate" >
+                                    {{__('route.graduate')}}
+                                </option>
+                                <option value="Master">
+                                    {{__('route.Master')}}
+                                </option>
+                            </select>
+                            
+                        </div>
+
+                         <div class="control-group form-group col-3">
+                                        <label class="form-label">{{__('route.gender')}}</label>
+                                        <div style="display: flex; gap: 20px; align-items: center;">
+                                            <label class="rdiobox" style="margin-right: 10px;">
+                                                <input name="gender" type="radio" value="male" >
+                                                <span>{{__('route.male')}}</span>
+                                            </label>
+                                            <label class="rdiobox">
+                                                <input name="gender" type="radio" value="female" >
+                                                <span>{{__('route.female')}}</span>
+                                            </label>
+                                            <label class="rdiobox">
+                                                <input name="gender" type="radio" value="Does not matter">
+                                                <span>{{__('route.Does not matter')}}</span>
+                                            </label>
+                                        </div>
+                                    </div>
                     </div>
                 
-                    <button type="submit" class="btn btn-primary">Filter</button>
+                    <button type="submit" class="btn btn-primary my-3">Filter</button>
                 </form>
                 
                
             </div>
+
+            
         </div>
         <!-- breadcrumb -->
 
@@ -62,7 +167,7 @@
         <div class="row row-sm">
             <div class="col-xl-12">
                 <div class="card">
-
+                    
                     @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>
@@ -74,6 +179,11 @@
                     @endif
                   
                     <div class="card-body">
+                        <div class="my-auto">
+                            <div class="d-flex">
+                                <h4 class="content-title mb-0 my-auto">{{__('route.Tables')}}</h4><span class="text-muted mt-1 tx-13 ml-2 mb-0">/ {{__('route.Job_Opportunity')}}</span>
+                            </div>
+                        </div>
                         <div class="table-responsive">
                             <table class="table text-md-nowrap" id="example1">
                                 <thead>
@@ -154,6 +264,42 @@
     
     <!-- Container closed -->
 
-   
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('select[name="scope_work_id"]').on('change', function(){
+                var scopeWorkId = $(this).val();
+                if(scopeWorkId) {
+                    $.ajax({
+                        url: '/get/jobtitle/by/' + scopeWorkId,
+                        type: "POST",
+                        data: {
+                            _token: '{{ csrf_token() }}'  
+                        },
+                        dataType: "json",
+                        success: function(data) {
+                            console.log(data); 
+                            if (data.jobtitlebyid) {
+                                var jobTitleSelect = $('select[name="job_title_id"]');
+                                jobTitleSelect.empty();
+                                jobTitleSelect.append('<option value="">اختر العنوان الوظيفي</option>');
+                                $.each(data.jobtitlebyid, function(key, value){
+                                    console.log(value); 
+                                    jobTitleSelect.append('<option value="'+ value.id +'">'+ value.name_en +' / '+ value.name_ar +'</option>');
+                                });
+                            } else {
+                                console.error("الحقل 'jobtitlebyid' غير موجود في الاستجابة");
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("حدث خطأ: " + error);
+                        }
+                    });
+                } else {
+                    $('select[name="job_title_id"]').empty();
+                }
+            });
+        });
+    </script>
    
 @endsection
