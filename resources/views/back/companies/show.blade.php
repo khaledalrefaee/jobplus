@@ -392,7 +392,8 @@ $countopportunities = DB::table('job_opportunities')->where('company_id', $compa
                                             <label for="scope_work">{{__('route.scope_work')}}</label>
                                             <select name="city_id" class="form-control select_2" >
                                                 @foreach ($city as $item)
-                                                    <option value="{{$item->id}}" {{  (old('city_id')) ? 'selected' : '' }}>
+                                                    <option value="{{$item->id}}" 
+                                                        {{ (old('city_id') == $item->id || (isset($company) && $company->city_id == $item->id)) ? 'selected' : '' }}>
                                                         {{$item->name_en}} / {{$item->name_ar}}
                                                     </option>
                                                 @endforeach
@@ -405,7 +406,8 @@ $countopportunities = DB::table('job_opportunities')->where('company_id', $compa
                                             <label for="scope_work">{{__('route.scope_work')}}</label>
                                             <select name="scopeWorks_id[]" class="form-control select_2" multiple="multiple">
                                                 @foreach ($scopeWorks as $scopeWork)
-                                                    <option value="{{$scopeWork->id}}" {{ in_array($scopeWork->id, old('scopeWorks_id', [])) ? 'selected' : '' }}>
+                                                    <option value="{{$scopeWork->id}}" 
+                                                        {{ in_array($scopeWork->id, old('scopeWorks_id', isset($company) ? $company->scopeWorks->pluck('id')->toArray() : [])) ? 'selected' : '' }}>
                                                         {{$scopeWork->name_en}} / {{$scopeWork->name_ar}}
                                                     </option>
                                                 @endforeach
@@ -413,7 +415,7 @@ $countopportunities = DB::table('job_opportunities')->where('company_id', $compa
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary waves-effect waves-light w-md" type="submit">Save</button>
+                                {{-- <button class="btn btn-primary waves-effect waves-light w-md" type="submit">Save</button> --}}
                             </form>
                         </div>
                     </div>

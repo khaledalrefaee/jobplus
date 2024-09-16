@@ -92,10 +92,18 @@
                                                 <td>
                                                     
                                                 
+                                                    
+                                                    <a href="{{route('download.CV.job.work',$item->id)}}" class="btn btn-warning btn-sm" 
+                                                        title="{{ trans('route.show') }}">
+                                                        <i class="fas fa-file-pdf" aria-hidden="true"></i>
+
+                                                    </a>
+
                                                     <a href="{{route('user.show',$item->id)}}" class="btn btn-info btn-sm" 
                                                         title="{{ trans('route.show') }}">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
+
                                                     @if(isset($item->cv))
                                                       <a class="btn btn-sm btn-indigo " href="{{ route('cv.download', $item->cv->id) }}" title="Download CV">
                                                         <i class="typcn typcn-folder"></i>

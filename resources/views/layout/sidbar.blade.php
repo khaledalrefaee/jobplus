@@ -1,6 +1,9 @@
 <?php
 use App\Models\City;
 $city =City::count();
+
+$user =App\Models\User::count();
+$company =App\Models\Company::count();
 ?>
 
 

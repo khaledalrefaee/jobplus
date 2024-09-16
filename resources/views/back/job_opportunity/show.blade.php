@@ -19,12 +19,11 @@ $lang = app()->getLocale();
         </div>
         <!-- breadcrumb -->
       
-            <div class="row justify-content-center">
-                <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-6">
                     <div class="card mb-4 shadow-sm">
                         <div class="card-header bg-primary text-white">
                             <h2 class="mb-0">{{ $jobOpportunity->jobTitle->{'name_' . $lang} }}
-
                                 <small class="text-light">{{__('route.in')}} {{ $jobOpportunity->city->{'name_' . $lang}  }}</small></h2>
                         </div>
                         <div class="card-body">
@@ -138,6 +137,46 @@ $lang = app()->getLocale();
                     </div>
                     <a href="{{route('Job.Opportunity')}}" class="btn btn-outline-primary btn-block">{{__('route.Back')}}</a>
                 </div>
+
+                <div class="col-12 col-lg-6">
+                    <div class="row">
+                        @foreach ($jobOpportunity->user as $user)
+                            <div class="col-12 col-sm-6 col-lg-6">
+                                <div class="card card-info mb-4">
+                                    <div class="card-header pb-0">
+                                        <h5 class="card-title mb-0 pb-0">{{$user->first_name}} {{$user->last_name}}</h5>
+                                    </div>
+                                    <div class="card-body text-info">
+                                        {{$user->pivot->text}}
+                                    </div>
+                                    <div class="card-footer">
+
+                                        @if(isset($user->cv))
+                                            <a class="btn btn-sm btn-indigo " href="{{ route('cv.download', $user->cv->id) }}" title="Download CV">
+                                            <i class="typcn typcn-folder"></i>
+                                            {{__('route.donlowed_Cv')}}
+                                            </a>
+                                        @endif
+
+                                        <a href="{{route('user.show',$user->id)}}" class="btn btn-info btn-sm" 
+                                            title="{{ trans('route.show') }}">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+
+                                        <a href="{{route('download.CV.job.work',$user->id)}}" class="btn btn-warning btn-sm" 
+                                            title="{{ trans('route.show') }}">
+                                            <i class="fas fa-file-pdf" aria-hidden="true"></i>
+
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            
+                
             </div>
         </div>
     </div>
@@ -145,13 +184,6 @@ $lang = app()->getLocale();
 @endsection
 
 @section('scripts')
-<script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function () {
-        'use strict'
-                </div>
-            </div>
-       
-    </div>
+
 
 @endsection

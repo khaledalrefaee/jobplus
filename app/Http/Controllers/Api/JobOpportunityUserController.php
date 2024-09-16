@@ -40,11 +40,19 @@ class JobOpportunityUserController extends Controller
             return response()->json($errors, 401);  
         }
 
+        $existingApplication = JobOpportunityUser::where('job_opportunity_id', $request->job_opportunity_id)
+        ->where('user_id', Auth::id())
+        ->first();
+
+        if ($existingApplication) {
+        return response()->json(['error' => 'You have already applied for this job opportunity'], 400);
+        }
+
         $jobOpportunityUser = new JobOpportunityUser();
         $jobOpportunityUser->text = $request->text;
         $jobOpportunityUser->job_opportunity_id = $request->job_opportunity_id; 
         $jobOpportunityUser->user_id = Auth::id();
-        $jobOpportunityUser->status = '';
+        $jobOpportunityUser->status = 'pending';
         $jobOpportunityUser->save();      
         return $this -> returnSuccessMessage('Job Opportunity User Created Successfully');
 

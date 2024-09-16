@@ -1,6 +1,8 @@
 @extends('index')
 @section('content')
-
+<?php
+$lang = app()->getLocale();
+?>
 	<!-- container -->
     <div class="container-fluid">
 
@@ -47,8 +49,10 @@
                             <table class="table text-md-nowrap" id="example1">
                                 <thead>
                                     <tr>
-                                        <th class="wd-15p border-bottom-0"> {{__('route.name_arabic')}}</th>
-                                        <th class="wd-15p border-bottom-0"> {{__('route.name_english')}}</th>
+                                        <th class="wd-15p border-bottom-0"> {{__('route.scope_work')}}</th>
+                                        <th class="wd-15p border-bottom-0"> {{__('route.job_title')}}</th>
+
+                                        <th class="wd-15p border-bottom-0"> {{__('route.status')}}</th>
                                         <th class="wd-15p border-bottom-0"> {{__('route.Action')}}</th>
                                     </tr>
                                 </thead>
@@ -56,13 +60,35 @@
                                     @foreach ($job_opportunitys as $item)
                                         <tr>
                                         
-                                                <td>{{$item->scopework->name_en}}</td>
-                                                <td>{{$item->from_age}}</td>
+                                                <td>{{$item->scopework->{'name_'.$lang} }}</td>
+                                                <td>{{$item->jobtitle->{'name_'.$lang} }}</td>
+                                                <td class="
+                                                        @if($item->status == 'Acceptable')
+                                                            bg-success
+                                                        @elseif($item->status == 'Unacceptable')
+                                                            bg-danger
+                                                        @elseif($item->status == 'In Processing')
+                                                            bg-warning
+                                                        @else
+                                                            bg-secondary
+                                                        @endif
+                                                    ">
+                                                    {{ __('route.'.$item->status) }}
+                                                </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal"
-                                                        data-target="#modaldemo8_edit{{ $item->id }}"
-                                                        title="{{ trans('route.Edit') }}"><i class="fa fa-edit"></i>
-                                                    </button>
+                                                    
+
+                                                    <a href="{{route('job_opportunity.show',$item->id)}}" class="btn btn-info btn-sm" 
+                                                        title="{{ trans('route.Delete') }}">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+
+                                                    <a href="{{route('job_opportunity.edit',$item->id)}}" class="btn btn-warning btn-sm" 
+                                                        title="{{ trans('route.Edit') }}">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+
+                                                   
                                                 
                                                     <a href="{{route('job_opportunity.destroy',$item->id)}}" class="btn btn-danger btn-sm" 
                                                         title="{{ trans('route.Delete') }}">
@@ -71,7 +97,7 @@
 
                                                 </td>
                                         </tr>
-                                        @include('back.cities.edit')
+                                   
                                     @endforeach
                          
                                 </tbody>

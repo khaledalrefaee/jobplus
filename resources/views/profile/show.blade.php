@@ -3,6 +3,11 @@
 
 <?php 
 $lang = app()->getLocale();
+
+
+$countsubscriptio =  DB::table('subscriptions')->where('company_id', $company_auth->id)->where('status','Acceptable')->count();
+$countopportunities = DB::table('job_opportunities')->where('company_id', $company_auth->id)->where('status','Acceptable')->count();
+
 ?>
 
 <div class="container-fluid">
@@ -127,9 +132,9 @@ $lang = app()->getLocale();
                                     <i class="icon-layers text-primary"></i>
                                 </div>
                                 <div class="ml-auto">
-                                    <h5 class="tx-13">Orders</h5>
-                                    <h2 class="mb-0 tx-22 mb-1 mt-1">1,587</h2>
-                                    <p class="text-muted mb-0 tx-11"><i class="si si-arrow-up-circle text-success mr-1"></i>increase</p>
+                                    <h5 class="tx-13">{{__('route.opportunities')}}</h5>
+                                    <h2 class="mb-0 tx-22 mb-1 mt-1">{{$countopportunities}}</h2>
+                                    <p class="text-muted mb-0 tx-11"><i class="si si-arrow-up-circle text-success mr-1"></i>{{__('route.increase')}}</p>
                                 </div>
                             </div>
                         </div>
@@ -143,14 +148,15 @@ $lang = app()->getLocale();
                                     <i class="icon-paypal text-danger"></i>
                                 </div>
                                 <div class="ml-auto">
-                                    <h5 class="tx-13">Revenue</h5>
-                                    <h2 class="mb-0 tx-22 mb-1 mt-1">46,782</h2>
-                                    <p class="text-muted mb-0 tx-11"><i class="si si-arrow-up-circle text-success mr-1"></i>increase</p>
+                                    <h5 class="tx-13">{{__('route.subscriptio')}}</h5>
+                                    <h2 class="mb-0 tx-22 mb-1 mt-1">{{$countsubscriptio}}</h2>
+                                    <p class="text-muted mb-0 tx-11"><i class="si si-arrow-up-circle text-success mr-1"></i>{{__('route.increase')}}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="col-sm-12 col-xl-4 col-lg-12 col-md-12">
                     <div class="card ">
                         <div class="card-body">
@@ -274,14 +280,38 @@ $lang = app()->getLocale();
                         </div>
                         <div class="tab-pane" id="profile">
                             <div class="row">
+                                @foreach ($company_auth->subscriptions as $subscriptions)
                                 <div class="col-sm-4">
                                     <div class="border p-1 card thumb">
-                                        <a href="#" class="image-popup" title="Screenshot-2"> <img src="../../assets/img/photos/7.jpg" class="thumb-img" alt="work-thumbnail"> </a>
-                                        <h4 class="text-center tx-14 mt-3 mb-0">Gallary Image</h4>
+                                        <a href="#" class="image-popup" title="Screenshot-2">
+                                        </a>
+                                        <h4 class="text-center tx-14 mt-3 mb-0">{{__('route.plan')}} : {{$subscriptions->plan->Number_of_opportunities}} {{__('route.opportunities')}}</h4>
+                                        <h4 class="text-center tx-14 mt-3 mb-0">{{__('route.remaining_opportunities')}} : {{$subscriptions->remaining_opportunities}}</h4>
+
                                         <div class="ga-border"></div>
-                                        <p class="text-muted text-center"><small>Photography</small></p>
+                                        <p class="text-muted text-center">
+                                            <small>{{__('route.name')}} : {{$subscriptions->name}}</small>
+                                        </p>
+                                        <p class="text-muted text-center">
+                                            <small>{{__('route.payment_type')}} : {{$subscriptions->payment_type}}</small>
+                                        </p>
+
+                                        <p class="text-muted text-center">
+                                        @if ($subscriptions->status == 'In Processing')
+                                            <small class="text-warning">{{__('route.status')}} : {{__('route.'.$subscriptions->status) }}</small>
+
+                                        @elseif($subscriptions->status == 'Unacceptable')
+                                            <small class="text-danger">{{__('route.status')}} : {{__('route.'.$subscriptions->status) }}</small>
+
+                                        @else
+                                            <small class="text-success">{{__('route.status')}} : {{__('route.'.$subscriptions->status) }}</small>
+
+                                        @endif
+                                        </p>
                                     </div>
                                 </div>
+                            @endforeach
+                             
                                
                             </div>
                         </div>
@@ -358,13 +388,15 @@ $lang = app()->getLocale();
                                    
                                     <div class="col-6 ">
                                         <div class="form-group">
-                                            <label for="scope_work">{{__('route.scope_work')}}</label>
+                                            <label for="scope_work">{{__('route.city')}}</label>
                                             <select name="city_id" class="form-control select_2" >
                                                 @foreach ($city as $item)
-                                                    <option value="{{$item->id}}" {{  (old('city_id')) ? 'selected' : '' }}>
+                                                    <option value="{{$item->id}}" 
+                                                        {{ (old('city_id') == $item->id || (isset($company_auth) && $company_auth->city_id == $item->id)) ? 'selected' : '' }}>
                                                         {{$item->name_en}} / {{$item->name_ar}}
                                                     </option>
                                                 @endforeach
+
                                             </select> 
                                         </div>
                                     </div>
@@ -374,10 +406,12 @@ $lang = app()->getLocale();
                                             <label for="scope_work">{{__('route.scope_work')}}</label>
                                             <select name="scopeWorks_id[]" class="form-control select_2" multiple="multiple">
                                                 @foreach ($scopeWorks as $scopeWork)
-                                                    <option value="{{$scopeWork->id}}" {{ in_array($scopeWork->id, old('scopeWorks_id', [])) ? 'selected' : '' }}>
+                                                    <option value="{{$scopeWork->id}}" 
+                                                        {{ in_array($scopeWork->id, old('scopeWorks_id', isset($company_auth) ? $company_auth->scopeWorks->pluck('id')->toArray() : [])) ? 'selected' : '' }}>
                                                         {{$scopeWork->name_en}} / {{$scopeWork->name_ar}}
                                                     </option>
                                                 @endforeach
+
                                             </select> 
                                         </div>
                                     </div>

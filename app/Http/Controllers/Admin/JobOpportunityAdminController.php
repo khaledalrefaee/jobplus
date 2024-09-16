@@ -57,8 +57,13 @@ class JobOpportunityAdminController extends Controller
             'job_title_id' => 'required|integer|exists:job__titles,id',
             'city_id' => 'required|integer|exists:cities,id',
             'gender' => 'required|string|in:male,female,Does not matter',
-            'from_age' => 'nullable|integer|min:10|max:100',
-            'to_age' => 'nullable|integer|min:10|max:100',
+            'from_age' => ['nullable','integer','min:10','max:100','required_with:to_age','lte:to_age', ],
+            'to_age' => ['nullable','integer','min:10','max:100','required_with:from_age','gte:from_age',],
+            
+            [
+                'from_age.lte' => 'The "From Age" must be less than or equal to the "To Age".',
+                'to_age.gte' => 'The "To Age" must be greater than or equal to the "From Age".',
+            ],
             'educational_level' => 'required|string',
             'career_level' => 'required|string',
             'type_job' => 'required|string',

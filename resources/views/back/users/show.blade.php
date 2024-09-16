@@ -29,7 +29,11 @@
                                 @else
                                     <img alt="" src="{{asset($user->image)}}">
                                 @endif
+
+                                
+
                             </div>
+                         
                             <div class="d-flex justify-content-between mg-b-20">
                                 <div>
                                     <h5 class="main-profile-name">{{$user->first_name}} 
@@ -48,10 +52,26 @@
                                 @if($user && $user->userdetails)
                                     {{$user->userdetails->description}}
                                 @else
-                                
                                 @endif
-                             
                             </div>
+
+                            
+                                <div class="d-flex justify-content-between">
+                                    @if(isset($user->cv))
+                                        <a class="btn btn-sm btn-indigo " href="{{ route('cv.download', $user->cv->id) }}" title="Download CV">
+                                            <i class="typcn typcn-folder"></i>
+                                            {{__('route.donlowed_Cv')}}
+                                        </a>
+                                    @endif
+                                    
+                                    <a href="{{route('download.CV.job.work',$user->id)}}" class="btn btn-warning btn-sm" 
+                                        title="{{ trans('route.show') }}">
+                                        <i class="fas fa-file-pdf" aria-hidden="true"></i>
+        
+                                    </a>
+                                </div>            
+                         
+    
 
                             <hr class="mg-y-30">
                             <label class="main-content-label tx-13 mg-b-20">{{__('route.Social')}}</label>
@@ -180,21 +200,45 @@
                             <div class="media-body">
                                 <span>{{__('route.phone')}}</span>
                                 <div>
-                                    {{$user->phone}}
+                                    <a href="whatsapp://send?abid={{$user->phone}}&text=مرحبا%2C%!">
+                                        {{$user->phone}}
+                                    </a>
                                 </div>
                             </div>
                         </div>
                         <div class="media">
                             <div class="media-icon bg-success-transparent text-success">
-                                <i class="icon ion-logo-slack"></i>
+                                <i class="icon ion-md-mail"></i>
                             </div>
                             <div class="media-body">
                                 <span>{{__('route.email')}}</span>
                                 <div>
-                                    {{$user->email}}
+                                    <a href="mailto:{{$user->email}}">
+                                        {{$user->email}}
+                                    </a>
+                                    
                                 </div>
                             </div>
                         </div>
+
+                        <div class="media">
+                            <div class="media-icon bg-warning-transparent text-warning">
+                                <i class="icon ion-md-compass"></i>
+                            </div>
+                            <div class="media-body">
+                                <span>{{__('route.city')}}</span>
+                                <div>
+                                    @if (app()->getLocale() == 'en')
+                                        {{$user->city->name_en}}
+                                    @else
+                                        {{$user->city->name_ar}}
+                                        
+                                    @endif
+                            
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="media">
                             <div class="media-icon bg-info-transparent text-info">
                                 <i class="icon ion-md-locate"></i>
@@ -206,6 +250,7 @@
                                 </div>
                             </div>
                         </div>
+                       
                        
                     </div>
                     <!-- main-profile-contact-list -->

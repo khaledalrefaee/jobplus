@@ -125,4 +125,8 @@ class AuthController extends Controller
         Auth::guard('company')->logout();
         return redirect('/');
     }
+
+    public function forgetPassword(){
+        return view('back.auth.forgetPassword');
+    }
 }

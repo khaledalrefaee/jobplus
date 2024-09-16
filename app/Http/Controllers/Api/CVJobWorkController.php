@@ -10,25 +10,28 @@ use Illuminate\Support\Facades\Auth;
 
 class CVJobWorkController extends Controller
 {
-    public function download(Request $request)
+    public function download_web(Request $request,$id)
     {
-        $user_id = Auth::id();
-        $locale = $request->input('lang', app()->getLocale());
-        app()->setLocale($locale);
+        
+        $user = User::findOrFail($id);
+        $pdf = PDF::loadView('cv.cv', compact('user'));
+        return $pdf->download('cv_' . $user->first_name . '_' . $user->last_name . '_' . '.pdf');
+    }
 
-        $user = User::with([
-            'userdetails',
-            'businessgallery',
-            'skill',
-            'language',
-            'experience',
-            'certificate',
-            'scopework',
-            'jobtitle'
-        ])->findOrFail($user_id);
+
+    public function download_api()
+    {
+        $user = Auth::user();
+
+        if (!$user) {
+            return response()->json(['error' => 'User not authenticated'], 401);
+        }
+
+        $user->load(['scopework', 'jobtitle', 'businessgallery', 'userdetails', 'city', 'skill', 'language', 'experience', 'certificate']);
 
         $pdf = PDF::loadView('cv.cv', compact('user'));
 
-        return $pdf->download('cv_' . $user->first_name . '_' . $user->last_name . '_' . $locale . '.pdf');
+        return $pdf->download('cv_'.$user->first_name.'_'.$user->last_name.'.pdf');
     }
+
 }

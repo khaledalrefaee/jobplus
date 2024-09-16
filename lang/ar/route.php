@@ -143,7 +143,7 @@ return [
    'Does not matter'=>'لا يهم',
    'between'=>'بين',
    'and'=>'و',
-
+    
    'job_description'=>'الوصف الوظيفي',
    'requirements'=>'المتطلبات',
    'requirements_for_trainees'=>'متطلبات للمتدربين',
@@ -175,4 +175,17 @@ return [
     'Posted on'=>'نشر في',
     'Back'=>'العودة',
     'specialties'=>'الاختصاصات',
+    'donlowed_Cv'=>'تحميل السيرة الذاتية',
+    'verification' =>'التحقق',
+    'send'=>'الارسال',
+    'otp'=>'رمز التحقق',
+    'resend otp'=>'اعادة ارسال رمز التحقق',
+    'This phone or email is not there'=>'هذا الهاتف أو البريد الإلكتروني ليس موجود',
+
+
+    'No OTP found'=>'OTP لم يتم العثور على ',
+    'Invalid OTP'=>'غير صالحة OTP',
+    'OTP expired'=>'OTP انتهت صلاحية ',
+    'Password updated successfully'=>'تم تحديث كلمة المرور بنجاح',
+    'not found'=>'غير موجود',
 ];

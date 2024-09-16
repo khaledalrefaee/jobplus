@@ -72,7 +72,7 @@
                                 <form action="{{route('subscriptio.store.admin')}}" data-parsley-validate="" method="POST">
                                     @csrf
                                     <div class="row row-sm">
-                                        <div class="col-12">
+                                        <div class="col-6">
                                             <input class="form-control" name="plan_id" placeholder="" value="{{$item->id}}"  type="hidden">
                                             <input class="form-control" name="remaining_opportunities" placeholder="" value="{{$item->Number_of_opportunities}}"  type="hidden">
 

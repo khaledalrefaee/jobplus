@@ -143,6 +143,10 @@ Route::group(['middleware' => ['auth:sanctum','setapplanguage']], function () {
 
         
 
+        ///////////////////////////// Donlowed Pdf //////////////////////////////////////
+
+        Route::get('/download-cv', [CVJobWorkController::class, 'download_api']);
+
         ///////////////////////////// get Image Company //////////////////////////////////////
 
         Route::get('get/image/company', [GetImageCompany::class, 'getTopCompanyImages']);

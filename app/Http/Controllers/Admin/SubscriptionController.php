@@ -81,7 +81,7 @@ class SubscriptionController extends Controller
             $Subscription->save();
             toastr()->success(trans('route.Add_messages'));
            
-            return redirect()->back();
+            return redirect()->route('subscriptio.get.admin');
             
         }
         catch (\Exception $a){

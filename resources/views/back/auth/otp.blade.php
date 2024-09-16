@@ -10,7 +10,7 @@
 		<meta name="Keywords" content="admin,admin dashboard,admin dashboard template,admin panel template,admin template,admin theme,bootstrap 4 admin template,bootstrap 4 dashboard,bootstrap admin,bootstrap admin dashboard,bootstrap admin panel,bootstrap admin template,bootstrap admin theme,bootstrap dashboard,bootstrap form template,bootstrap panel,bootstrap ui kit,dashboard bootstrap 4,dashboard design,dashboard html,dashboard template,dashboard ui kit,envato templates,flat ui,html,html and css templates,html dashboard template,html5,jquery html,premium,premium quality,sidebar bootstrap 4,template admin bootstrap 4"/>
 
 		<!-- Title -->
-		<title> Log in </title>
+		<title> forget Password </title>
 
 		<!-- Favicon -->
         @include('layout.css')
@@ -49,8 +49,8 @@
                                         </div>
 											<div class="card-sigin">
 												<div class="main-signup-header">
-													<h2>{{__('route.Welcome back')}}!</h2>
-													<h5 class="font-weight-semibold mb-4">{{__('route.Please sign in to continue')}}.</h5>
+													{{-- <h2>{{__('route.Welcome back')}}!</h2>
+													<h5 class="font-weight-semibold mb-4">{{__('route.Please sign in to continue')}}.</h5> --}}
                                                         @if ($errors->any())
                                                             <div class="alert alert-danger">
                                                                 <ul>
@@ -61,23 +61,35 @@
                                                             </div>
                                                          @endif
                                                     
-                                                    <form action="{{route('login.form')}}" method="POST">
+                                                    <form action="{{ route('verify.otp') }}" method="POST">
                                                         @csrf
 														<div class="form-group">
-															<label>{{__('route.email')}}</label>
-                                                             <input class="form-control" value="{{old('email')}}" name="email" placeholder="{{__('ROUTE.Enter your')}} {{__('route.email')}}" type="email">
+                                                            
+															<input type="text" name="phone" value="{{ old('phone') ?? $phone }}">
+															<input type="text" name="email" value="{{ old('email') ?? $email }}">
+                                                        
+															<label>{{__('route.otp')}}</label>
+                                                             <input class="form-control" value="{{old('code')}}" name="code" placeholder="{{__('ROUTE.Enter your')}} {{__('route.otp')}}" type="text">
 														</div>
-														<div class="form-group">
-															<label>{{__('route.Password')}}</label> 
-                                                            <input class="form-control" name="password" placeholder="{{__('ROUTE.Enter your')}} {{__('route.Password')}}" type="password">
-														</div>
-                                                        <button class="btn btn-main-primary btn-block" type="submit">{{__('route.Sign In')}}</button>
 													
+                                                        <button class="btn btn-main-primary btn-block" type="submit">{{__('route.verification')}}</button>
 													</form>
+
+                                                    <form action="{{ route('create.Otp') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="phone" value="{{ old('phone') ?? $phone }}">
+                                                        <input type="hidden" name="email" value="{{ old('email') ?? $email }}">
+                                                        
+                                                        <button type="submit" class="btn btn-main-primary btn-block my-3">{{ __('route.resend otp') }}</button>
+                                                    </form>
+
+                                                  
+
 													<div class="main-signin-footer mt-5">
 														
 														<p>
-															<a href="{{route('forgetPassword')}}">{{__('route.Forgot password')}}?</a>
+                                                            <p>{{__('route.Already have an account')}}? <a href="{{route('login')}}">{{__('route.Sign In')}}</a></p>
+
 														</p>
 
 														<p>{{__('route.Do not have an account')}}? 

@@ -1,6 +1,9 @@
 @extends('index')
 @section('content')
 
+<?php 
+$lang = app()->getLocale();
+?>
 	<!-- container -->
     <div class="container-fluid">
 
@@ -190,6 +193,8 @@
                                     <tr>
                                         <th class="wd-15p border-bottom-0"> {{__('route.name_company')}}</th>
                                         <th class="wd-15p border-bottom-0"> {{__('route.scope_work')}}</th>
+                                        <th class="wd-15p border-bottom-0"> {{__('route.job_title')}}</th>
+
                                         <th class="wd-15p border-bottom-0"> {{__('route.status')}}</th>
                                         <th class="wd-15p border-bottom-0"> {{__('route.Action')}}</th>
                                     </tr>
@@ -198,7 +203,8 @@
                                     @foreach ($job_opportunitys as $item)
                                         <tr>
                                                 <td>{{$item->company->name_company}}</td>
-                                                <td>{{$item->scopework->name_en}}</td>
+                                                <td>{{$item->scopework->{'name_'.$lang} }}</td>
+                                                <td>{{$item->jobtitle->{'name_'.$lang} }}</td>
                                                 <td class="
                                                         @if($item->status == 'Acceptable')
                                                             bg-success
@@ -210,7 +216,8 @@
                                                             bg-secondary
                                                         @endif
                                                     ">
-                                                        {{$item->status}}
+                                                    {{ __('route.'.$item->status) }}
+
                                                 </td>
                                                 <td>
                                                     <div class="d-flex align-items-center">

@@ -4,11 +4,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OtpController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Back\AuthController;
 use App\Http\Controllers\Back\CityController;
 use App\Http\Controllers\Back\PlanController;
 use App\Http\Controllers\Back\UsersController;
+use App\Http\Controllers\Api\CVJobWorkController;
 use App\Http\Controllers\Back\JobtitleController;
 use App\Http\Controllers\Back\SubscripController;
 use App\Http\Controllers\Back\companiesController;
@@ -39,12 +41,31 @@ Route::group(
         'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
     ], function(){ 
 
+        Route::get('/test/{id}', function ($id) {
+            $user =App\Models\User::find($id);
+            return view('cv.cv',compact('user'));
+        });
+        
         ////////////////////////////////// Users \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
         Route::get('register',[AuthController::class,'Register'])->name('Register');
         Route::post('register/form',[AuthController::class,'Registerform'])->name('Register.form');
         Route::get('login',[AuthController::class,'login'])->name('login');
         Route::post('login/form',[AuthController::class,'LoginForm'])->name('login.form');
-        
+        Route::get('forgetPassword',[AuthController::class,'forgetPassword'])->name('forgetPassword');
+       
+       
+        /////////////////////////////////// Otp ////////////////////////////////////////
+        Route::get('verifeyOtpPage',[OtpController::class,'verifeyOtpPage'])->name('verifeyOtpPage');
+        Route::get('updatePasswordPage',[OtpController::class,'updatePasswordPage'])->name('updatePasswordPage');
+
+        Route::post('create/Otp',[OtpController::class,'createOtp'])->name('create.Otp');
+
+        Route::post('verify/otp', [OtpController::class, 'verifyOtp'])->name('verify.otp');
+
+
+        Route::post('update/password', [OtpController::class, 'updatePassword'])->name('update.password');
+
+
     });
    
 Route::group(
@@ -58,7 +79,10 @@ Route::group(
 
         Route::get('/dashboard', function () {
             return view('content');
-        });
+        })->name('dashboard');
+
+        Route::get('download/CV/job/work/{id}',[CVJobWorkController::class,'download_web'])->name('download.CV.job.work');
+
 
        //////////////////////////////////  Profile \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 

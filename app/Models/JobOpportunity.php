@@ -39,7 +39,7 @@ class JobOpportunity extends Model
 
     public function user()
     {
-        return $this->belongsToMany(User::class, 'job_opportunity_users');
+        return $this->belongsToMany(User::class, 'job_opportunity_users')->withPivot('text', 'status');
     }
 
 }

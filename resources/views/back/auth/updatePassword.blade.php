@@ -61,16 +61,38 @@
                                                             </div>
                                                          @endif
                                                     
-                                                    <form action="{{route('login.form')}}" method="POST">
+                                                    <form action="{{route('update.password')}}" method="POST">
                                                         @csrf
-														<div class="form-group">
-															<label>{{__('route.email')}}</label>
-                                                             <input class="form-control" value="{{old('email')}}" name="email" placeholder="{{__('ROUTE.Enter your')}} {{__('route.email')}}" type="email">
-														</div>
-														<div class="form-group">
-															<label>{{__('route.Password')}}</label> 
-                                                            <input class="form-control" name="password" placeholder="{{__('ROUTE.Enter your')}} {{__('route.Password')}}" type="password">
-														</div>
+														<div class="row">
+                                                            <div class="col-6">
+                                                                <div class="form-group">
+                                                                    <label>{{__('route.email')}}</label>
+                                                                     <input class="form-control"  value="{{$email}}" name="email" placeholder="{{__('ROUTE.Enter your')}} {{__('route.email')}}" type="email">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-6">
+                                                                <div class="form-group">
+                                                                    <label>{{__('route.phone')}}</label>
+                                                                     <input class="form-control"  value="{{$phone}}" name="phone" placeholder="{{__('ROUTE.Enter your')}} {{__('route.phone')}}" type="number">
+                                                                </div>
+                                                            </div>
+
+                                                         
+
+
+                                                            <div class="form-group col-12">
+                                                                <label>{{__('route.Password')}} </label> 
+                                                                <input class="form-control" name="password" value="{{old('password')}}" placeholder="{{__('route.Enter your')}} {{__('route.Password')}}" type="password">
+                                                            </div>
+    
+    
+                                                            <div class="form-group col-12">
+                                                                <label>{{__('route.Re-Password')}} </label> 
+                                                                <input class="form-control" name="password_confirmation" value="{{old('password_confirmation')}}"  placeholder="{{__('route.Enter your')}} {{__('route.Re-Password')}}" type="password">
+                                                            </div>
+                                                        </div>
+													
                                                         <button class="btn btn-main-primary btn-block" type="submit">{{__('route.Sign In')}}</button>
 													
 													</form>
