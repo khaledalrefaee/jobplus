@@ -65,8 +65,8 @@
                                                         @csrf
 														<div class="form-group">
                                                             
-															<input type="text" name="phone" value="{{ old('phone') ?? $phone }}">
-															<input type="text" name="email" value="{{ old('email') ?? $email }}">
+															<input type="hidden" name="phone" value="{{ old('phone') ?? $phone }}">
+															<input type="hidden" name="email" value="{{ old('email') ?? $email }}">
                                                         
 															<label>{{__('route.otp')}}</label>
                                                              <input class="form-control" value="{{old('code')}}" name="code" placeholder="{{__('ROUTE.Enter your')}} {{__('route.otp')}}" type="text">
@@ -85,7 +85,7 @@
 
                                                   
 
-													<div class="main-signin-footer mt-5">
+													{{-- <div class="main-signin-footer mt-5">
 														
 														<p>
                                                             <p>{{__('route.Already have an account')}}? <a href="{{route('login')}}">{{__('route.Sign In')}}</a></p>
@@ -95,7 +95,7 @@
 														<p>{{__('route.Do not have an account')}}? 
 															<a href="{{route('Register')}}">{{__('route.Create an Account')}}</a>
 														</p>
-													</div>
+													</div> --}}
 												</div>
 											</div>
 										</div>

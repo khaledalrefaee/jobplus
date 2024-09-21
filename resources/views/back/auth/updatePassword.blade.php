@@ -96,7 +96,7 @@
                                                         <button class="btn btn-main-primary btn-block" type="submit">{{__('route.Sign In')}}</button>
 													
 													</form>
-													<div class="main-signin-footer mt-5">
+													{{-- <div class="main-signin-footer mt-5">
 														
 														<p>
 															<a href="{{route('forgetPassword')}}">{{__('route.Forgot password')}}?</a>
@@ -105,7 +105,7 @@
 														<p>{{__('route.Do not have an account')}}? 
 															<a href="{{route('Register')}}">{{__('route.Create an Account')}}</a>
 														</p>
-													</div>
+													</div> --}}
 												</div>
 											</div>
 										</div>

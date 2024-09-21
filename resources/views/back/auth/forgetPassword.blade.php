@@ -49,8 +49,8 @@
                                         </div>
 											<div class="card-sigin">
 												<div class="main-signup-header">
-													{{-- <h2>{{__('route.Welcome back')}}!</h2>
-													<h5 class="font-weight-semibold mb-4">{{__('route.Please sign in to continue')}}.</h5> --}}
+													<h2>{{__('route.Please enter the information ')}}!</h2>
+													{{-- <h5 class="font-weight-semibold mb-4">{{__('route.Please sign in to continue')}}.</h5> --}}
                                                         @if ($errors->any())
                                                             <div class="alert alert-danger">
                                                                 <ul>
@@ -74,7 +74,7 @@
                                                         <button class="btn btn-main-primary btn-block" type="submit">{{__('route.send')}}</button>
 													
 													</form>
-													<div class="main-signin-footer mt-5">
+													{{-- <div class="main-signin-footer mt-5">
 														
 														<p>
                                                             <p>{{__('route.Already have an account')}}? <a href="{{route('login')}}">{{__('route.Sign In')}}</a></p>
@@ -84,7 +84,7 @@
 														<p>{{__('route.Do not have an account')}}? 
 															<a href="{{route('Register')}}">{{__('route.Create an Account')}}</a>
 														</p>
-													</div>
+													</div> --}}
 												</div>
 											</div>
 										</div>

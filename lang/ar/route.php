@@ -188,4 +188,9 @@ return [
     'OTP expired'=>'OTP انتهت صلاحية ',
     'Password updated successfully'=>'تم تحديث كلمة المرور بنجاح',
     'not found'=>'غير موجود',
+    'Please enter the information '=>'قم بادخال المعلومات من فضلك ',
+    'The correct code has been entered'=>'تم ادخال الرمز الصحيح',
+    'Code sent'=>'تم ارسال رمز',
+
+    'email_or_phone'=>'الايميل او رقم الهاتف',
 ];

@@ -11,12 +11,134 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Mcamara\LaravelLocalization\LaravelLocalization;
+use App\Models\Otp;
+use App\Mail\OtpMail;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
 
     use GeneralTrait;
     
+    
+    public function reset_password(Request $request){
+        
+    }
+
+    public function verifyOtpApi(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'code' => 'required|string',
+            'phone' => 'nullable|string',
+            'email' => 'nullable|email',
+        ]);
+    
+        if ($validator->fails()) {
+            $errors = $validator->getMessageBag()->all();
+            return response()->json($errors, 401);
+        }
+    
+        if (!$request->phone && !$request->email) {
+            return $this->returnError('Please provide either phone or email to verify');   
+        }
+    
+        $query = Otp::where('code', $request->code);
+    
+        if ($request->phone) {
+            $query->where('phone', $request->phone);
+        }
+    
+        if ($request->email) {
+            $query->where('email', $request->email);
+        }
+    
+        $otpRecord = $query->first();
+    
+        if (!$otpRecord) {
+            return $this->returnError('No OTP found');   
+        }
+    
+        if (now() > $otpRecord->expires_at) {
+            return $this->returnError('OTP expired');   
+        }
+    
+        $otpRecord->delete(); 
+    
+        return $this->returnSuccessMessage('OTP verified successfully !');
+    }
+    
+    public function createOtp(Request $request){
+        $request->validate([
+            'email' => 'required|email',
+            'phone' => 'required|string',
+        ]);
+
+        $user = User::where('phone', $request->phone)
+                            ->Where('email', $request->email)
+                            ->first();
+        if (!$user) {
+            return back()->withErrors(['password' => __('route.This phone or email is not there')]); 
+        }
+
+            Otp::where('phone', $request->phone)
+            ->where('email', $request->email)
+            ->delete();
+
+        $otp = new Otp();  
+        $otp->phone = $request->phone; 
+        $otp->email = $request->email; 
+        $otp->generateCode(); 
+
+        $this->otpwhatsapp($request, $otp->code);
+
+        Mail::to($request->email)->send(new OtpMail($otp->code ,$user->first_name));
+        
+       
+    }
+
+
+    public function otpwhatsapp(Request $request , $otpCode){
+
+        $message = 'Your OTP code is: ' . $otpCode;
+
+        $params=array(
+        'token' => 'vxp9ulskg5kkgpdg',
+        'to' => $request->phone,
+        'body' => $message,
+        'priority' => '1',
+        'referenceId' => '',
+        'msgId' => '',
+        'mentions' => ''
+        );
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://api.ultramsg.com/instance69103/messages/chat",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_SSL_VERIFYHOST => 0,
+        CURLOPT_SSL_VERIFYPEER => 0,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => http_build_query($params),
+        CURLOPT_HTTPHEADER => array(
+            "content-type: application/x-www-form-urlencoded"
+        ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+        // echo "cURL Error #:" . $err;
+        } else {
+        // echo $response;
+        }
+    }
+
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -77,6 +199,7 @@ class AuthController extends Controller
     
         $user = User::create($data);
     
+        $this->createOtp($request);
         return $this->returnSuccessMessage('User created successfully');
             
     }

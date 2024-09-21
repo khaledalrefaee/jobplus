@@ -64,8 +64,8 @@
                                                     <form action="{{route('login.form')}}" method="POST">
                                                         @csrf
 														<div class="form-group">
-															<label>{{__('route.email')}}</label>
-                                                             <input class="form-control" value="{{old('email')}}" name="email" placeholder="{{__('ROUTE.Enter your')}} {{__('route.email')}}" type="email">
+															<label>{{__('route.email_or_phone')}}</label>
+                                                             <input class="form-control" value="{{old('email_or_phone')}}" name="email_or_phone" placeholder="{{__('ROUTE.Enter your')}} {{__('route.email_or_phone')}}" type="text">
 														</div>
 														<div class="form-group">
 															<label>{{__('route.Password')}}</label> 

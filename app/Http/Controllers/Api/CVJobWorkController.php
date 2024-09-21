@@ -19,19 +19,24 @@ class CVJobWorkController extends Controller
     }
 
 
-    public function download_api()
+    public function download_api($id)
     {
-        $user = Auth::user();
-
-        if (!$user) {
-            return response()->json(['error' => 'User not authenticated'], 401);
-        }
+        $user = User::findOrFail($id);
 
         $user->load(['scopework', 'jobtitle', 'businessgallery', 'userdetails', 'city', 'skill', 'language', 'experience', 'certificate']);
 
         $pdf = PDF::loadView('cv.cv', compact('user'));
 
-        return $pdf->download('cv_'.$user->first_name.'_'.$user->last_name.'.pdf');
+        $fileName = 'cv_'.$user->first_name.'_'.$user->last_name.'.pdf';
+
+        $filePath = public_path('downloads/' . $fileName);
+
+        $pdf->save($filePath);
+
+        return response()->json([
+            'url' => url('downloads/' . $fileName)
+        ]);
     }
+
 
 }

@@ -51,6 +51,8 @@ Route::group(['middleware' => ['setapplanguage']], function () {
         Route::post('register',[AuthController::class,'register']);
         Route::post('login',[AuthController::class,'login']);
  
+        Route::post('verify-otp', [AuthController::class, 'verifyOtpApi']);
+
        
 });
 
@@ -143,9 +145,6 @@ Route::group(['middleware' => ['auth:sanctum','setapplanguage']], function () {
 
         
 
-        ///////////////////////////// Donlowed Pdf //////////////////////////////////////
-
-        Route::get('/download-cv', [CVJobWorkController::class, 'download_api']);
 
         ///////////////////////////// get Image Company //////////////////////////////////////
 
@@ -155,6 +154,11 @@ Route::group(['middleware' => ['auth:sanctum','setapplanguage']], function () {
         Route::get('user/completion', [CompletionController::class, 'getCompletionPercentage']);
 });
 
+
+
+        ///////////////////////////// Donlowed Pdf //////////////////////////////////////
+
+        Route::get('/download-cv/{id}', [CVJobWorkController::class, 'download_api']);
 
 
   

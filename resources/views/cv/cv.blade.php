@@ -173,10 +173,17 @@
 <body>
 
     <div class="container">
-        <!-- معلومات المستخدم الشخصية -->
-        <div class="user-image">
-          <img src="{{asset($user->image)}}" alt="User Photo" style="max-width: 150px; border-radius: 50%; margin-bottom: 15px;">
-        </div>
+        @if ($user->image == null)
+            <div class="user-image">
+                <img src="data:image/jpg;base64,{{ base64_encode(file_get_contents(public_path('assets/img/faces/6.jpg'))) }}" alt="User Photo" style="max-width: 150px; border-radius: 50%; margin-bottom: 15px;">
+            </div>
+        @else
+            <div class="user-image">
+                <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path($user->image))) }}" alt="User Photo" style="max-width: 150px; border-radius: 50%; margin-bottom: 15px;">
+            </div>
+        @endif
+    
+    
         <div class="header" style="margin-top: -134px;">
           
             <h1>{{$user->first_name}} {{$user->last_name}}</h1>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Otp;
+use App\Mail\OtpMail;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -35,7 +37,12 @@ class OtpController extends Controller
         $otp->generateCode(); 
 
         $this->otpwhatsapp($request, $otp->code);
+
+        Mail::to($request->email)->send(new OtpMail($otp->code ,$company->name_company));
+        
         session(['phone' => $request->phone, 'email' => $request->email]);
+
+        toastr()->success(__('route.Code sent'));
 
         return redirect()->route('verifeyOtpPage');
     }
@@ -97,7 +104,6 @@ class OtpController extends Controller
     
         $otp = Otp::where('phone', $request->phone)
                   ->where('email', $request->email)
-                  ->latest()
                   ->first();
     
         if (!$otp) {
@@ -111,7 +117,8 @@ class OtpController extends Controller
         if (now() > $otp->expires_at) {
             return back()->withErrors(['otp' => __('route.OTP expired')]);
         }
-    
+        toastr()->success(__('route.The correct code has been entered'));
+
         return redirect()->route('updatePasswordPage');
     }
 

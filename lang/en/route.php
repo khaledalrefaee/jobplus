@@ -166,4 +166,8 @@ return[
     'OTP expired'=>'OTP expired',
     'Password updated successfully'=>'Password updated successfully',
     'not found'=>'not found',
+    'Please enter the information '=>'Please enter the information ',
+    'The correct code has been entered'=>'The correct code has been entered',
+    'Code sent'=>'Code sent',
+    'email_or_phone'=>'email or phone',
 ];
