@@ -4,6 +4,7 @@ use App\Models\City;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CvController;
+use App\Http\Controllers\Api\OtpController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\GetImageCompany;
@@ -53,7 +54,10 @@ Route::group(['middleware' => ['setapplanguage']], function () {
  
         Route::post('verify-otp', [AuthController::class, 'verifyOtpApi']);
 
-       
+
+        Route::post('create/Otp/Phone', [OtpController::class, 'createOtpPhone']);
+        Route::post('create/Otp/email', [OtpController::class, 'createOtpEmail']);
+        Route::post('update/Password', [OtpController::class, 'updatePassword']);
 });
 
 

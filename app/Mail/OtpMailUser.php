@@ -9,19 +9,20 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class OtpMail extends Mailable
+class OtpMailUser extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $otp;
-    public $company;
+    public $user;
+
     /**
      * Create a new message instance.
      */
-    public function __construct($otp,$company)
+    public function __construct($otp,$user)
     {
         $this->otp = $otp;
-        $this->company = $company;
+        $this->user = $user;
     }
 
     /**
@@ -30,32 +31,27 @@ class OtpMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Otp Mail',
+            subject: 'Otp Mail User',
         );
-    }
-
-    public function build()
-    {
-        return $this->view('emails.otp')
-                    ->subject('Your OTP Code')
-                    ->with([
-                        'otp' => $this->otp,
-                        'company' => $this->company,
-                        'verificationUrl' => route('verifeyOtpPage') 
-                    ]);
     }
 
     /**
      * Get the message content definition.
      */
+
+     public function build()
+     {
+         return $this->view('emails.user_otp')
+                     ->subject('Your OTP Code')
+                     ->with([
+                         'otp' => $this->otp,
+                         'user' => $this->user,
+                     ]);
+     }
     // public function content(): Content
     // {
     //     return new Content(
-    //         view: 'emails.otp',
-    //         text :'Your OTP Code',
-    //         with: [
-    //             'otp' => $this->otp,
-    //         ],
+    //         view: 'view.name',
     //     );
     // }
 

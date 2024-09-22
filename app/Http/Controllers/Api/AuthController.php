@@ -3,17 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use Carbon\Carbon;
+use App\Models\Otp;
 use App\Models\User;
+use App\Mail\OtpMail;
+use App\Mail\OtpMailUser;
 use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Mcamara\LaravelLocalization\LaravelLocalization;
-use App\Models\Otp;
-use App\Mail\OtpMail;
-use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -21,9 +22,7 @@ class AuthController extends Controller
     use GeneralTrait;
     
     
-    public function reset_password(Request $request){
-        
-    }
+
 
     public function verifyOtpApi(Request $request)
     {
@@ -91,8 +90,7 @@ class AuthController extends Controller
 
         $this->otpwhatsapp($request, $otp->code);
 
-        Mail::to($request->email)->send(new OtpMail($otp->code ,$user->first_name));
-        
+        Mail::to($request->email)->send(new OtpMailUser($otp->code ,$user->first_name));        
        
     }
 
