@@ -19,18 +19,19 @@
 		<div class="page" >
             <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 
-            @include('layout.sidbar')
+				@include('layout.sidbar')
 
-			<!-- main-content -->
-			<div class="main-content app-content">
+				<!-- main-content -->
+				<div class="main-content app-content">
 
-			    @include('layout.header')
+					@include('layout.header')
 
-				<!-- container -->
-			    @yield('content')
-				<!-- /Container -->
-			</div>
-			<!-- /main-content -->
+					<!-- container -->
+					@yield('content')
+					<!-- /Container -->
+				</div>
+				
+				<!-- /main-content -->
 				<!-- /Container -->
 			</div>
 			<!-- /main-content -->

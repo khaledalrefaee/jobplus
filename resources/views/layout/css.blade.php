@@ -81,7 +81,17 @@
 
 
 		<style>
-			    /* From Uiverse.io by Shoh2008 */ 
+  .notification-badge {
+      position: absolute;
+      top: 2px;
+      right: 0px;
+      background-color: #dc3545;
+      color: white; 
+      padding: 2px 6px; 
+      border-radius: 50%; 
+      font-size: 12px; 
+  }
+
 .checkbox-wrapper-8 .tgl {
   display: none;
 }

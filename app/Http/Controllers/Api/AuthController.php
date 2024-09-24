@@ -263,6 +263,7 @@ class AuthController extends Controller
         $activeStatus = $locale == 'en' &&  $user->active == 0 ? 'active' : 'مفعل';
     
         $date =[
+            'id' => $user->id,
             'first_name' => $user->first_name,
             'last_name' => $user->last_name,
             'phone' => $user->phone,

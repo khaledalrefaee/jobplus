@@ -190,17 +190,19 @@
             <p>{{$user->scopework->name_en}} | {{$user->jobtitle->name_en}}</p>
             <p>{{$user->email}} | {{$user->phone}} </p> 
 
-            <p> 
-                @foreach ($user->businessgallery as $businessgallery)
-
-                <a href="{{$businessgallery->link}}">{{$businessgallery->name}} | </a>
-       
-                @endforeach
-              </p>
+            <p>
+                @if($user->businessgallery)
+                    @foreach ($user->businessgallery as $businessgallery)
+                        <a href="{{ $businessgallery->link ?? '#' }}">{{ $businessgallery->name ?? 'No name' }} | </a>
+                    @endforeach
+                @else
+                    <span>No business gallery available</span>
+                @endif
+            </p>
 
             <p>
               @if($user && $user->userdetails)
-              {{$user->userdetails->description}}
+                {{$user->userdetails->description}}
               @else
               
               @endif
@@ -214,11 +216,12 @@
               <div class="section-title">personal information</div>
               <div class="section-content">
                
-                  <p><strong>gender :</strong> {{ $user->gender }}</p>
-                  <p><strong>birthday:</strong> {{ $user->birthday }}</p>
-                  <p><strong>nationality:</strong> {{ $user->nationality }}</p>
-                  <p><strong>city:</strong>  {{$user->city->name_en}}</p>
-                  <p><strong>address:</strong> {{$user->address}}</p>
+                <p><strong>gender:</strong> {{ $user->gender ?? 'Not specified' }}</p>
+                <p><strong>birthday:</strong> {{ $user->birthday ?? 'Not specified' }}</p>
+                <p><strong>nationality:</strong> {{ $user->nationality ?? 'Not specified' }}</p>
+                <p><strong>city:</strong> {{ $user->city->name_en ?? 'Not specified' }}</p>
+                <p><strong>address:</strong> {{ $user->address ?? 'Not specified' }}</p>
+                
                  
 
               </div>
@@ -229,18 +232,14 @@
             <div class="section">
               <div class="section-title">Details</div>
               <div class="section-content">
-                  <p><strong>years experience:</strong> {{ $user->userdetails->years_experience }}</p>
-                  <p><strong>educational level :</strong> {{ $user->userdetails->educational_level }}</p>
-                  <p><strong>career level:</strong> {{ $user->userdetails->career_level }}</p>
-                  <p><strong>type job:</strong> {{ $user->userdetails->type_job }}</p>
-                  <p><strong>status :</strong> {{ $user->userdetails->status_employee }}</p>
-
-                  <p><strong>rang salary :</strong> {{ $user->userdetails->rang_salary }}</p>
-                  
-
-                 
-
-              </div>
+                <p><strong>years experience:</strong> {{ $user->userdetails->years_experience ?? 'Not specified' }}</p>
+                <p><strong>educational level:</strong> {{ $user->userdetails->educational_level ?? 'Not specified' }}</p>
+                <p><strong>career level:</strong> {{ $user->userdetails->career_level ?? 'Not specified' }}</p>
+                <p><strong>type job:</strong> {{ $user->userdetails->type_job ?? 'Not specified' }}</p>
+                <p><strong>status:</strong> {{ $user->userdetails->status_employee ?? 'Not specified' }}</p>
+                <p><strong>range salary:</strong> {{ $user->userdetails->rang_salary ?? 'Not specified' }}</p>
+            </div>
+            
             </div>
           </div>
          </div>
@@ -254,13 +253,16 @@
                 <div class="section skills">
                     <div class="section-title">Skills</div>
                     <div class="section-content">
-                        <ul class="skills-list">
-                            @foreach ($user->skill as $skill)
-                            <li><strong>name:</strong> {{$skill->name}} {{$skill->Level}}</li>
-                            
-                            @endforeach
-                        
-                        </ul>
+                        @if($user->skill)
+                            <ul class="skills-list">
+                                @foreach ($user->skill as $skill)
+                                    <li><strong>name:</strong> {{ $skill->name ?? 'No skill name' }} {{ $skill->Level ?? 'No level' }}</li>
+                                @endforeach
+                            </ul>
+                        @else
+                            <p>No skills available</p>
+                        @endif
+                       
 
                         
                     </div>
@@ -273,16 +275,18 @@
                 <div class="section languages">
                     <div class="section-title">Languages</div>
                     <div class="section-content">
-                        <ul class="languages-list">
-                            @foreach ($user->language as $language)
-                            <li>
-                                <strong>{{$language->name}}:</strong>
-                                <div class="stars" data-rating="{{$language->rang}}"></div>
-                            </li>
-                        @endforeach
-                        
-                        
-                        </ul>
+                        @if($user->language)
+                            <ul class="languages-list">
+                                @foreach ($user->language as $language)
+                                    <li>
+                                        <strong>{{ $language->name ?? 'No language' }}:</strong>
+                                        <div class="stars" data-rating="{{ $language->rang ?? 0 }}"></div>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @else
+                            <p>No languages available</p>
+                        @endif
                     </div>
                 </div>
             </div>

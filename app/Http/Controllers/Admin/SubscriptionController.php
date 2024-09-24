@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Company;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\CreateSubscreb;
+use Illuminate\Support\Facades\Notification;
 
 class SubscriptionController extends Controller
 {
@@ -79,6 +82,11 @@ class SubscriptionController extends Controller
             
             $Subscription->status = 'In Processing';
             $Subscription->save();
+
+             // إرسال الإشعار لكل Owner
+            $owners = Company::where('type', 'owner')->get();
+            Notification::send($owners, new CreateSubscreb());
+            
             toastr()->success(trans('route.Add_messages'));
            
             return redirect()->route('subscriptio.get.admin');

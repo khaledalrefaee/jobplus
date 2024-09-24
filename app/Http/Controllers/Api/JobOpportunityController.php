@@ -57,7 +57,7 @@ class JobOpportunityController extends Controller
 
     public function filterJobs(Request $request)
     {
-        $query = JobOpportunity::query();
+        $query = JobOpportunity::query()->with(['company', 'jobtitle', 'scopework', 'city']);
     
         if ($request->filled('city_id')) {
             $query->where('city_id', $request->city_id);
