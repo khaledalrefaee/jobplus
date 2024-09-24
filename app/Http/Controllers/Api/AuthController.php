@@ -290,8 +290,9 @@ class AuthController extends Controller
         $user = Auth::user();
 
         $validator = Validator::make($request->all(), [
-            'scope_work_id' => 'required|exists:scope_works,id',
-            'job_title_id' => 'required|exists:job__titles,id',
+            'scope_work_id' => 'exists:scope_works,id',
+            'job_title_id' => 'exists:job__titles,id',
+            'city_id' => 'nullable|exists:cities,id',
 
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -301,7 +302,6 @@ class AuthController extends Controller
             'gender' => 'required|string|max:255',
             'nationality' => 'nullable|string|max:255',
             'birthday' => 'nullable|date_format:d/m/Y',
-            'city_id' => 'nullable|required|exists:cities,id',
             'address' => 'string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -338,6 +338,10 @@ class AuthController extends Controller
 
         if ($request->filled('scope_work_id')) {
             $data['scope_work_id'] = $request->scope_work_id;
+        }
+
+        if ($request->filled('city_id')) {
+            $data['city_id'] = $request->city_id;
         }
 
         if ($request->filled('job_title_id')) {
