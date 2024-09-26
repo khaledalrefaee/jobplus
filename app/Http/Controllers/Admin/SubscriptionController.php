@@ -83,9 +83,8 @@ class SubscriptionController extends Controller
             $Subscription->status = 'In Processing';
             $Subscription->save();
 
-             // إرسال الإشعار لكل Owner
             $owners = Company::where('type', 'owner')->get();
-            Notification::send($owners, new CreateSubscreb());
+            Notification::send($owners, new CreateSubscreb($Subscription));
             
             toastr()->success(trans('route.Add_messages'));
            

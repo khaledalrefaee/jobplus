@@ -3,20 +3,22 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
 
 class CreateSubscreb extends Notification
 {
     use Queueable;
 
+    public $Subscription;
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct($subscription)
     {
-        //
+        $this->subscription = $subscription;
     }
 
     /**
@@ -36,15 +38,14 @@ class CreateSubscreb extends Notification
      *
      * @return array<string, mixed>
      */
-    public function toArray(object $notifiable): array
+    public function toArray(object $notifiable,): array
     {
         return [
             'message' => 'A new subscription has been created',
-            'subscription_id' => $notifiable->id,
-            'payment_type' => $notifiable->payment_type,
-            'name_company' => $notifiable->company->name_company,
-            'Number_of_opportunities' => $notifiable->plan->Number_of_opportunities,
-            'price' => $notifiable->plan->price,
+            'subscription_id' => $this->subscription->id,
+            'payment_type' => $this->subscription->payment_type,
+            'name_company' => Auth::user()->name_company,
+         
 
         ];
     }

@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Controllers\Api\GetImageCompany;
 use App\Http\Controllers\Api\SkillController;
+use App\Http\Controllers\Api\FavoriteController;
 use App\Http\Controllers\Api\JobTitleController;
 use App\Http\Controllers\Api\LanguageController;
 use App\Http\Controllers\Api\CVJobWorkController;
@@ -156,6 +157,14 @@ Route::group(['middleware' => ['auth:sanctum','setapplanguage']], function () {
 
         ///////////////////////////// Completion //////////////////////////////////////
         Route::get('user/completion', [CompletionController::class, 'getCompletionPercentage']);
+
+
+         ///////////////////////////// Favorite //////////////////////////////////////
+         Route::post('/get/Favorite/job/Opportunity', [FavoriteController::class, 'index']);
+
+         Route::post('Favorite/store', [FavoriteController::class, 'store']);
+         Route::post('Favorite/destroy/{id}',[FavoriteController::class,'destroy']);
+
 });
 
 
@@ -165,7 +174,8 @@ Route::group(['middleware' => ['auth:sanctum','setapplanguage']], function () {
         Route::get('/download-cv/{id}', [CVJobWorkController::class, 'download_api']);
 
 
-  
+        Route::get('sendNotification', [App\Http\Controllers\Back\JobOpportunityController::class, 'sendNotification']);
+
     
 
 

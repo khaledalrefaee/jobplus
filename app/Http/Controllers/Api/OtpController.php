@@ -90,7 +90,7 @@ class OtpController extends Controller
         $message = 'Your OTP code is: ' . $otpCode;
 
         $params=array(
-        'token' => 'vxp9ulskg5kkgpdg',
+        'token' => 'bve410he1gloo0q2',
         'to' => $request->phone,
         'body' => $message,
         'priority' => '1',
@@ -100,7 +100,7 @@ class OtpController extends Controller
         );
         $curl = curl_init();
         curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://api.ultramsg.com/instance69103/messages/chat",
+        CURLOPT_URL => "https://api.ultramsg.com/instance95698/messages/chat",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => "",
         CURLOPT_MAXREDIRS => 10,

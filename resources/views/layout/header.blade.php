@@ -135,26 +135,33 @@
 
                             <div class="menu-header-content bg-primary text-left">
                                 <div class="d-flex">
-                                    <h6 class="dropdown-title mb-1 tx-15 text-white font-weight-semibold">Notifications</h6>
-                                    <span class="badge badge-pill badge-warning ml-auto my-auto float-right">Mark All Read</span>
+                                    <h6 class="dropdown-title mb-1 tx-15 text-white font-weight-semibold">{{__('route.Notifications')}}</h6>
+                                    <a href="{{ route('notifications.markAllRead') }}" class="badge badge-pill badge-warning ml-auto my-auto float-right">{{ __('Mark All Read') }}</a>
+
                                 </div>
-                                <p class="dropdown-title-text subtext mb-0 text-white op-6 pb-0 tx-12 ">You have 4 unread Notifications</p>
+                                {{-- <p class="dropdown-title-text subtext mb-0 text-white op-6 pb-0 tx-12 ">You have 4 unread Notifications</p> --}}
                             </div>
 
                             <div class="main-notification-list Notification-scroll">
-                                <a class="d-flex p-3 border-bottom" href="#">
-                                    <div class="notifyimg bg-pink">
-                                        <i class="la la-file-alt text-white"></i>
-                                    </div>
-                                    <div class="ml-3">
-                                        <h5 class="notification-label mb-1">New files available</h5>
-                                        <div class="notification-subtext">10 hour ago</div>
-                                    </div>
-                                    <div class="ml-auto" >
-                                        <i class="las la-angle-right text-right text-muted"></i>
-                                    </div>
-                                </a>
-                                <a class="d-flex p-3" href="#">
+
+
+                                @foreach (Auth::user()->unreadNotifications as $notification)
+                                <a class="d-flex p-3 border-bottom" href="{{ route('subscription.show', ['id' => $notification->data['subscription_id'], 'notification' => $notification->id]) }}">
+
+                                        <div class="notifyimg bg-warning">
+                                            <i class="la la-file-alt text-white"></i>
+                                        </div>
+                                        <div class="ml-3">
+                                            <h5 class="notification-label mb-1">{{ $notification->data['message'] }}</h5>
+                                            <div class="notification-subtext">{{ $notification->created_at->diffForHumans() }}</div>
+                                        </div>
+                                        <div class="ml-auto">
+                                            <i class="las la-angle-right text-right text-muted"></i>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            
+                                {{-- <a class="d-flex p-3" href="#">
                                     <div class="notifyimg bg-purple">
                                         <i class="la la-gem text-white"></i>
                                     </div>
@@ -213,12 +220,10 @@
                                     <div class="ml-auto" >
                                         <i class="las la-angle-right text-right text-muted"></i>
                                     </div>
-                                </a>
+                                </a> --}}
                             </div>
 
-                            <div class="dropdown-footer">
-                                <a href="">VIEW ALL</a>
-                            </div>
+                           
                         </div>
                     </div>
                     

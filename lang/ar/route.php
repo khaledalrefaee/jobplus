@@ -193,4 +193,7 @@ return [
     'Code sent'=>'تم ارسال رمز',
 
     'email_or_phone'=>'الايميل او رقم الهاتف',
+    'Mark All Read'=>'قرأة الكل',
+    'Fully read'=>'تمت القرأة بشكل كامل ',
+    'Notifications'=>'الاشعارات',
 ];

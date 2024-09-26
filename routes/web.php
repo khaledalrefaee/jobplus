@@ -10,6 +10,7 @@ use App\Http\Controllers\Back\AuthController;
 use App\Http\Controllers\Back\CityController;
 use App\Http\Controllers\Back\PlanController;
 use App\Http\Controllers\Back\UsersController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Api\CVJobWorkController;
 use App\Http\Controllers\Back\JobtitleController;
 use App\Http\Controllers\Back\SubscripController;
@@ -135,6 +136,8 @@ Route::group(
 
 
         Route::get('subscriptio',[SubscripController::class,'index'])->name('subscriptio');
+        Route::get('subscriptio/show/{id}',[SubscripController::class,'show'])->name('subscription.show');
+
         Route::post('subscriptio/store',[SubscripController::class,'store'])->name('subscriptio.store');
         Route::get('subscriptio/Unacceptable/{id}',[SubscripController::class,'Unacceptable'])->name('Unacceptable');
         Route::get('subscriptio/Acceptable/{id}',[SubscripController::class,'Acceptable'])->name('Acceptable');
@@ -160,6 +163,10 @@ Route::group(
 
 
       
+            //////////////////////////////////  Admin \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+        Route::get('/notifications/mark-all-read', [NotificationController::class, 'markAllRead'])->name('notifications.markAllRead');
 
 
 

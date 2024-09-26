@@ -6,6 +6,7 @@ use App\Models\Plan;
 use App\Models\Company;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -54,6 +55,16 @@ class SubscripController extends Controller
       }
     }
 
+    public function show( $id){
+      
+        $Subscription = Subscription::find($id);
+     
+        $getid = DB::table('notifications')->where('data->subscription_id',$id)->pluck('id');
+        
+        DB ::table('notifications')->where('id', $getid)->update(['read_at'=>now()]);
+        
+        return view ('back.subscrip.show',compact('Subscription'));
+    }
 
     public function Unacceptable($id){
         $Subscription = Subscription::find($id);
@@ -75,6 +86,8 @@ class SubscripController extends Controller
     {
         $Subscription = Subscription::find($id);
         $Subscription->delete();
-        return redirect()->back()->with('success','Subscription Deleted Successfully');
+        toastr()->error(trans('route.Delete_messages'));
+
+        return redirect()->back();
     }
 }

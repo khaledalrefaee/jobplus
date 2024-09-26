@@ -170,4 +170,7 @@ return[
     'The correct code has been entered'=>'The correct code has been entered',
     'Code sent'=>'Code sent',
     'email_or_phone'=>'email or phone',
+    'Mark All Read'=>'Mark All Read',
+    'Fully read'=>'Fully read',
+    'Notifications'=>'Notifications',
 ];

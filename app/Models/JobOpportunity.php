@@ -42,4 +42,11 @@ class JobOpportunity extends Model
         return $this->belongsToMany(User::class, 'job_opportunity_users')->withPivot('text', 'status');
     }
 
+
+
+    public function favorite()
+    {
+        return $this->belongsToMany(User::class, 'favorites');
+    }
+
 }

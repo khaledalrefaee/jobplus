@@ -11,7 +11,10 @@ use App\Models\JobOpportunity;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Database\Eloquent\Scope;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\JobOpportunityAccepted;
 
 class JobOpportunityController extends Controller
 {
@@ -139,8 +142,47 @@ class JobOpportunityController extends Controller
         $jobOpportunity = JobOpportunity::findOrfail($id);
         $jobOpportunity->status = 'Acceptable';
         $jobOpportunity->save();
+
+        $this->sendNotification(
+            'welcome to Lillian',  // عنوان الإشعار
+            'welcome to Lillian.',  // رسالة الإشعار
+            'test_khaled_mohamed_test_test'  // اسم التوبيك الذي سيتم إرسال الإشعار إليه
+        );
+
+        // $title = 'welcome to Lillian';
+        // $message = 'welcome to Lillian.';
+    
+        // Notification::send($jobOpportunity, new JobOpportunityAccepted($title, $message));
+
+        
         toastr()->warning(trans('route.Update_messages'));
         return redirect()->back();
+    }
+
+    public function sendNotification()
+    {
+       
+
+        $headers = [
+            'Content-Type' => 'application/json',
+            'Authorization' => 'key=AAAAUWfHjZ4:APA91bF4sbcRHWpgSlvhWzKxCGlymjXe3UZShjKr8Fsgw_rcriM3Q-4vEWgBgJ-3DEizZ7xf5gh6GhOkkYZARuNFozdVvN9Cg0vvFqDtmICEC-3VwMVhfarZVV5ptLKdJUE7du7AxeZJ'
+        ];
+
+        $body = [
+            'to' => '/topics/' . test_khaled_mohamed_test_test,
+            'notification' => [
+                'title' => 'welcome to Lillian',
+                'body' => 'welcome to Lillian'
+            ]
+        ];
+
+        $response = Http::withHeaders($headers)->post('https://fcm.googleapis.com/fcm/send', $body);
+
+        if ($response->successful()) {
+            \Log::info('Notification sent successfully');
+        } else {
+            \Log::error('Failed to send notification: ' . $response->body());
+        }
     }
 
     public function edit($id)

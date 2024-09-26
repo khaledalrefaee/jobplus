@@ -64,13 +64,13 @@
                                     <select name="payment_type" class="form-control " id="payment_type"  required="">
                                         <option label="Choose one">
                                         </option>
-                                        <option value="كاش" >
-                                            كاش 
-                                        </option>
+                                            <option value="cash" >
+                                                كاش 
+                                            </option>
 
-                                        <option value="تحويل" >
-                                            تحويل
-                                        </option>
+                                            <option value="transform" >
+                                                تحويل
+                                            </option>
                                     </select>
                                 </div>
                                 
@@ -117,7 +117,7 @@
 
         var transferFields_2 = document.getElementById('transferFields_2');
         var transferFields_3 = document.getElementById('transferFields_3');
-        if (this.value === 'تحويل') {
+        if (this.value === 'transform') {
             transferFields.style.display = 'block';
 
             transferFields_2.style.display = 'block';
